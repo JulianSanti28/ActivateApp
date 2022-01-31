@@ -8,6 +8,7 @@ package com.unicauca.activate.controller;
 import com.unicauca.activate.model.Event;
 import com.unicauca.activate.model.User;
 import com.unicauca.activate.service.EventService;
+import com.unicauca.activate.service.IUserService;
 import de.mkammerer.argon2.Argon2;
 import java.util.List;
 import java.util.Optional;
@@ -35,10 +36,15 @@ public class EventController {
 
     @Autowired
     private EventService EventService;
+    
+    @Autowired
+    private IUserService UserService;
 
     //Crear Evento
     @PostMapping("create")
-    public ResponseEntity<?> create(@RequestBody Event event) {
+    public ResponseEntity<?> create(@RequestBody Event event){   
+        Optional<User> user =  UserService.findById(event.getUser_id_()); 
+        user.get().agregarEventos(event);
         Event save = EventService.save(event);
         return ResponseEntity.ok().body(save);
     }

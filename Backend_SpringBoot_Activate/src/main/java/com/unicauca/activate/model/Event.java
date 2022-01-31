@@ -29,6 +29,8 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+
+    
     @Column(length = 50)
     private String titulo = "";
     
@@ -44,9 +46,30 @@ public class Event {
     @Column(length = 50)
     private String fecha_final = "";
     
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    //Atributo del Modelo
+   // private Long user_id;
+    @ManyToOne
     @JoinColumn(name = "user_id",  nullable = false)
-    private User RefUser;
+    private User user;
+
+    private Long user_id_;
+
+    public Long getUser_id_() {
+        return user_id_;
+    }
+
+    public void setUser_id_(Long user_id_) {
+        this.user_id_ = user_id_;
+    }
+    
+    
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
     
 
     public Long getId() {

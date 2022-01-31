@@ -29,7 +29,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="user_id")
+    @Column(name = "user")
     private Long id;
 
     @Column(length = 50)
@@ -44,8 +44,19 @@ public class User {
     @Column(length = 255, nullable = false)
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "RefUser" )
-    private Set<Event> events;
+    @OneToMany(mappedBy = "user")
+    private List<Event> events;
+
+    public void agregarEventos(Event evento) {
+        if (this.events == null) {
+            this.events = new ArrayList<>();
+            this.events.add(evento);
+            evento.setUser(this);
+        } else {
+            this.events.add(evento);
+            evento.setUser(this);
+        }
+    }
 
     public Long getId() {
         return id;
