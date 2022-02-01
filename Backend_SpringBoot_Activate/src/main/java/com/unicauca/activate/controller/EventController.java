@@ -7,6 +7,7 @@ package com.unicauca.activate.controller;
 
 import com.unicauca.activate.model.Event;
 import com.unicauca.activate.model.User;
+import com.unicauca.activate.model.Asistence;
 import com.unicauca.activate.service.EventService;
 import com.unicauca.activate.service.IUserService;
 import de.mkammerer.argon2.Argon2;
@@ -14,6 +15,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+import javax.xml.transform.Source;
+
+import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,10 +47,28 @@ public class EventController {
 
     //Crear Evento
     @PostMapping("create")
-    public ResponseEntity<?> create(@RequestBody Event event){   
+    public ResponseEntity<?> create(@RequestBody Event event){  
         Optional<User> user =  UserService.findById(event.getUser_id_()); 
         user.get().agregarEventos(event);
         Event save = EventService.save(event);
+        return ResponseEntity.ok().body(save);
+    }
+
+    //Asociar un usuario a un evento
+    @PostMapping("associate")
+    public ResponseEntity<?> associate(@RequestBody Asistence asistence) {
+        System.out.println("------------------------------------------------------------------");
+        
+        Optional<Event> evento = EventService.findById(asistence.getIdentificacionEvento());
+        Optional<User> user =  UserService.findById(asistence.getIdentificacionUsuario()); 
+        Event evento_asociar = evento.get();
+        User usuario_asociar = user.get();
+
+        evento_asociar.getUsers().add(usuario_asociar);
+        usuario_asociar.getEventos().add(evento_asociar);
+
+        Event save = EventService.save(evento_asociar);
+        
         return ResponseEntity.ok().body(save);
     }
 

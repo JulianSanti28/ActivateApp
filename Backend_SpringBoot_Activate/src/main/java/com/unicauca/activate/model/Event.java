@@ -5,6 +5,12 @@
  */
 package com.unicauca.activate.model;
 
+
+
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +18,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -51,6 +59,19 @@ public class Event {
     @ManyToOne
     @JoinColumn(name = "user_id",  nullable = false)
     private User user;
+
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinTable(name = "asistencia",joinColumns = {@JoinColumn(name = "event_id")},
+                                    inverseJoinColumns ={@JoinColumn(name = "user_id_asocciated")})
+    private Set<User> usuarios = new HashSet<>();
+    
+    public Set<User> getUsers() {
+        return usuarios;
+    }
+
+    public void setUsers(Set<User> usuarios) {
+        this.usuarios = usuarios;
+    }
 
     private Long user_id_;
 
@@ -120,5 +141,14 @@ public class Event {
     public void setFecha_final(String fecha_final) {
         this.fecha_final = fecha_final;
     }
+
+    @Override
+    public String toString() {
+        return "Event [descripcion=" + descripcion + ", fecha_final=" + fecha_final + ", fecha_inicio=" + fecha_inicio
+                + ", id=" + id + ", titulo=" + titulo + ", ubicacion=" + ubicacion + ", user=" + user + ", user_id_="
+                + user_id_ + ", users=" + usuarios + "]";
+    }
+
+    
 
 }

@@ -6,18 +6,20 @@
 package com.unicauca.activate.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
+import javax.persistence.ManyToMany;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
+import javax.persistence.FetchType;
 
 /**
  *
@@ -46,6 +48,17 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Event> events;
+
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "usuarios")
+    private Set<Event> eventos = new HashSet<>();
+
+    public Set<Event> getEventos() {
+        return eventos;
+    }
+
+    public void setEventos(Set<Event> eventos) {
+        this.eventos = eventos;
+    }
 
     public void agregarEventos(Event evento) {
         if (this.events == null) {
