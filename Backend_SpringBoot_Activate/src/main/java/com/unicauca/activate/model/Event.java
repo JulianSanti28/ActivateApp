@@ -21,6 +21,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -60,18 +61,9 @@ public class Event {
     @JoinColumn(name = "user_id",  nullable = false)
     private User user;
 
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinTable(name = "asistencia",joinColumns = {@JoinColumn(name = "event_id")},
-                                    inverseJoinColumns ={@JoinColumn(name = "user_id_asocciated")})
-    private Set<User> usuarios = new HashSet<>();
+    @OneToMany(mappedBy = "event")
+    Set<EventUser> assistences;
     
-    public Set<User> getUsers() {
-        return usuarios;
-    }
-
-    public void setUsers(Set<User> usuarios) {
-        this.usuarios = usuarios;
-    }
 
     private Long user_id_;
 
@@ -142,12 +134,7 @@ public class Event {
         this.fecha_final = fecha_final;
     }
 
-    @Override
-    public String toString() {
-        return "Event [descripcion=" + descripcion + ", fecha_final=" + fecha_final + ", fecha_inicio=" + fecha_inicio
-                + ", id=" + id + ", titulo=" + titulo + ", ubicacion=" + ubicacion + ", user=" + user + ", user_id_="
-                + user_id_ + ", users=" + usuarios + "]";
-    }
+    
 
     
 

@@ -54,23 +54,7 @@ public class EventController {
         return ResponseEntity.ok().body(save);
     }
 
-    //Asociar un usuario a un evento
-    @PostMapping("associate")
-    public ResponseEntity<?> associate(@RequestBody Asistence asistence) {
-        System.out.println("------------------------------------------------------------------");
-        
-        Optional<Event> evento = EventService.findById(asistence.getIdentificacionEvento());
-        Optional<User> user =  UserService.findById(asistence.getIdentificacionUsuario()); 
-        Event evento_asociar = evento.get();
-        User usuario_asociar = user.get();
 
-        evento_asociar.getUsers().add(usuario_asociar);
-        usuario_asociar.getEventos().add(evento_asociar);
-
-        Event save = EventService.save(evento_asociar);
-        
-        return ResponseEntity.ok().body(save);
-    }
 
     //Leer Evento por ID
     @GetMapping("{id}")

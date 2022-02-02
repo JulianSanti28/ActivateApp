@@ -49,16 +49,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Event> events;
 
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "usuarios")
-    private Set<Event> eventos = new HashSet<>();
-
-    public Set<Event> getEventos() {
-        return eventos;
-    }
-
-    public void setEventos(Set<Event> eventos) {
-        this.eventos = eventos;
-    }
+    @OneToMany(mappedBy = "user")
+    Set<EventUser> assistences;
+    
 
     public void agregarEventos(Event evento) {
         if (this.events == null) {

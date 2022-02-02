@@ -22,6 +22,11 @@ public class Asistence {
     public void setIdentificacionEvento(Long identificacionEvento) {
         this.identificacionEvento = identificacionEvento;
     }
+    @Override
+    public String toString() {
+        return "Asistence [identificacionEvento=" + identificacionEvento + ", identificacionUsuario="
+                + identificacionUsuario + "]";
+    }
     
     
 }
