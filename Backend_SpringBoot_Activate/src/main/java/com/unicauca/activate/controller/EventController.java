@@ -7,6 +7,7 @@ package com.unicauca.activate.controller;
 
 import com.unicauca.activate.model.Event;
 import com.unicauca.activate.model.User;
+import com.unicauca.activate.model.Asistence;
 import com.unicauca.activate.service.EventService;
 import com.unicauca.activate.service.IUserService;
 import de.mkammerer.argon2.Argon2;
@@ -14,6 +15,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+import javax.xml.transform.Source;
+
+import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,12 +47,14 @@ public class EventController {
 
     //Crear Evento
     @PostMapping("create")
-    public ResponseEntity<?> create(@RequestBody Event event){   
+    public ResponseEntity<?> create(@RequestBody Event event){  
         Optional<User> user =  UserService.findById(event.getUser_id_()); 
         user.get().agregarEventos(event);
         Event save = EventService.save(event);
         return ResponseEntity.ok().body(save);
     }
+
+
 
     //Leer Evento por ID
     @GetMapping("{id}")

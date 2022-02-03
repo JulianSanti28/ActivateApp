@@ -1,6 +1,6 @@
 package com.unicauca.activate.exception;
 
-import com.unicauca.activate.exception.ErrorResponse;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
