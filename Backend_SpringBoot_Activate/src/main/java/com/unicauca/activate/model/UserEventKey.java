@@ -13,6 +13,32 @@ public class UserEventKey implements Serializable {
     @Column(name = "user_id")
     Long userId;
 
+    
+
+    public Long getEventId() {
+        return eventId;
+    }
+
+
+
+    public void setEventId(Long eventId) {
+        this.eventId = eventId;
+    }
+
+
+
+    public Long getUserId() {
+        return userId;
+    }
+
+
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+
+
     @Override
     public String toString() {
         return "UserEventKey [eventId=" + eventId + ", userId=" + userId + "]";

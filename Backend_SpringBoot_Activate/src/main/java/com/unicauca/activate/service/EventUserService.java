@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.transaction.annotation.Transactional;
 import com.unicauca.activate.model.EventUser;
+import com.unicauca.activate.model.UserEventKey;
 import com.unicauca.activate.repository.EventUserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class EventUserService implements IEventUserService{
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<EventUser> findById(Long id) {
+    public Optional<EventUser> findById(UserEventKey id) {
         return eventUserRepository.findById(id);
     }
 
@@ -49,7 +50,7 @@ public class EventUserService implements IEventUserService{
 
     @Override
     @Transactional
-    public void deleteById(Long id) {
+    public void deleteById(UserEventKey id) {
         eventUserRepository.deleteById(id);
     }
 

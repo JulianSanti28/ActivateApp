@@ -6,6 +6,7 @@ import com.unicauca.activate.model.Asistence;
 import com.unicauca.activate.model.Event;
 import com.unicauca.activate.model.EventUser;
 import com.unicauca.activate.model.User;
+import com.unicauca.activate.model.UserEventKey;
 import com.unicauca.activate.service.EventService;
 import com.unicauca.activate.service.IEventUserService;
 import com.unicauca.activate.service.IUserService;
@@ -39,7 +40,13 @@ public class EventUserController {
         Optional<User> user = UserService.findById(asistence.getIdentificacionUsuario());
         Optional<Event> event = EventService.findById(asistence.getIdentificacionEvento());
 
+        UserEventKey userEventKey = new UserEventKey();
+        
+        userEventKey.setEventId(asistence.getIdentificacionEvento());
+        userEventKey.setUserId(asistence.getIdentificacionUsuario());
+
         EventUser eventUser = new EventUser();
+        eventUser.setId(userEventKey);
         eventUser.setEvent(event.get());
         eventUser.setUser(user.get());
         

@@ -1,12 +1,10 @@
 package com.unicauca.activate.model;
 
-import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 
@@ -14,35 +12,30 @@ import javax.persistence.Table;
 @Table(name = "event_user")
 public class EventUser {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_asist")
-    Long id;
+    @EmbeddedId
+    UserEventKey id;
+
 
     @ManyToOne
+    @MapsId("eventId")
     @JoinColumn(name = "event_id")
     Event event;
 
     @ManyToOne
+    @MapsId("userId")
     @JoinColumn(name = "user_id")
     User user;
 
     public EventUser() {
     }
 
-    
-   
-    public Long getId() {
+    public UserEventKey getId() {
         return id;
     }
 
-
-
-    public void setId(Long id) {
+    public void setId(UserEventKey id) {
         this.id = id;
     }
-
-
 
     public Event getEvent() {
         return event;
