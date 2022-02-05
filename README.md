@@ -65,20 +65,20 @@ Validación del escenario:
 
 ## VISTA LÓGICA
 Vista de contenedores y componentes (C4)
-![Diagrama de Componentes para Activate](https://myoctocat.com/assets/images/base-octocat.svg)
+![Diagrama de Componentes para Activate](https://github.com/JulianSanti28/Backend_Activate/blob/Miguel_Mosquera/Documentacion/Imagenes/Diagrama%20de%20Componentes%20para%20Activate.jpeg)
 
 ## VISTA DE MÓDULOS(UML)
-![Vista de Modulos UML](https://myoctocat.com/assets/images/base-octocat.svg)
+![Vista de Modulos UML](https://github.com/JulianSanti28/Backend_Activate/blob/Miguel_Mosquera/Documentacion/Imagenes/Vista%20de%20modulos.png)
 
 ## VISTA DE COMPONENTES Y CONECTORES
-![VISTA DE COMPONENTES Y CONECTORES](https://myoctocat.com/assets/images/base-octocat.svg)
+![VISTA DE COMPONENTES Y CONECTORES](https://github.com/JulianSanti28/Backend_Activate/blob/Miguel_Mosquera/Documentacion/Imagenes/Vista%20de%20componentes%20y%20Conectores.jpeg)
 
 ## VISTA DE IMPLEMENTACIÓN
-![VISTA DE IMPLEMENTACIÓN](https://myoctocat.com/assets/images/base-octocat.svg)
+![VISTA DE IMPLEMENTACIÓN](https://github.com/JulianSanti28/Backend_Activate/blob/Miguel_Mosquera/Documentacion/Imagenes/Diagrama%20Implementacion%20.jpeg)
 
 
 ## MODELO ENTIDAD-RELACIÓN
-![MODELO ENTIDAD RELACION](https://myoctocat.com/assets/images/base-octocat.svg)
+![MODELO ENTIDAD RELACION](https://github.com/JulianSanti28/Backend_Activate/blob/Miguel_Mosquera/Documentacion/Imagenes/modelo%20entidad%20relacion.jpeg)
 
 ## DECISIONES DE ARQUITECTURA
 **Tipo de aplicación:** Aplicación Web.
@@ -98,12 +98,12 @@ SGBD MySQL: Se hace uso de una base de datos relacional que permite a partir de 
 - Javascript: Lenguaje de programación usado en la parte del cliente y permite manipular, solicitar y recibir información con el fin de tomar decisiones a nivel del cliente.
 
 ## DISEÑO DETALLADO DE MÓDULOS
-![DISEÑO DETALLADO DE MÓDULOS](https://myoctocat.com/assets/images/base-octocat.svg)
-![DISEÑO DETALLADO DE MÓDULOS](https://myoctocat.com/assets/images/base-octocat.svg)
-![DISEÑO DETALLADO DE MÓDULOS](https://myoctocat.com/assets/images/base-octocat.svg)
-![DISEÑO DETALLADO DE MÓDULOS](https://myoctocat.com/assets/images/base-octocat.svg)
-![DISEÑO DETALLADO DE MÓDULOS](https://myoctocat.com/assets/images/base-octocat.svg)
-![DISEÑO DETALLADO DE MÓDULOS](https://myoctocat.com/assets/images/base-octocat.svg)
+![DISEÑO DETALLADO DE MÓDULOS](https://github.com/JulianSanti28/Backend_Activate/blob/Miguel_Mosquera/Documentacion/Imagenes/Dise%C3%B1o%20detallado%20modulos%201.png)
+![DISEÑO DETALLADO DE MÓDULOS](https://github.com/JulianSanti28/Backend_Activate/blob/Miguel_Mosquera/Documentacion/Imagenes/Dise%C3%B1o%20detallado%20modulos%202.png)
+![DISEÑO DETALLADO DE MÓDULOS](https://github.com/JulianSanti28/Backend_Activate/blob/Miguel_Mosquera/Documentacion/Imagenes/Dise%C3%B1o%20detallado%20modulos%203.png)
+![DISEÑO DETALLADO DE MÓDULOS](https://github.com/JulianSanti28/Backend_Activate/blob/Miguel_Mosquera/Documentacion/Imagenes/Dise%C3%B1o%20detallado%20modulos%204.png)
+![DISEÑO DETALLADO DE MÓDULOS](https://github.com/JulianSanti28/Backend_Activate/blob/Miguel_Mosquera/Documentacion/Imagenes/Dise%C3%B1o%20detallado%20modulos%205.png)
+![DISEÑO DETALLADO DE MÓDULOS](https://github.com/JulianSanti28/Backend_Activate/blob/Miguel_Mosquera/Documentacion/Imagenes/Dise%C3%B1o%20detallado%20modulos%206.png)
 
 ## DEPLOYMENT
 ### Proceso para correr la infraestructura del programa.
