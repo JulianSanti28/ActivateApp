@@ -19,7 +19,7 @@ La aplicación cuenta con una serie de funcionalidades que la hacen llamativa y 
 Inicialmente Actívate cuenta con funcionales como: Registro, autenticación, creación de eventos, suscripción a eventos,  agregar comentarios, patrocinar un evento, y además los usuarios pueden tener un rol distinto en nuestra aplicación en donde cada rol cuenta con características diferentes que le permiten interactuar con la plataforma de la manera más cómoda según sus necesidades.
 
 ## MODELO DE CONTEXTO C4
-![C4](https://myoctocat.com/assets/images/base-octocat.svg)
+![C4](https://github.com/JulianSanti28/Backend_Activate/blob/Miguel_Mosquera/Documentacion/Imagenes/Diagrama%20de%20Contexto%20para%20Activate.jpeg)
 
 ## VISTA DE REQUERIMIENTOS
 ### MVP
