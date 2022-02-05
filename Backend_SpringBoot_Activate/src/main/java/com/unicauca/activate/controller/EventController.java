@@ -7,18 +7,14 @@ package com.unicauca.activate.controller;
 
 import com.unicauca.activate.model.Event;
 import com.unicauca.activate.model.User;
-import com.unicauca.activate.model.Asistence;
+// import com.unicauca.activate.model.Asistence;
 import com.unicauca.activate.service.EventService;
 import com.unicauca.activate.service.IUserService;
-import de.mkammerer.argon2.Argon2;
+import com.unicauca.activate.utilities.JWTUtilities;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-
-import javax.xml.transform.Source;
-
-import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +24,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,18 +42,20 @@ public class EventController {
     @Autowired
     private IUserService UserService;
 
+    @Autowired
+    private JWTUtilities jwUtil;
+
     //Crear Evento
     @PostMapping("create")
-    public ResponseEntity<?> create(@RequestBody Event event){  
-        Optional<User> user =  UserService.findById(event.getUser_id_()); 
+    public ResponseEntity<?> create(@RequestHeader(value="Authorization") String token, @RequestBody Event event){  
+        Long usuarioID = Long.parseLong(jwUtil.getKey(token));    
+        Optional<User> user =  UserService.findById(usuarioID); 
         user.get().agregarEventos(event);
         Event save = EventService.save(event);
         return ResponseEntity.ok().body(save);
     }
 
-
-
-    //Leer Evento por ID
+    //Obtene por id
     @GetMapping("{id}")
     public ResponseEntity<?> read(@PathVariable Long id) {
         Optional<Event> oEvent = EventService.findById(id);
@@ -75,7 +74,7 @@ public class EventController {
         if (!event.isPresent()) {
             return ResponseEntity.notFound().build();
         }
-
+        
         event.get().setTitulo(eventDetails.getTitulo());
         event.get().setDescripcion(eventDetails.getDescripcion());
         event.get().setUbicacion(eventDetails.getUbicacion());

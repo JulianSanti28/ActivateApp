@@ -5,8 +5,6 @@
  */
 package com.unicauca.activate.model;
 
-
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,7 +22,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 /**
  *
  * @author 57322
@@ -37,44 +34,37 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
 
-    
     @Column(length = 50)
     private String titulo = "";
-    
+
     @Column(length = 50)
     private String descripcion = "";
-    
+
     @Column(length = 50)
     private String ubicacion = "";
-    
+
     @Column(length = 50)
     private String fecha_inicio = "";
-    
+
     @Column(length = 50)
     private String fecha_final = "";
+
     
-    //Atributo del Modelo
-   // private Long user_id;
+    //Relación 1:N con la entidad category.
     @ManyToOne
-    @JoinColumn(name = "user_id",  nullable = false)
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
+
+    //Atributo del Modelo
+    // private Long user_id;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @OneToMany(mappedBy = "event")
     Set<EventUser> assistences;
-    
 
-    private Long user_id_;
-
-    public Long getUser_id_() {
-        return user_id_;
-    }
-
-    public void setUser_id_(Long user_id_) {
-        this.user_id_ = user_id_;
-    }
-    
     
     public User getUser() {
         return user;
@@ -83,7 +73,6 @@ public class Event {
     public void setUser(User user) {
         this.user = user;
     }
-    
 
     public Long getId() {
         return id;
@@ -96,7 +85,6 @@ public class Event {
     public String getTitulo() {
         return titulo;
     }
-
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
@@ -133,9 +121,5 @@ public class Event {
     public void setFecha_final(String fecha_final) {
         this.fecha_final = fecha_final;
     }
-
-    
-
-    
 
 }
