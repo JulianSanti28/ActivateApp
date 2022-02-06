@@ -78,7 +78,7 @@ Vista de contenedores y componentes (C4)
 
 
 ## MODELO ENTIDAD-RELACIÓN
-![MODELO ENTIDAD RELACION](https://github.com/JulianSanti28/Backend_Activate/blob/Miguel_Mosquera/Documentacion/Imagenes/modelo%20entidad%20relacion.jpeg)
+![MODELO ENTIDAD RELACION](https://github.com/JulianSanti28/Backend_Frontend_Activate/blob/main/Documentacion/Imagenes/modelo%20entidad%20relacion.png)
 
 ## DECISIONES DE ARQUITECTURA
 **Tipo de aplicación:** Aplicación Web.
