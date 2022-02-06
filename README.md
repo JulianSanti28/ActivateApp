@@ -1,4 +1,4 @@
-# LayerMVC Publicador Subscriptor
+# Actívate - Red social de eventos.
 Realizado por:
     Jose Sebastian Arenas Rodriguez -> jarenas@unicauca.edu.co> 
     Miguel Andres Mosquera Monje -> miguelmonje@unicauca.edu.co>
@@ -7,8 +7,8 @@ Realizado por:
     Jualian Santiago Martinez -> juliansmartinez@unicauca.edu.co
 
 
-El Backend se construyo en Java Spring Boot haciendo uso de Maven(Se debe instalar previamente).
-El Frontend se construyo en html,css haciendo uso de librerias Bootstrap y Javascript
+El Backend se construyó en Java Spring Boot haciendo uso de Maven(Se debe instalar previamente).
+El Frontend se construyó con HTML,CSS3 haciendo uso del Framework Bootstrap y el lenguaje de programación Javascript
 
 ## Resumen
 
