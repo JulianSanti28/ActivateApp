@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.springframework.test.context.jdbc.Sql;
 
 /**
  *
@@ -25,7 +26,7 @@ public class Category {
     @Column(length = 50)
     private String nombre = "";
 
-    @Column(length = 50)
+    @Column(length = 150)
     private String descripcion = "";
 
     @OneToMany(mappedBy = "category")

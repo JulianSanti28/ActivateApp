@@ -15,7 +15,6 @@ public class EventUser {
     @EmbeddedId
     UserEventKey id;
 
-
     @ManyToOne
     @MapsId("eventId")
     @JoinColumn(name = "event_id")
