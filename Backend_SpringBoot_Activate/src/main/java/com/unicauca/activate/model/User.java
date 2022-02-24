@@ -5,13 +5,11 @@
  */
 package com.unicauca.activate.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
-import java.util.HashSet;
+
 import java.util.List;
 import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.ManyToMany;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +17,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.FetchType;
 
 /**
  *
@@ -31,7 +28,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user")
+    @Column(name = "id")
     private Long id;
 
     @Column(length = 50)
@@ -39,19 +36,26 @@ public class User {
 
     @Column(length = 50)
     private String lastName;
-
+    
+    @JsonIgnore
     @Column(length = 50, nullable = false, unique = true)
     private String email;
 
+    @JsonIgnore
     @Column(length = 255, nullable = false)
     private String password;
 
     @OneToMany(mappedBy = "user")
     private List<Event> events;
+    
+    @OneToMany(mappedBy = "user")
+    private List<Comment> comments;
 
     @OneToMany(mappedBy = "user")
     Set<EventUser> assistences;
-    
+
+    //@OneToMany(mappedBy = "userComment")
+    //List<Comment> comments;
 
     public void agregarEventos(Event evento) {
         if (this.events == null) {

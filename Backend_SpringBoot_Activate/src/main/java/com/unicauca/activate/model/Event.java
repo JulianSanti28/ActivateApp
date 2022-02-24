@@ -5,19 +5,19 @@
  */
 package com.unicauca.activate.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -50,21 +50,60 @@ public class Event {
     @Column(length = 50)
     private String fecha_final = "";
 
-    
     //Relación 1:N con la entidad category.
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    //Atributo del Modelo
-    // private Long user_id;
+    //Relacion N:1
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @OneToMany(mappedBy = "event") 
+    private List<Comment> comments;
+
     @OneToMany(mappedBy = "event")
     Set<EventUser> assistences;
 
+    public void agregarComentarios(Comment comment) {
+        if (this.comments == null) {
+            this.comments = new ArrayList<>();
+            this.comments.add(comment);
+            comment.setEvent(this);
+        } else {
+            this.comments.add(comment);
+            comment.setEvent(this);
+        }
+    }
+    
+    
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public Set<EventUser> getAssistences() {
+        return assistences;
+    }
+
+    public void setAssistences(Set<EventUser> assistences) {
+        this.assistences = assistences;
+    }
+
+    
     
     public User getUser() {
         return user;

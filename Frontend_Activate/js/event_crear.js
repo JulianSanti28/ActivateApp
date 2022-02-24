@@ -35,3 +35,39 @@ async function registrarEvento() {
   
 }
   
+{
+    "id": 1,
+    "titulo": "Rumbitaaa",
+    "descripcion": "Hola",
+    "ubicacion": "Popayan",
+    "fecha_inicio": "28/05/1998",
+    "fecha_final": "28/05/1998",
+    "category": {
+        "id": 1,
+        "nombre": "MASCOTAS",
+        "descripcion": "Espacio para temas de mÃ¡scotas"
+    },
+    "user": {
+        "id": 1,
+        "name": "Pruebas",
+        "lastName": "Pruebas",
+        "email": "JulianSmartusisossaa",
+        "password": "$argon2id$v=19$m=1024,t=1,p=1$8dUsFXKXf/WLx6TywnA9Zg$EuDR6dA7+W32dwp1er+MPJ6TGgIKTXbAb1IsJTa3/hE"
+    },
+    "comments": [
+        {
+            "id": 1,
+            "descripcion": "Me gustó",
+            "fechaComentario": "01/02/2022",
+            "score": 2,
+            "user": {
+                "id": 1,
+                "name": "Pruebas",
+                "lastName": "Pruebas",
+                "email": "JulianSmartusisossaa",
+                "password": "$argon2id$v=19$m=1024,t=1,p=1$8dUsFXKXf/WLx6TywnA9Zg$EuDR6dA7+W32dwp1er+MPJ6TGgIKTXbAb1IsJTa3/hE"
+            }
+        }
+    ],
+    "assistences": []
+}

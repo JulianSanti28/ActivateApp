@@ -19,12 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/activate")
 public class LoginController {
-
     @Autowired
     private UserService UserService;
     @Autowired
     private JWTUtilities jwtUtil;
-
     //Crear Usuario
     @PostMapping("login")
     public String  login(@RequestBody User user){

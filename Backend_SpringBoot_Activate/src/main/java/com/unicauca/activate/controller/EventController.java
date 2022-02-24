@@ -59,6 +59,7 @@ public class EventController {
     @GetMapping("{id}")
     public ResponseEntity<?> read(@PathVariable Long id) {
         Optional<Event> oEvent = EventService.findById(id);
+        System.out.println("Comentarios" + oEvent.get().getComments().size());
         if (!oEvent.isPresent()) {
             return ResponseEntity.notFound().build();
         }

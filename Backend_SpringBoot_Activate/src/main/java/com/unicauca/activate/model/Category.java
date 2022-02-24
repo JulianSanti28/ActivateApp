@@ -32,6 +32,9 @@ public class Category {
     @OneToMany(mappedBy = "category")
     private List<Event> events;
 
+    private Category(){
+        
+    }
     public Category(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
