@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
 import com.unicauca.activate.model.User;
 import com.unicauca.activate.service.IUserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +46,9 @@ public class UserController {
     //Leer Usuario
     @GetMapping("user/{id}")
     public ResponseEntity<?> read(@PathVariable Long id) {
+
         Optional<User> oUser = UserService.findById(id);
+
         if (!oUser.isPresent()) {
             return ResponseEntity.notFound().build();
         }

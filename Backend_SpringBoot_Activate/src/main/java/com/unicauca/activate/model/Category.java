@@ -1,6 +1,7 @@
 //Paquete
 package com.unicauca.activate.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import org.springframework.test.context.jdbc.Sql;
 
 /**
  *
@@ -32,8 +32,9 @@ public class Category {
     @OneToMany(mappedBy = "category")
     private List<Event> events;
 
-    private Category(){
-        
+    
+
+    public Category() {
     }
     public Category(String nombre, String descripcion) {
         this.nombre = nombre;
@@ -64,4 +65,15 @@ public class Category {
         this.id = id;
     }
 
+
+    public void agregarEventos(Event evento) {
+        if (this.events == null) {
+            this.events = new ArrayList<>();
+            this.events.add(evento);
+            evento.setCategory(this);
+        } else {
+            this.events.add(evento);
+            evento.setCategory(this);
+        }
+    }
 }

@@ -5,11 +5,6 @@
  */
 package com.unicauca.activate.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -50,34 +45,22 @@ public class Event {
     @Column(length = 50)
     private String fecha_final = "";
 
+    
     //Relación 1:N con la entidad category.
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    //Relacion N:1
+    //Atributo del Modelo
+    // private Long user_id;
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToMany(mappedBy = "event") 
-    private List<Comment> comments;
+    @ManyToOne
+    @JoinColumn(name = "CIU_id", nullable = false)
+    private City city;
 
-    @OneToMany(mappedBy = "event")
-    Set<EventUser> assistences;
-
-    public void agregarComentarios(Comment comment) {
-        if (this.comments == null) {
-            this.comments = new ArrayList<>();
-            this.comments.add(comment);
-            comment.setEvent(this);
-        } else {
-            this.comments.add(comment);
-            comment.setEvent(this);
-        }
-    }
-    
-    
 
     public Category getCategory() {
         return category;
@@ -87,23 +70,9 @@ public class Event {
         this.category = category;
     }
 
-    public List<Comment> getComments() {
-        return comments;
-    }
+    @OneToMany(mappedBy = "event")
+    Set<EventUser> assistences;
 
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public Set<EventUser> getAssistences() {
-        return assistences;
-    }
-
-    public void setAssistences(Set<EventUser> assistences) {
-        this.assistences = assistences;
-    }
-
-    
     
     public User getUser() {
         return user;
@@ -160,5 +129,22 @@ public class Event {
     public void setFecha_final(String fecha_final) {
         this.fecha_final = fecha_final;
     }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    @Override
+    public String toString() {
+        return "Event [assistences=" + assistences + ", category=" + category + ", city=" + city + ", descripcion="
+                + descripcion + ", fecha_final=" + fecha_final + ", fecha_inicio=" + fecha_inicio + ", id=" + id
+                + ", titulo=" + titulo + ", ubicacion=" + ubicacion + ", user=" + user + "]";
+    }
+
+        
 
 }
