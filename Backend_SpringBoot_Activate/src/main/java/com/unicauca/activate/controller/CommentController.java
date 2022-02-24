@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,8 +46,8 @@ public class CommentController {
 
     //Crear Commentario
     @PostMapping("create")
-    public ResponseEntity<?> create(@RequestBody CommentDTO commentDto) {
-        Long userId = Long.parseLong("1");
+    public ResponseEntity<?> create(@RequestHeader(value="Authorization") String token, @RequestBody CommentDTO commentDto) {
+        Long userId = Long.parseLong(jwUtil.getKey(token)); 
         Long eventId = commentDto.getEventId();
         Optional<User> user = UserService.findById(userId);
         Optional<Event> event = EventService.findById(eventId);
