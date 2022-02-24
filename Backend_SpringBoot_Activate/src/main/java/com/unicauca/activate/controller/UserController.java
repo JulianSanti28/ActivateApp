@@ -6,11 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import com.unicauca.activate.model.User;
-import com.unicauca.activate.service.EventService;
-import com.unicauca.activate.service.IEventService;
 import com.unicauca.activate.service.IUserService;
-import com.unicauca.activate.model.Event;
-import com.unicauca.activate.utilities.JWTUtilities;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

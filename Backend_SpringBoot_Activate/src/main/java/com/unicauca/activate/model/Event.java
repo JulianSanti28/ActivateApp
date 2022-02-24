@@ -5,19 +5,14 @@
  */
 package com.unicauca.activate.model;
 
-import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -61,6 +56,19 @@ public class Event {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "CIU_id", nullable = false)
+    private City city;
+
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     @OneToMany(mappedBy = "event")
     Set<EventUser> assistences;
@@ -121,5 +129,22 @@ public class Event {
     public void setFecha_final(String fecha_final) {
         this.fecha_final = fecha_final;
     }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    @Override
+    public String toString() {
+        return "Event [assistences=" + assistences + ", category=" + category + ", city=" + city + ", descripcion="
+                + descripcion + ", fecha_final=" + fecha_final + ", fecha_inicio=" + fecha_inicio + ", id=" + id
+                + ", titulo=" + titulo + ", ubicacion=" + ubicacion + ", user=" + user + "]";
+    }
+
+        
 
 }

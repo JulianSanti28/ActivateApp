@@ -1,11 +1,7 @@
 package com.unicauca.activate;
 
-import com.unicauca.activate.model.Category;
-import com.unicauca.activate.service.ICategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.test.context.jdbc.Sql;
 
 @SpringBootApplication
 public class Application {
