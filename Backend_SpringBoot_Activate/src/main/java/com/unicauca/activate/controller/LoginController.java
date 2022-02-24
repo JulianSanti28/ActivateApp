@@ -26,7 +26,6 @@ public class LoginController {
     //Crear Usuario
     @PostMapping("login")
     public String  login(@RequestBody User user){
-        System.out.println("Desde JS"+ " " + user.getEmail());
         User usuarioLogueado = UserService.verificarCredenciales(user);
         if (usuarioLogueado != null) {
             String tokenJwt = jwtUtil.create(String.valueOf(usuarioLogueado.getId()), usuarioLogueado.getEmail());
