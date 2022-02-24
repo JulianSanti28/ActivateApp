@@ -59,11 +59,11 @@ public class EventController {
 
     //Crear Evento
     @PostMapping("create")
-    public ResponseEntity<?> create(@RequestBody Event event){ 
+    public ResponseEntity<?> create(@RequestHeader(value="Authorization") String token, @RequestBody Event event){ 
         System.out.println(event.toString());
         Long Id = Long.valueOf(1);
-        //Long usuarioID = Long.parseLong(jwUtil.getKey(token));    
-        Optional<User> user =  UserService.findById(Id); 
+        Long usuarioID = Long.parseLong(jwUtil.getKey(token));    
+        Optional<User> user =  UserService.findById(usuarioID); 
         Optional<Category> category = CategoryService.findById(Id);
         Optional<City> city = CityService.findById(Id);
         city.get().agregarEventos(event);
