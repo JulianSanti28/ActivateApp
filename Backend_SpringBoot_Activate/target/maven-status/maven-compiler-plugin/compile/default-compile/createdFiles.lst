@@ -1,6 +1,5 @@
 com\unicauca\activate\service\UserService.class
 com\unicauca\activate\exception\ErrorResponse.class
-com\unicauca\activate\repository\EventRespository.class
 com\unicauca\activate\exception\GlobalExceptionHandler.class
 com\unicauca\activate\controller\LoginController.class
 com\unicauca\activate\Application.class

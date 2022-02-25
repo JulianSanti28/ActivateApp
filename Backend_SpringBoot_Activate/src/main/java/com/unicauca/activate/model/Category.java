@@ -1,6 +1,7 @@
 //Paquete
 package com.unicauca.activate.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -64,4 +65,14 @@ public class Category {
         this.id = id;
     }
 
+    public void agregarEventos(Event evento) {
+        if (this.events == null) {
+            this.events = new ArrayList<>();
+            this.events.add(evento);
+            evento.setCategory(this);
+        } else {
+            this.events.add(evento);
+            evento.setCategory(this);
+        }
+    }
 }
