@@ -2,10 +2,14 @@ const respuesta = "Correct";
 const peticion = {
     "Token": "abcdefgh",
     "usuario": "miguel",
-    "mail": "mandresmosquera@gmail.com"
 }
-$(document).ready(function () {
 
+$(document).ready(function () {
+    //Se limpia cualquier sesion iniciada anteriormente
+    localStorage.removeItem("token");
+    localStorage.removeItem("mail");
+    localStorage.removeItem("user");
+    
     //Pendiente al envio del formulario
     const form = document.getElementById("formulario");
     form.addEventListener("submit", e => {
@@ -37,7 +41,6 @@ async function iniciarSesion() {
     if (respuesta != 'FAIL') {
         localStorage.token = peticion.Token;
         localStorage.user = peticion.usuario;
-        localStorage.mail = datos.mail;
         window.location.href = 'profile.html'
     } else {
         alert("Las credenciales son incorrectas. Por favor intente nuevamente.");

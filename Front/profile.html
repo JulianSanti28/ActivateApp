@@ -25,6 +25,8 @@
 </head>
 
 <body>
+  <!-- Verificacion de que se Inicio Sesion para cargar la pagina -->
+  <script src="src/js/profileLoading.js"></script>
   <nav class="contenedor-perfil">
 
 
@@ -170,7 +172,7 @@
                       alt="User profile picture">
                   </div>
 
-                  <h3 class="profile-username text-center">Nina Mcintire</h3>
+                  <h3 class="profile-username text-center" id="profileName">Nina Mcintire</h3>
 
                   <ul class="list-group list-group-unbordered mb-3">
                     <li class="list-group-item">
@@ -181,7 +183,7 @@
                     </li>
                   </ul>
 
-                  <a href="login.html" class="btn btn-primary btn-block"><b>Cerrar Sesion</b></a>
+                  <a href="login.html" class="btn btn-primary btn-block" id="closeSession"><b>Cerrar Sesion</b></a>
                 </div>
                 <!-- /.card-body -->
               </div>
@@ -236,10 +238,10 @@
                       <!-- Default box -->
                       <!-- <div class="card card-solid"> -->
                       <div class="pb-0">
-                        <div class="row">
+                        <div class="row" id="eventList">
 
                           <!-- Post -->
-                          <div class="col-12 col-sm-6 col-md-6 d-flex align-items-stretch flex-column">
+                          <!-- <div class="col-12 col-sm-6 col-md-6 d-flex align-items-stretch flex-column">
                             <div class="card bg-light d-flex flex-fill">
                               <div class="card-body pt-1">
                                 <div class="row">
@@ -289,7 +291,7 @@
                                 </div>
                               </div>
                             </div>
-                          </div>
+                          </div> -->
                           <!-- / Post -->
 
 
@@ -463,11 +465,14 @@
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- AdminLTE App -->
   <script src="dist/js/adminlte.min.js"></script>
-
   <!-- InputMask -->
   <script src="plugins/moment/moment.min.js"></script>
   <!-- date-range-picker -->
   <script src="plugins/daterangepicker/daterangepicker.js"></script>
+
+  <!-- Recursos -->
+  <script src="src/js/profile.js"></script>
+
   <!-- Page specific script -->
   <script>
     $(function () {
