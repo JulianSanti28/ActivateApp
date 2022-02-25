@@ -1,5 +1,6 @@
 package com.unicauca.activate.model;
 
+
 public class Asistence {
     private Long identificacionUsuario;
     private Long identificacionEvento;
