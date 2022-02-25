@@ -1,0 +1,38 @@
+.contenedor-perfil{
+    margin: auto;
+    width: 90%;
+}
+
+#card{
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    bottom:0;
+   background:blue;
+    display: grid;
+    gap: 0px;
+    grid-template: 
+        "header header"  10%
+        "info  foto"    auto
+        "texto texto"  60% /
+        auto    auto;
+}
+
+
+#header{
+    grid-area: header;
+    background-color: rgb(214, 247, 70);
+}
+#info{
+    grid-area: info;
+    background-color: rgb(230, 106, 203);
+}
+#foto{
+    grid-area: foto;
+    background-color: rgb(68, 39, 233);
+}
+#texto{
+    grid-area: texto;
+    background-color: #6f9;
+}
