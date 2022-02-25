@@ -6,7 +6,7 @@
   <title>Activate | Registration Page</title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
   <!-- Font Awesome -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- icheck bootstrap -->
@@ -25,7 +25,7 @@
 
       <form action="" method="post" id="formulario">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" id="nombre" placeholder="Nombre" required>
+          <input type="text" class="form-control" id="name" placeholder="Nombre" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -33,7 +33,15 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="email" class="form-control" id="correo" placeholder="Correo" required>
+          <input type="text" class="form-control" id="lastName" placeholder="Apellido">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" id="mail" placeholder="Correo" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -41,7 +49,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" id="contrasenia" placeholder="Contraseña" required>
+          <input type="password" class="form-control" id="password" placeholder="Contraseña" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -49,7 +57,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" id="validContrasenia" placeholder="Repetir Contraseña" required>
+          <input type="password" class="form-control" id="validPassword" placeholder="Repetir Contraseña" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -61,7 +69,7 @@
           <label for="exampleInputFile">Foto de Perfil</label>
           <div class="input-group">
             <div class="custom-file">
-              <input type="file" class="custom-file-input" id="InputFile">
+              <input type="file" class="custom-file-input" id="inputFile">
               <label class="custom-file-label" for="exampleInputFile">Subir Foto</label>
             </div>
           </div>

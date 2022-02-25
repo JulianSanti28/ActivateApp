@@ -1,28 +1,42 @@
+$(document).ready(function () {
 
-const nombre = document.getElementById('nombre');
-const correo = document.getElementById('correo');
-const password = document.getElementById('contrasenia');
-const validContrasenia = document.getElementById('validContrasenia');
 
-const form = document.getElementById("formulario");
-form.addEventListener("submit", e=>{
-    e.preventDefault();
-    let valid = false;
+    //Pendiente al envio del formulario
+    const form = document.getElementById("formulario");
+    form.addEventListener("submit", e => {
+        //Validacion del formulario antes de realizar la peticion
+        e.preventDefault();
+        const password = document.getElementById('password');
+        const validPassword = document.getElementById('validPassword');
 
-    if(password.value == validContrasenia.value){
-        valid = true
-    }else{
-        alert("Verifique las contraseñas")
-    }
+        if (password.value == validPassword.value) {
+            registrarUsuario(password);
+        } else {
+            alert("Las contraseñas no coinciden")
+        }
+    })
+});
 
-    if(valid){
-        registrarUsuario();
-    }
-})
+async function registrarUsuario(password) {
 
- 
-async function registrarUsuario() {
+    //Construimos el JSON de usuario
+    let datos = {};
+    datos.name = document.getElementById('name').value;
+    datos.lastName = document.getElementById('lastName').value;
+    datos.email = document.getElementById('mail').value;
+    datos.photo = document.getElementById('inputFile').value;
+    datos.password = password;
+
+    // //Realizamos la peticion al servidor
+    // const request = await fetch('http://localhost:8082/activate/create', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Accept': 'application/json',
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify(datos)
+    // });
     
-    window.location.href = 'login.html';
-  
+    alert("La cuenta fue creada con exito!");
+    window.location.href = 'login.html'
 }
