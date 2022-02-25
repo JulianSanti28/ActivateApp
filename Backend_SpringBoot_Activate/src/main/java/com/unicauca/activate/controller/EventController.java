@@ -5,10 +5,14 @@
  */
 package com.unicauca.activate.controller;
 
+import com.unicauca.activate.model.Category;
+import com.unicauca.activate.model.City;
 import com.unicauca.activate.model.Event;
 import com.unicauca.activate.model.User;
 // import com.unicauca.activate.model.Asistence;
 import com.unicauca.activate.service.EventService;
+import com.unicauca.activate.service.ICategoryService;
+import com.unicauca.activate.service.ICityService;
 import com.unicauca.activate.service.IUserService;
 import com.unicauca.activate.utilities.JWTUtilities;
 import java.util.List;
@@ -45,12 +49,25 @@ public class EventController {
     @Autowired
     private JWTUtilities jwUtil;
 
+    @Autowired
+    private ICategoryService CategoryService;
+    
+    @Autowired
+    private ICityService CityService;
+
     //Crear Evento
     @PostMapping("create")
     public ResponseEntity<?> create(@RequestHeader(value="Authorization") String token, @RequestBody Event event){  
+        System.out.println(event.toString());
+        Long Id = Long.valueOf(1);
         Long usuarioID = Long.parseLong(jwUtil.getKey(token));    
         Optional<User> user =  UserService.findById(usuarioID); 
+        Optional<Category> category = CategoryService.findById(Id);
+        Optional<City> city = CityService.findById(Id);
+        city.get().agregarEventos(event);
+        category.get().agregarEventos(event);
         user.get().agregarEventos(event);
+        System.out.println(event.toString());
         Event save = EventService.save(event);
         return ResponseEntity.ok().body(save);
     }

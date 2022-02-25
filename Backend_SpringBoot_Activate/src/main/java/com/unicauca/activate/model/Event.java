@@ -66,6 +66,10 @@ public class Event {
     @OneToMany(mappedBy = "event")
     Set<EventUser> assistences;
 
+    @ManyToOne
+    @JoinColumn(name = "CIU_id", nullable = false)
+    private City city;
+
     public void agregarComentarios(Comment comment) {
         if (this.comments == null) {
             this.comments = new ArrayList<>();
@@ -161,4 +165,11 @@ public class Event {
         this.fecha_final = fecha_final;
     }
 
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
 }
