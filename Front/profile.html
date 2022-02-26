@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+
+  <!-- Recursos -->
+  <link rel="stylesheet" href="src/css/profile.css">
+
+  
+
+</head>
+
+<body>
+  <!-- Verificacion de que se Inicio Sesion para cargar la pagina -->
+  <script src="src/js/profileLoading.js"></script>
+  <nav class="contenedor-perfil">
+
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand navbar-white navbar-light">
+      <!-- Left navbar links -->
+      <ul class="navbar-nav">
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="profile.html" class="nav-link">Home</a>
+        </li>
+      </ul>
+
+      <!-- Right navbar links -->
+      <ul class="navbar-nav ml-auto">
+
+
+        <!-- Messages Dropdown Menu -->
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="far fa-comments"></i>
+            <span class="badge badge-danger navbar-badge">3</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            <a href="#" class="dropdown-item">
+              <!-- Message Start -->
+              <div class="media">
+                <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                <div class="media-body">
+                  <h3 class="dropdown-item-title">
+                    Brad Diesel
+                    <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                  </h3>
+                  <p class="text-sm">Call me whenever you can...</p>
+                  <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                </div>
+              </div>
+              <!-- Message End -->
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item">
+              <!-- Message Start -->
+              <div class="media">
+                <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                <div class="media-body">
+                  <h3 class="dropdown-item-title">
+                    John Pierce
+                    <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                  </h3>
+                  <p class="text-sm">I got your message bro</p>
+                  <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                </div>
+              </div>
+              <!-- Message End -->
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item">
+              <!-- Message Start -->
+              <div class="media">
+                <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                <div class="media-body">
+                  <h3 class="dropdown-item-title">
+                    Nora Silvester
+                    <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+                  </h3>
+                  <p class="text-sm">The subject goes here</p>
+                  <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                </div>
+              </div>
+              <!-- Message End -->
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+          </div>
+        </li>
+        <!-- Notifications Dropdown Menu -->
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="far fa-bell"></i>
+            <span class="badge badge-warning navbar-badge">15</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            <span class="dropdown-item dropdown-header">15 Notifications</span>
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item">
+              <i class="fas fa-envelope mr-2"></i> 4 new messages
+              <span class="float-right text-muted text-sm">3 mins</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item">
+              <i class="fas fa-users mr-2"></i> 8 friend requests
+              <span class="float-right text-muted text-sm">12 hours</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item">
+              <i class="fas fa-file mr-2"></i> 3 new reports
+              <span class="float-right text-muted text-sm">2 days</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+            <i class="fas fa-expand-arrows-alt"></i>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+    <!-- /.navbar -->
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-6">
+              <h1>Perfil</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">User Profile</li>
+              </ol>
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-2">
+
+              <!-- Profile Image -->
+              <div class="card card-primary card-outline">
+                <div class="card-body box-profile">
+                  <div class="text-center">
+                    <img class="profile-user-img img-fluid img-circle" id="userImg" src=""
+                      alt="User profile picture">
+                  </div>
+
+                  <h3 class="profile-username text-center" id="profileName">Nina Mcintire</h3>
+
+                  <ul class="list-group list-group-unbordered mb-3">
+                    <li class="list-group-item">
+                      <b>Seguidores</b> <a class="float-right">1,322</a>
+                    </li>
+                    <li class="list-group-item">
+                      <b>Siguiendo</b> <a class="float-right">543</a>
+                    </li>
+                  </ul>
+
+                  <a href="login.html" class="btn btn-primary btn-block" id="closeSession"><b>Cerrar Sesion</b></a>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">About Me</h3>
+                </div>
+
+                <div class="card-body">
+                  <strong><i class="fas fa-book mr-1"></i> Educacion</strong>
+                  <p class="text-muted">
+                    B.S. in Computer Science from the University of Tennessee at Knoxville
+                  </p>
+                  <hr>
+                  <strong><i class="fas fa-map-marker-alt mr-1"></i> Ubicacion</strong>
+                  <p class="text-muted">Malibu, California</p>
+                  <hr>
+                  <strong><i class="fas fa-pencil-alt mr-1"></i> Hobbies</strong>
+                  <p class="text-muted">
+                    <span class="tag tag-danger">UI Design</span>
+                    <span class="tag tag-success">Coding</span>
+                    <span class="tag tag-info">Javascript</span>
+                    <span class="tag tag-warning">PHP</span>
+                    <span class="tag tag-primary">Node.js</span>
+                  </p>
+                  <hr>
+                  <strong><i class="far fa-file-alt mr-1"></i> Notas</strong>
+                  <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim
+                    neque.</p>
+                </div>
+
+              </div>
+
+            </div>
+            <!-- /.col -->
+            <div class="col-md-10">
+              <div class="card">
+                <div class="card-header p-2">
+                  <ul class="nav nav-pills">
+                    <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Eventos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Crear</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Cuenta</a></li>
+                  </ul>
+                </div><!-- /.card-header -->
+
+                <!-- Main content -->
+                <div class="card-body">
+                  <div class="tab-content">
+                    <div class="active tab-pane" id="activity">
+                      <!-- Default box -->
+                      <!-- <div class="card card-solid"> -->
+                      <div class="pb-0">
+                        <div class="row" id="eventList">
+
+                          <!-- Post -->
+                          <!-- <div class="col-12 col-sm-6 col-md-6 d-flex align-items-stretch flex-column">
+                            <div class="card bg-light d-flex flex-fill">
+                              <div class="card-body pt-1">
+                                <div class="row">
+                                  <div class="col-7">
+                                    <div class="row">
+                                      <div class="user-block">
+
+                                        <img class="img-circle img-bordered-sm" src="dist/img/user6-128x128.jpg"
+                                          alt="User Image">
+                                        <span class="username">
+                                          <a href="#">Adam Jones</a>
+                                        </span>
+
+                                      </div>
+                                    </div>
+
+                                    <div class="text-center">
+                                      <h3 class=""><b>Titulo Evento</b></h3>
+                                    </div>
+                                    <div class="row ">
+                                      <i class="fas fa-calendar"> Inicio / Fin</i><br>
+                                    </div>
+                                    <div class="row ">
+                                      <i class="fas fa-map-marker-alt"> Fin</i>
+                                    </div>
+
+                                  </div>
+                                  <div class="col-5 text-center">
+
+                                    <img src="dist/img/photo2.png" alt="user-avatar" class="img-circle img-fluid">
+
+                                  </div>
+                                </div>
+                                <div class="row pt-1">
+
+                                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloribus modi recusandae
+                                  sunt saepe voluptatem blanditiis repellat perferendis repellendus voluptates! Sunt
+                                  quis laborum debitis natus deserunt soluta, tenetur voluptatibus ullam rerum!
+
+                                </div>
+                              </div>
+                              <div class="card-footer">
+                                <div class="text-right">
+                                  <a href="event.html" class="btn btn-sm btn-primary">
+                                    <i class="fas fa-user"></i> Ver evento
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div> -->
+                          <!-- / Post -->
+
+
+
+                        </div>
+                      </div>
+                      <!-- /.card-body -->
+                      <div class="card-footer">
+                        <nav aria-label="Contacts Page Navigation">
+                          <ul class="pagination justify-content-center m-0">
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                            <li class="page-item"><a class="page-link" href="#">5</a></li>
+                            <li class="page-item"><a class="page-link" href="#">6</a></li>
+                            <li class="page-item"><a class="page-link" href="#">7</a></li>
+                            <li class="page-item"><a class="page-link" href="#">8</a></li>
+                          </ul>
+                        </nav>
+                      </div>
+                      <!-- /.card-footer -->
+                      <!-- </div> -->
+                      <!-- /.card -->
+
+                      <!-- /.content -->
+                      <!-- /.post -->
+
+
+
+
+                    </div>
+                    <!-- /.tab-pane -->
+
+
+
+
+
+
+
+
+                    <!-- tab-pane -->
+                    <div class="tab-pane" id="timeline">
+                      <!-- The timeline -->
+                      <div class="timeline timeline-inverse">
+
+
+                        <!-- general form elements -->
+                        <div class="card card-primary">
+                          <div class="card-header">
+                            <h3 class="card-title">CREAR EVENTO</h3>
+                          </div>
+                          <!-- /.card-header -->
+                          <!-- form start -->
+                          <form action="" method="post" id="eventForm">
+                            <div class="card-body">
+                              <div class="form-group">
+                                <label for="exampleInputEmail1">Titulo</label>
+                                <input type="text" class="form-control" id="input_titulo" placeholder="Titulo" required>
+                              </div>
+                              <div class="form-group">
+                                <label for="exampleInputPassword1">Descripcion</label>
+                                <input type="text" class="form-control" id="input_descripcion" placeholder="Descripcion" required>
+                              </div>
+
+                              <div class="form-group">
+                                <label>Ciudad</label>
+                                <select class="custom-select" id="input_ubicacion">
+                                  <option>option 1</option>
+                                  <option>option 2</option>
+                                  <option>option 3</option>
+                                  <option>option 4</option>
+                                  <option>option 5</option>
+                                </select>
+                              </div>
+
+                              <!-- Date and time range -->
+                              <div class="form-group">
+                                <label>Date and time range:</label>
+
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-clock"></i></span>
+                                  </div>
+                                  <input type="text" class="form-control float-right" id="reservationtime">
+                                </div>
+                                <!-- /.input group -->
+                              </div>
+                              <!-- /.form group -->
+
+                              <div class="form-group">
+                                <label for="exampleInputFile">Imagen</label>
+                                <div class="input-group">
+                                  <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="input_img">
+                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                  </div>
+                                  <div class="input-group-append">
+                                    <span class="input-group-text">Upload</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- /.card-body -->
+
+                            <div class="card-footer">
+                              <button  type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                          </form>
+                        </div>
+                        <!-- /.card -->
+
+
+
+
+
+
+
+                      </div>
+                    </div>
+                    <!-- /.tab-pane -->
+
+
+
+
+
+
+
+
+                    <!-- tab-pane -->
+                    <div class="tab-pane" id="settings">
+                      <form class="form-horizontal">
+                        <div class="form-group row">
+                          <label for="inputName2" class="col-sm-2 col-form-label">Name</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputName2" placeholder="Name">
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <div class="offset-sm-2 col-sm-10">
+                            <button type="submit" class="btn btn-danger">Submit</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <!-- /.tab-pane -->
+
+                  </div>
+                  <!-- /.tab-content -->
+                </div><!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+  </nav>
+
+  <!-- jQuery -->
+  <script src="plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="dist/js/adminlte.min.js"></script>
+  <!-- InputMask -->
+  <script src="plugins/moment/moment.min.js"></script>
+  <!-- date-range-picker -->
+  <script src="plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- bs-custom-file-input -->
+  <script src="plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+
+  <!-- Recursos -->
+  <script src="src/js/profile.js"></script>
+  <script src="src/js/createEvent.js"></script>
+
+  <!-- Page specific script for time picker-->
+  <script>
+    $(function () {
+      //Date range picker with time picker
+      $('#reservationtime').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+          format: 'MM/DD/YYYY hh:mm A'
+        }
+      })
+    })
+  </script>
+
+  <!-- Page specific script for file picker-->
+  <script>
+    $(function () {
+      bsCustomFileInput.init();
+    });
+  </script>
+
+
+
+
+</body>
+
+</html>
