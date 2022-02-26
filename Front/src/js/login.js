@@ -2,13 +2,16 @@ const respuesta = "Correct";
 const peticion = {
     "Token": "abcdefgh",
     "usuario": "miguel",
+    "id": 1,
+    "img":"dist/img/user2-160x160.jpg"
 }
 
 $(document).ready(function () {
     //Se limpia cualquier sesion iniciada anteriormente
     localStorage.removeItem("token");
-    localStorage.removeItem("mail");
     localStorage.removeItem("user");
+    localStorage.removeItem("id");
+    localStorage.removeItem("img");
     
     //Pendiente al envio del formulario
     const form = document.getElementById("formulario");
@@ -41,6 +44,8 @@ async function iniciarSesion() {
     if (respuesta != 'FAIL') {
         localStorage.token = peticion.Token;
         localStorage.user = peticion.usuario;
+        localStorage.id = peticion.id;
+        localStorage.img = peticion.img;
         window.location.href = 'profile.html'
     } else {
         alert("Las credenciales son incorrectas. Por favor intente nuevamente.");

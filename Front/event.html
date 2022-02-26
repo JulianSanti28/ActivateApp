@@ -150,9 +150,11 @@
               <div class="card card-widget">
                 <div class="card-header">
                   <div class="user-block">
-                    <img class="img-circle" src="dist/img/user1-128x128.jpg" alt="User Image">
+                    <img class="img-circle" id="userImg" src="" alt="User Image">
                     <span id="user_name" class="username"><a href="#">  </a></span>
-                    <span id="calendario_evento" class="description">Shared publicly - 7:30 PM Today</span>
+                    <span id="calendar_event" class="description"></span>
+                    <span id="ubication_event" class="description"></span>
+                    <span id="category_event" class="description"></span>
                   </div>
                   <!-- /.user-block -->
                   <div class="card-tools">
@@ -170,11 +172,11 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <img class="img-fluid pad" src="dist/img/photo2.png" alt="Photo">
+                  <img class="img-fluid pad" id="eventImg" src="" alt="Photo">
   
                   <p id="event_description">  </p>
   
-                  <a onclick="registraseEvento()" class="btn btn-app bg-success">
+                  <a onclick="eventRegister()" class="btn btn-app bg-success">
                     <!-- <span class="badge bg-purple">891</span> -->
                     <i  class="fas fa-users"></i> Registrarte
                   </a>
@@ -186,42 +188,25 @@
                   <span class="float-right text-muted">127 likes - 3 comments</span>
                 </div>
                 <!-- /.card-body -->
-                <div class="card-footer card-comments">
-                  <div class="card-comment">
-                    <!-- User image -->
+                <div class="card-footer card-comments" id="comments_wrapper">
+
+
+                  <!-- <div class="card-comment">
                     <img class="img-circle img-sm" src="dist/img/user3-128x128.jpg" alt="User Image">
-  
                     <div class="comment-text">
-                      <span class="username">
-                        Maria Gonzales
-                        <span class="text-muted float-right">8:03 PM Today</span>
-                      </span><!-- /.username -->
+                      <span class="username">Maria Gonzales<span class="text-muted float-right">8:03 PM Today</span>
+                      </span>
                       It is a long established fact that a reader will be distracted
-                      by the readable content of a page when looking at its layout.
                     </div>
-                    <!-- /.comment-text -->
-                  </div>
-                  <!-- /.card-comment -->
-                  <div class="card-comment">
-                    <!-- User image -->
-                    <img class="img-circle img-sm" src="dist/img/user4-128x128.jpg" alt="User Image">
-  
-                    <div class="comment-text">
-                      <span class="username">
-                        Luna Stark
-                        <span class="text-muted float-right">8:03 PM Today</span>
-                      </span><!-- /.username -->
-                      It is a long established fact that a reader will be distracted
-                      by the readable content of a page when looking at its layout.
-                    </div>
-                    <!-- /.comment-text -->
-                  </div>
-                  <!-- /.card-comment -->
+                  </div> -->
+
+
+
                 </div>
                 <!-- /.card-footer -->
                 <div class="card-footer">
                   <form action="#" method="post">
-                    <img class="img-fluid img-circle img-sm" src="dist/img/user4-128x128.jpg" alt="Alt Text">
+                    <img class="img-fluid img-circle img-sm" id="userLoginImg" src="" alt="Alt Text">
                     <!-- .img-push is used to add margin to elements next to floating images -->
                     <div class="img-push">
                       <input type="text" class="form-control form-control-sm" placeholder="Press enter to post comment">

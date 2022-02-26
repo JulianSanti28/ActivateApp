@@ -82,6 +82,7 @@ const eventos = [
 $(document).ready(function () {
     //Situar nombre del usuario Logeado
     document.getElementById("profileName").innerHTML = localStorage.user;
+    document.getElementById("userImg").setAttribute("src", localStorage.img);
     //Cargar todos los eventos
     cargarEventos();
 
@@ -89,8 +90,9 @@ $(document).ready(function () {
     const closeSession = document.getElementById("closeSession");
     closeSession.addEventListener("click", e => {
         localStorage.removeItem("token");
-        localStorage.removeItem("mail");
         localStorage.removeItem("user");
+        localStorage.removeItem("id");
+        localStorage.removeItem("img");
     });
 
 });
