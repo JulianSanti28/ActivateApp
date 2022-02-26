@@ -13,14 +13,13 @@
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
 
   <!-- Recursos -->
   <link rel="stylesheet" href="src/css/profile.css">
 
-  <!-- daterange picker -->
-  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
-
-
+  
 
 </head>
 
@@ -346,17 +345,15 @@
                           </div>
                           <!-- /.card-header -->
                           <!-- form start -->
-                          <form method="post">
+                          <form action="" method="post" id="eventForm">
                             <div class="card-body">
                               <div class="form-group">
                                 <label for="exampleInputEmail1">Titulo</label>
-                                <input type="email" class="form-control" id="input_titulo" placeholder="Titulo"
-                                  required>
+                                <input type="text" class="form-control" id="input_titulo" placeholder="Titulo" required>
                               </div>
                               <div class="form-group">
                                 <label for="exampleInputPassword1">Descripcion</label>
-                                <input type="text" class="form-control" id="input_descripcion" placeholder="Descripcion"
-                                  required>
+                                <input type="text" class="form-control" id="input_descripcion" placeholder="Descripcion" required>
                               </div>
 
                               <div class="form-group">
@@ -400,7 +397,7 @@
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                              <button onclick="registrarEvento()" type="submit" class="btn btn-primary">Submit</button>
+                              <button  type="submit" class="btn btn-primary">Submit</button>
                             </div>
                           </form>
                         </div>
@@ -469,11 +466,14 @@
   <script src="plugins/moment/moment.min.js"></script>
   <!-- date-range-picker -->
   <script src="plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- bs-custom-file-input -->
+  <script src="plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 
   <!-- Recursos -->
   <script src="src/js/profile.js"></script>
+  <script src="src/js/createEvent.js"></script>
 
-  <!-- Page specific script -->
+  <!-- Page specific script for time picker-->
   <script>
     $(function () {
       //Date range picker with time picker
@@ -486,6 +486,17 @@
       })
     })
   </script>
+
+  <!-- Page specific script for file picker-->
+  <script>
+    $(function () {
+      bsCustomFileInput.init();
+    });
+  </script>
+
+
+
+
 </body>
 
 </html>

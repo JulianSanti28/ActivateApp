@@ -62,6 +62,12 @@ $(document).ready(function () {
         localStorage.removeItem('verEvento');
     });
 
+    //Pendiente al enviar un comentario
+    const form = document.getElementById("form");
+    form.addEventListener("submit", e => {
+        e.preventDefault();
+        sendComment();
+    });
 });
 
 function getHeaders() {
@@ -113,10 +119,23 @@ function cargarComentario(comment) {
 
 async function eventRegister() {
 
-    const request = await fetch('http://localhost:8082/activate/assist/create', {
-        method: 'POST',
-        headers: getHeaders()
-    });
+    // const request = await fetch('http://localhost:8082/activate/assist/create', {
+    //     method: 'POST',
+    //     headers: getHeaders()
+    // });
     alert("Registro Exitoso!");
     window.location.href = 'profile.html'
+}
+
+
+async function sendComment() {
+
+    // const request = await fetch('http://localhost:8082/activate/event/comment', {
+    //     method: 'POST',
+    //     headers: getHeaders()
+    // });
+    const cajaComentario = document.getElementById("cajaComentario");
+    alert("Comentario-> " + cajaComentario.value);
+
+    window.location.href = 'event.html'
 }
