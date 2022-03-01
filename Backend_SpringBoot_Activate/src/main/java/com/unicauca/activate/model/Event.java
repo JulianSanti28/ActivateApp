@@ -49,8 +49,7 @@ public class Event {
 
     @Column(length = 50)
     private String fecha_final = "";
-    
-    private String imagen;
+
     //Relación 1:N con la entidad category.
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
@@ -81,16 +80,9 @@ public class Event {
             comment.setEvent(this);
         }
     }
+    
+    
 
-    //Getters and Setters
-    public String getImagen() {
-        return imagen;
-    }
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
-    
-    
     public Category getCategory() {
         return category;
     }
@@ -115,7 +107,7 @@ public class Event {
         this.assistences = assistences;
     }
 
-
+    
     
     public User getUser() {
         return user;
