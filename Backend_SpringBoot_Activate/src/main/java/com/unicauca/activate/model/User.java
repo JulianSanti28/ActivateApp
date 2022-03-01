@@ -37,11 +37,9 @@ public class User {
     @Column(length = 50)
     private String lastName;
     
-    @JsonIgnore
     @Column(length = 50, nullable = false, unique = true)
     private String email;
 
-    @JsonIgnore
     @Column(length = 255, nullable = false)
     private String password;
 
@@ -108,4 +106,11 @@ public class User {
         this.password = password;
     }
 
+    @Override
+    public String toString() {
+        return "User [assistences=" + assistences + ", comments=" + comments + ", email=" + email + ", events=" + events
+                + ", id=" + id + ", lastName=" + lastName + ", name=" + name + ", password=" + password + "]";
+    }
+
+    
 }

@@ -8,6 +8,7 @@ package com.unicauca.activate.controller;
 import com.unicauca.activate.model.Category;
 import com.unicauca.activate.model.City;
 import com.unicauca.activate.model.Event;
+import com.unicauca.activate.model.EventDTO;
 import com.unicauca.activate.model.User;
 // import com.unicauca.activate.model.Asistence;
 import com.unicauca.activate.service.EventService;
@@ -19,6 +20,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,13 +60,20 @@ public class EventController {
 
     //Crear Evento
     @PostMapping("create")
-    public ResponseEntity<?> create(@RequestHeader(value="Authorization") String token, @RequestBody Event event){  
-        System.out.println(event.toString());
-        Long Id = Long.valueOf(1);
-        Long usuarioID = Long.parseLong(jwUtil.getKey(token));    
-        Optional<User> user =  UserService.findById(usuarioID); 
-        Optional<Category> category = CategoryService.findById(Id);
-        Optional<City> city = CityService.findById(Id);
+    public ResponseEntity<?> create(@RequestHeader(value="Authorization") String token,@RequestBody EventDTO eventDTO){ 
+        System.out.println(token);
+        Event event = new Event();
+        event.setTitulo(eventDTO.getTitulo());
+        event.setDescripcion(eventDTO.getDescripcion());
+        event.setUbicacion(eventDTO.getUbicacion());
+        event.setFecha_inicio(eventDTO.getFecha_inicio());
+        event.setFecha_final(eventDTO.getFecha_final());
+
+        Long usuarioID = Long.parseLong(token);
+        Optional<User> user =  UserService.findById(usuarioID);
+        Optional<Category> category = CategoryService.findById(eventDTO.getIdCategory());
+        Optional<City> city = CityService.findById(eventDTO.getIdCity());
+
         city.get().agregarEventos(event);
         category.get().agregarEventos(event);
         user.get().agregarEventos(event);
