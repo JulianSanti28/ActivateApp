@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import com.unicauca.activate.model.User;
 import com.unicauca.activate.service.IUserService;
+
+import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +36,7 @@ public class UserController {
     //Crear Usuario
     @PostMapping("create")
     public ResponseEntity<?> create(@RequestBody User user) {
+        System.out.println(user.toString());
         Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
         String hash = argon2.hash(1, 1024, 1, user.getPassword());
         user.setPassword(hash);
