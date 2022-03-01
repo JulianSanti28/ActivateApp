@@ -15,8 +15,14 @@ import com.unicauca.activate.service.ICategoryService;
 import com.unicauca.activate.service.ICityService;
 import com.unicauca.activate.service.IUserService;
 import com.unicauca.activate.utilities.JWTUtilities;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +36,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -42,7 +50,7 @@ public class EventController {
 
     @Autowired
     private EventService EventService;
-    
+
     @Autowired
     private IUserService UserService;
 
@@ -51,17 +59,29 @@ public class EventController {
 
     @Autowired
     private ICategoryService CategoryService;
-    
+
     @Autowired
     private ICityService CityService;
 
     //Crear Evento
     @PostMapping("create")
-    public ResponseEntity<?> create(@RequestHeader(value="Authorization") String token, @RequestBody Event event){  
-        System.out.println(event.toString());
+    public ResponseEntity<?> create(@RequestHeader(value = "Authorization") String token, @RequestParam(name = "image", required = false) MultipartFile foto, @RequestBody Event event) {
+
+        //Si llego la foto
+        if (!foto.isEmpty()) {
+            String ruta = "C://images//uploads";
+            try {
+                byte[] bytesImage = foto.getBytes();
+                Path rutaAbsoluta = Paths.get(ruta + "//" + foto.getOriginalFilename());
+                Files.write(rutaAbsoluta, bytesImage);
+                event.setImagen(foto.getOriginalFilename());
+            } catch (IOException ex) {
+                Logger.getLogger(EventController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         Long Id = Long.valueOf(1);
-        Long usuarioID = Long.parseLong(jwUtil.getKey(token));    
-        Optional<User> user =  UserService.findById(usuarioID); 
+        Long usuarioID = Long.parseLong(jwUtil.getKey(token));
+        Optional<User> user = UserService.findById(usuarioID);
         Optional<Category> category = CategoryService.findById(Id);
         Optional<City> city = CityService.findById(Id);
         city.get().agregarEventos(event);
@@ -92,7 +112,7 @@ public class EventController {
         if (!event.isPresent()) {
             return ResponseEntity.notFound().build();
         }
-        
+
         event.get().setTitulo(eventDetails.getTitulo());
         event.get().setDescripcion(eventDetails.getDescripcion());
         event.get().setUbicacion(eventDetails.getUbicacion());

@@ -38,6 +38,7 @@ public class UserController {
         String hash = argon2.hash(1, 1024, 1, user.getPassword());
         user.setPassword(hash);
         User save = UserService.save(user);
+        System.out.println("Holaaa");
         return ResponseEntity.ok().body(save);
     }
 

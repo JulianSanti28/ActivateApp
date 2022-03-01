@@ -37,11 +37,11 @@ public class User {
     @Column(length = 50)
     private String lastName;
     
-    @JsonIgnore
+    //@JsonIgnore
     @Column(length = 50, nullable = false, unique = true)
     private String email;
 
-    @JsonIgnore
+    //@JsonIgnore
     @Column(length = 255, nullable = false)
     private String password;
 
@@ -53,9 +53,6 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     Set<EventUser> assistences;
-
-    //@OneToMany(mappedBy = "userComment")
-    //List<Comment> comments;
 
     public void agregarEventos(Event evento) {
         if (this.events == null) {
