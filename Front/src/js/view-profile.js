@@ -13,7 +13,7 @@ const eventos = [
             "descripcion": "Espacio para temas de mÃ¡scotas"
         },
         "user": {
-            "id": 100,
+            "id": 1,
             "name": "Vladimir",
             "lastName": "Putin",
             "email": "JulianSmartusisossaa@gmail.com",
@@ -51,7 +51,7 @@ const eventos = [
             "descripcion": "Espacio para temas de mÃ¡scotas"
         },
         "user": {
-            "id": 200,
+            "id": 1,
             "name": "Paula",
             "lastName": "Peña",
             "email": "JulianSmartusisossaa@gmail.com",
@@ -80,9 +80,6 @@ const eventos = [
 
 
 $(document).ready(function () {
-    //Limpiar Locarl Storage
-    localStorage.removeItem('user_profile_id');
-    
     //Situar nombre del usuario Logeado
     document.getElementById("profileName").innerHTML = localStorage.user;
     document.getElementById("userImg").setAttribute("src", localStorage.img);
@@ -137,7 +134,7 @@ function eventBody(evento) {
         + '<img class="img-circle img-bordered-sm" src="'+evento.user.img+'"'
         + 'alt="User Image">'
         + '<span class="username">'
-        + '<a onclick="seeUser(event)" id='+evento.user.id+' href="user-profile.html">'+evento.user.name+ ' '+evento.user.lastName+'</a>'
+        + '<a href="user-profile.html">'+evento.user.name+ ' '+evento.user.lastName+'</a>'
         + '</span>'
 
         + '</div>'
@@ -187,11 +184,3 @@ function verEvento(event) {
     localStorage.removeItem('verEvento');
     localStorage.verEvento = hijo.innerHTML;
 }
-
-
-function seeUser(event){
-    const user_profile_id = event.target.id;
-
-    localStorage.removeItem('user_profile_id');
-    localStorage.user_profile_id = user_profile_id;
-  }
