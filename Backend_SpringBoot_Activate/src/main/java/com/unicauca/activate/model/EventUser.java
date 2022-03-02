@@ -7,6 +7,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "event_user")
@@ -15,11 +17,13 @@ public class EventUser {
     @EmbeddedId
     UserEventKey id;
 
+    @JsonIgnore
     @ManyToOne
     @MapsId("eventId")
     @JoinColumn(name = "event_id")
     Event event;
 
+    @JsonIgnore
     @ManyToOne
     @MapsId("userId")
     @JoinColumn(name = "user_id")

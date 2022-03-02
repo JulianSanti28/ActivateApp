@@ -6,6 +6,7 @@
 package com.unicauca.activate.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -62,7 +63,6 @@ public class Event {
 
     @OneToMany(mappedBy = "event") 
     private List<Comment> comments;
-
     @OneToMany(mappedBy = "event")
     Set<EventUser> assistences;
 
@@ -171,5 +171,13 @@ public class Event {
 
     public void setCity(City city) {
         this.city = city;
+    }
+
+    public void addAsistence(EventUser asistence){
+        if (this.assistences == null) {
+            this.assistences = new HashSet<>();
+            this.assistences.add(asistence);
+        }
+
     }
 }

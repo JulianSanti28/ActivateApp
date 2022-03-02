@@ -6,8 +6,10 @@
 package com.unicauca.activate.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
@@ -48,7 +50,7 @@ public class User {
     
     @OneToMany(mappedBy = "user")
     private List<Comment> comments;
-
+    
     @OneToMany(mappedBy = "user")
     Set<EventUser> assistences;
 
@@ -104,6 +106,24 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void addAsistence(EventUser asistence){
+        if (this.assistences == null) {
+            this.assistences = new HashSet<>();
+            this.assistences.add(asistence);
+        }
+
+    }
+
+    
+    
+    public Set<EventUser> getAssistences() {
+        return assistences;
+    }
+
+    public void setAssistences(Set<EventUser> assistences) {
+        this.assistences = assistences;
     }
 
     @Override
