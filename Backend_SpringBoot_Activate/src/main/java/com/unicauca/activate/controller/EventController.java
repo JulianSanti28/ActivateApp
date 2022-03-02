@@ -74,7 +74,7 @@ public class EventController {
     @PostMapping("create")
     public ResponseEntity<?> create(@RequestHeader(value = "Authorization") String token, @RequestPart(value = "image", required = false) MultipartFile foto, @RequestPart(value = "event", required = false) @Valid EventDTO eventDTO){ 
         if (!foto.isEmpty()) {
-            String ruta = "C://images//uploads";
+            String ruta = "./files/imagesEvents";
             try {
                 byte[] bytesImage = foto.getBytes();
                 Path rutaAbsoluta = Paths.get(ruta + "//" + foto.getOriginalFilename());
