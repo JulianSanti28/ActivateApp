@@ -51,6 +51,8 @@ public class Event {
     @Column(length = 50)
     private String fecha_final = "";
 
+    private String image;
+
     //Relación 1:N con la entidad category.
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
@@ -124,6 +126,18 @@ public class Event {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public String getImage() {
+        return image;
+    }
+
+
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+
 
     public String getTitulo() {
         return titulo;
