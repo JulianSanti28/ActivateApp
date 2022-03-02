@@ -43,6 +43,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import com.unicauca.activate.mapper.Mapper;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -54,6 +55,8 @@ import ch.qos.logback.classic.Logger;
 @RestController
 @RequestMapping("/activate/event")
 public class EventController {
+
+    private Mapper mapper = new Mapper();
 
     @Autowired
     private EventService EventService;
@@ -86,12 +89,7 @@ public class EventController {
         }
 
         System.out.println(token);
-        Event event = new Event();
-        event.setTitulo(eventDTO.getTitulo());
-        event.setDescripcion(eventDTO.getDescripcion());
-        event.setUbicacion(eventDTO.getUbicacion());
-        event.setFecha_inicio(eventDTO.getFecha_inicio());
-        event.setFecha_final(eventDTO.getFecha_final());
+        Event event = mapper.toEvent(eventDTO);
         event.setImage(foto.getOriginalFilename());
 
         Long usuarioID = Long.parseLong(token);

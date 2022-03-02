@@ -7,7 +7,11 @@ package com.unicauca.activate.mapper;
 
 import com.unicauca.activate.model.Comment;
 import com.unicauca.activate.model.CommentDTO;
+import com.unicauca.activate.model.Event;
+import com.unicauca.activate.model.EventDTO;
+
 import org.springframework.stereotype.Component;
+
 
 /**
  *
@@ -27,5 +31,15 @@ public class Mapper {
         comment.setFechaComentario(commentDto.getFechaComentario());
         comment.setScore(commentDto.getScore());
         return comment;
+    }
+
+    public Event toEvent(EventDTO eventDto){
+        Event event = new Event();
+        event.setTitulo(eventDto.getTitulo());
+        event.setDescripcion(eventDto.getDescripcion());
+        event.setUbicacion(eventDto.getUbicacion());
+        event.setFecha_inicio(eventDto.getFecha_inicio());
+        event.setFecha_final(eventDto.getFecha_final());
+        return event;
     }
 }

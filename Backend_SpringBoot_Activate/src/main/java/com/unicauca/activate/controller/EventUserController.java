@@ -48,7 +48,6 @@ public class EventUserController {
     //Crear Asistencia
     @PostMapping("create")
     public ResponseEntity<?> create(@RequestBody Asistence asistence) {
-        System.out.println(asistence.toString());
         //Long usuarioID = Long.parseLong(jwUtil.getKey(token)); 
         //Long eventoID = Long.parseLong(event_id); 
         //Asistence asistence = new Asistence(usuarioID, eventoID);
@@ -72,13 +71,11 @@ public class EventUserController {
         user.get().addAsistence(eventUser);
 
         EventUser save = EventUserService.save(eventUser);
-        System.out.println("Pasoooooo1");
         return ResponseEntity.ok().body(save);
     }
 
     @GetMapping("eventsUser/all/{id}")
     public List<Event> readAllEvents(@PathVariable Long id) {
-        System.out.println(id+"--------------------------------");
         Optional<User> user = UserService.findById(id);
         Set<EventUser> eventsUser = user.get().getAssistences();
         List<Event> events = new ArrayList<>();
