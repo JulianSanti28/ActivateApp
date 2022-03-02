@@ -75,22 +75,10 @@ public class EventController {
 
     //Crear Evento
     @PostMapping("create")
-    public ResponseEntity<?> create(@RequestHeader(value = "Authorization") String token, @RequestPart(value = "image", required = false) MultipartFile foto, @RequestPart(value = "event", required = false) @Valid EventDTO eventDTO){ 
-        if (!foto.isEmpty()) {
-            String ruta = "./files/imagesEvents";
-            try {
-                byte[] bytesImage = foto.getBytes();
-                Path rutaAbsoluta = Paths.get(ruta + "//" + foto.getOriginalFilename());
-                Files.write(rutaAbsoluta, bytesImage);
-                //event.setImagen(foto.getOriginalFilename());
-            } catch (IOException ex) {
-                System.out.println("Error al cargar el archivo");
-            }
-        }
+    public ResponseEntity<?> create(@RequestHeader(value = "Authorization") String token,@RequestBody @Valid EventDTO eventDTO){ 
 
         System.out.println(token);
         Event event = mapper.toEvent(eventDTO);
-        event.setImage(foto.getOriginalFilename());
 
         Long usuarioID = Long.parseLong(token);
         Optional<User> user =  UserService.findById(usuarioID);
@@ -102,6 +90,29 @@ public class EventController {
         user.get().agregarEventos(event);
         System.out.println(event.toString());
         Event save = EventService.save(event);
+        return ResponseEntity.ok().body(save);
+    }
+
+
+
+    //Crear Evento
+    @PostMapping("create/image")
+    public ResponseEntity<?> createImageEvent(@RequestHeader(value = "event_id") Long eventId,@RequestPart(value = "image", required = false) MultipartFile foto){ 
+        System.out.print("-----------");
+        if (!foto.isEmpty()) {
+            String ruta = "./files/imagesEvents";
+            try {
+                byte[] bytesImage = foto.getBytes();
+                Path rutaAbsoluta = Paths.get(ruta + "//" + foto.getOriginalFilename());
+                Files.write(rutaAbsoluta, bytesImage);
+                //event.setImagen(foto.getOriginalFilename());
+            } catch (IOException ex) {
+                System.out.println("Error al cargar el archivo");
+            }
+        }
+        Optional<Event> event =  EventService.findById(eventId);
+        event.get().setImage(foto.getOriginalFilename());
+        Event save = EventService.save(event.get());
         return ResponseEntity.ok().body(save);
     }
 
