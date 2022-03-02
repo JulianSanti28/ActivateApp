@@ -85,4 +85,14 @@ public class EventUserController {
         return events;
     }
 
+    @GetMapping("usersEvent/all/{id}")
+    public List<User> readAllUsers(@PathVariable Long id){
+        Optional<Event> event = EventService.findById(id);
+        Set<EventUser> eventsUser = event.get().getAssistences();
+        List<User> users = new ArrayList<>();
+        for (EventUser temp : eventsUser) {
+            users.add(temp.getUser());
+        }
+        return users;
+    }
 }
