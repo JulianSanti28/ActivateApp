@@ -16,10 +16,17 @@ import com.unicauca.activate.service.ICategoryService;
 import com.unicauca.activate.service.ICityService;
 import com.unicauca.activate.service.IUserService;
 import com.unicauca.activate.utilities.JWTUtilities;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+import javax.validation.Valid;
 
 import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +40,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
 
 /**
  *
@@ -60,7 +72,19 @@ public class EventController {
 
     //Crear Evento
     @PostMapping("create")
-    public ResponseEntity<?> create(@RequestHeader(value="Authorization") String token,@RequestBody EventDTO eventDTO){ 
+    public ResponseEntity<?> create(@RequestHeader(value = "Authorization") String token, @RequestPart(value = "image", required = false) MultipartFile foto, @RequestPart(value = "event", required = false) @Valid EventDTO eventDTO){ 
+        if (!foto.isEmpty()) {
+            String ruta = "C://images//uploads";
+            try {
+                byte[] bytesImage = foto.getBytes();
+                Path rutaAbsoluta = Paths.get(ruta + "//" + foto.getOriginalFilename());
+                Files.write(rutaAbsoluta, bytesImage);
+                //event.setImagen(foto.getOriginalFilename());
+            } catch (IOException ex) {
+                System.out.println("Error al cargar el archivo");
+            }
+        }
+
         System.out.println(token);
         Event event = new Event();
         event.setTitulo(eventDTO.getTitulo());
@@ -68,6 +92,7 @@ public class EventController {
         event.setUbicacion(eventDTO.getUbicacion());
         event.setFecha_inicio(eventDTO.getFecha_inicio());
         event.setFecha_final(eventDTO.getFecha_final());
+        event.setImage(foto.getOriginalFilename());
 
         Long usuarioID = Long.parseLong(token);
         Optional<User> user =  UserService.findById(usuarioID);
