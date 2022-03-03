@@ -46,6 +46,7 @@ async function iniciarSesion() {
         localStorage.token = peticion.Token;
         localStorage.user = peticion.Usuario;
         localStorage.email = datos.email;
+        localStorage.id = peticion.Id;
         //localStorage.img = peticion.img;
         window.location.href = 'profile.html'
     } else {

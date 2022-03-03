@@ -23,8 +23,6 @@ async function cargarCiudades() {
     });
     const ciudades = await request.json();
 
-    console.log(ciudades);
-
     for (let ciudad of ciudades) {
         var option = document.createElement("option");
         option.setAttribute('id',ciudad.ciu_id);
