@@ -25,17 +25,17 @@ async function registrarUsuario(password) {
     datos.lastName = document.getElementById('lastName').value;
     datos.email = document.getElementById('mail').value;
     datos.photo = document.getElementById('inputFile').value;
-    datos.password = password;
+    datos.password = document.getElementById('password').value;
 
-    // //Realizamos la peticion al servidor
-    // const request = await fetch('http://localhost:8082/activate/create', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Accept': 'application/json',
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify(datos)
-    // });
+    //Realizamos la peticion al servidor
+    const request = await fetch('http://localhost:8081/activate/create', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datos)
+    });
 
     alert("La cuenta fue creada con exito!");
     window.location.href = 'login.html'

@@ -82,9 +82,12 @@ async function registrarEvento() {
     datos.titulo = document.getElementById('input_titulo').value;
     datos.descripcion = document.getElementById('input_descripcion').value;
     datos.ubicacion = document.getElementById('input_ubicacion').value;
+    datos.fecha_inicio = document.getElementById('input_inicio').value;
+    datos.fecha_final = document.getElementById('input_fin').value;
+    datos.idCategory = categorias[0];
+    datos.
     datos.date = document.getElementById('reservationtime').value;
-    // datos.fecha_inicio = document.getElementById('input_inicio').value;
-    // datos.fecha_final = document.getElementById('input_fin').value;
+    
     
     const image_input = document.getElementById('input_img').value;
 
