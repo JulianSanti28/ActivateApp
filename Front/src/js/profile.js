@@ -195,4 +195,4 @@ function seeUser(event){
 
     localStorage.removeItem('user_profile_id');
     localStorage.user_profile_id = user_profile_id;
-  }
+}
