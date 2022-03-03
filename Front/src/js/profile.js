@@ -119,7 +119,11 @@ async function cargarEventos() {
 
     let listadoHtml = '';
     for (let evento of eventos) {
+        
+        evento.image = "data:image/jpg;base64," + evento.image;
         listadoHtml += eventBody(evento);
+
+        //console.log(evento.image);
     }
     document.querySelector('#eventList').innerHTML = listadoHtml;
 
