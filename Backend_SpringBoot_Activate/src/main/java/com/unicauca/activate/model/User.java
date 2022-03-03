@@ -44,7 +44,8 @@ public class User {
 
     @Column(length = 255, nullable = false)
     private String password;
-
+    
+    //private String image;
     @OneToMany(mappedBy = "user")
     private List<Event> events;
     
@@ -53,7 +54,14 @@ public class User {
     
     @OneToMany(mappedBy = "user")
     Set<EventUser> assistences;
-
+    
+    @JsonIgnore
+    @OneToMany(mappedBy="to")
+    private List<Follow> followers; //seguidores
+    
+    @JsonIgnore
+    @OneToMany(mappedBy="from")
+    private List<Follow> following; // seguidos
     //@OneToMany(mappedBy = "userComment")
     //List<Comment> comments;
 
@@ -107,7 +115,13 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+    //public String getImage() {
+    //    return image;
+    //}
 
+    //public void setImage(String image) {
+    //    this.image = image;
+    //}
     public void addAsistence(EventUser asistence){
         if (this.assistences == null) {
             this.assistences = new HashSet<>();
@@ -115,9 +129,21 @@ public class User {
         }
 
     }
+    public void addFollowFollowing(Follow follow){ // sigo a otra persona
+        
+        if(this.following==null){
+            this.following = new ArrayList<Follow>();
+        }
+        this.following.add(follow);
+    }
+    public void addFollowFollower(Follow follow){ // me siguen 
+        if(this.followers == null ){
+            this.followers = new ArrayList<Follow>();
+        }
+      
+        this.followers.add(follow);
 
-    
-    
+    }
     public Set<EventUser> getAssistences() {
         return assistences;
     }
@@ -125,7 +151,49 @@ public class User {
     public void setAssistences(Set<EventUser> assistences) {
         this.assistences = assistences;
     }
+    
+    public List<Follow> getFollowers() {
+        return followers;
+    }
 
+    public void setFollowers(List<Follow> followers) {
+        this.followers = followers;
+    }
+
+    public List<Follow> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(List<Follow> following) {
+        this.following = following;
+    }
+    
+    public int getFollowingCount(){
+        if(this.following == null){
+            return 0;
+        }
+        return this.following.size();
+    }
+    public int getFollowerCount(){
+        if(this.followers == null){
+            return 0;
+        }
+        return this.followers.size();
+    }
+    public void delFollowing(long idFollow){
+        for(int i = 0 ; i< this.following.size();i++){
+            if(this.following.get(i).getId()==idFollow){
+                this.following.remove(i);
+            }
+        }
+    }
+    public void delFollower(long idFollow){
+        for(int i = 0 ; i< this.followers.size();i++){
+            if(this.followers.get(i).getId()==idFollow){
+                this.followers.remove(i);
+            }
+        }
+    }
     @Override
     public String toString() {
         return "User [assistences=" + assistences + ", comments=" + comments + ", email=" + email + ", events=" + events
