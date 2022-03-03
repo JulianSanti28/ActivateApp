@@ -63,7 +63,7 @@ public class User {
     @OneToMany(mappedBy="from")
     private List<Follow> following; // seguidos
     
-    private String image;
+    private byte[] image;
     //@OneToMany(mappedBy = "userComment")
     //List<Comment> comments;
 
@@ -170,11 +170,11 @@ public class User {
         this.following = following;
     }
 
-    public String getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
     

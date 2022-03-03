@@ -65,7 +65,14 @@ public class UserController {
             }
         }
         Optional<User> user =  UserService.findById(userId);
-        user.get().setImage(foto.getOriginalFilename());
+        
+        try {
+            if (foto.getBytes().length > 0) {
+                user.get().setImage(foto.getBytes());
+            }
+        } catch (IOException ex) {
+            System.out.println("Error al guardar bytes");
+        }
         User save = UserService.save(user.get());
         return ResponseEntity.ok().body(save);
     }
