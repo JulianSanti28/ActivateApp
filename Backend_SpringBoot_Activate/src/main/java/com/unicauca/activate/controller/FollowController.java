@@ -17,6 +17,8 @@ import com.unicauca.activate.utilities.JWTUtilities;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -60,6 +62,21 @@ public class FollowController {
 //        User userFrom = mapper.toUser()
         Follow save = followService.save(newFollow);
         return ResponseEntity.ok().body(save);
+    }
+    
+    @DeleteMapping("remove/{id}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long followId) {
+        if (!followService.findById(followId).isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        
+        Follow oldFollow = followService.findById(followId).get();
+        
+        oldFollow.getFrom().delFollowing(followId);
+        oldFollow.getTo().delFollower(followId);
+        
+        followService.deleteById(followId);
+        return ResponseEntity.ok().build();
     }
     
 }

@@ -38,5 +38,14 @@ public class Follow {
     public long getId() {
         return id;
     }
+
+    public User getFrom() {
+        return from;
+    }
+
+    public User getTo() {
+        return to;
+    }
+    
     
 }

@@ -159,7 +159,27 @@ public class User {
         this.following = following;
     }
     
+    public long getFollowingCount(){
+        return this.following.size();
+    }
+    public long getFollowerCount(){
+        return this.followers.size();
+    }
     
+    public void delFollowing(long idFollow){
+        for(int i = 0 ; i< this.following.size();i++){
+            if(this.following.get(i).getId()==idFollow){
+                this.following.remove(i);
+            }
+        }
+    }
+    public void delFollower(long idFollow){
+        for(int i = 0 ; i< this.followers.size();i++){
+            if(this.followers.get(i).getId()==idFollow){
+                this.followers.remove(i);
+            }
+        }
+    }
     @Override
     public String toString() {
         return "User [assistences=" + assistences + ", comments=" + comments + ", email=" + email + ", events=" + events
