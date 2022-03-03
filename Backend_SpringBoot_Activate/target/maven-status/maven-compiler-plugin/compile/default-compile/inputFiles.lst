@@ -18,6 +18,7 @@ c:\Users\Sebastian_Arenas\Documents\Repositorios GitHub\Backend_Frontend_Activat
 c:\Users\Sebastian_Arenas\Documents\Repositorios GitHub\Backend_Frontend_Activate\Backend_SpringBoot_Activate\src\main\java\com\unicauca\activate\repository\CommentRepository.java
 c:\Users\Sebastian_Arenas\Documents\Repositorios GitHub\Backend_Frontend_Activate\Backend_SpringBoot_Activate\src\main\java\com\unicauca\activate\service\CategoryService.java
 c:\Users\Sebastian_Arenas\Documents\Repositorios GitHub\Backend_Frontend_Activate\Backend_SpringBoot_Activate\src\main\java\com\unicauca\activate\service\ICommentService.java
+c:\Users\Sebastian_Arenas\Documents\Repositorios GitHub\Backend_Frontend_Activate\Backend_SpringBoot_Activate\src\main\java\com\unicauca\activate\controller\CategoryController.java
 c:\Users\Sebastian_Arenas\Documents\Repositorios GitHub\Backend_Frontend_Activate\Backend_SpringBoot_Activate\src\main\java\com\unicauca\activate\service\ICityService.java
 c:\Users\Sebastian_Arenas\Documents\Repositorios GitHub\Backend_Frontend_Activate\Backend_SpringBoot_Activate\src\main\java\com\unicauca\activate\service\EventService.java
 c:\Users\Sebastian_Arenas\Documents\Repositorios GitHub\Backend_Frontend_Activate\Backend_SpringBoot_Activate\src\main\java\com\unicauca\activate\service\EventUserService.java
@@ -26,6 +27,7 @@ c:\Users\Sebastian_Arenas\Documents\Repositorios GitHub\Backend_Frontend_Activat
 c:\Users\Sebastian_Arenas\Documents\Repositorios GitHub\Backend_Frontend_Activate\Backend_SpringBoot_Activate\src\main\java\com\unicauca\activate\repository\CityRepository.java
 c:\Users\Sebastian_Arenas\Documents\Repositorios GitHub\Backend_Frontend_Activate\Backend_SpringBoot_Activate\src\main\java\com\unicauca\activate\controller\EventUserController.java
 c:\Users\Sebastian_Arenas\Documents\Repositorios GitHub\Backend_Frontend_Activate\Backend_SpringBoot_Activate\src\main\java\com\unicauca\activate\controller\CommentController.java
+c:\Users\Sebastian_Arenas\Documents\Repositorios GitHub\Backend_Frontend_Activate\Backend_SpringBoot_Activate\src\main\java\com\unicauca\activate\controller\CityController.java
 c:\Users\Sebastian_Arenas\Documents\Repositorios GitHub\Backend_Frontend_Activate\Backend_SpringBoot_Activate\src\main\java\com\unicauca\activate\service\IEventUserService.java
 c:\Users\Sebastian_Arenas\Documents\Repositorios GitHub\Backend_Frontend_Activate\Backend_SpringBoot_Activate\src\main\java\com\unicauca\activate\utilities\JWTUtilities.java
 c:\Users\Sebastian_Arenas\Documents\Repositorios GitHub\Backend_Frontend_Activate\Backend_SpringBoot_Activate\src\main\java\com\unicauca\activate\model\Event.java
