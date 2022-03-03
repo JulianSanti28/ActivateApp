@@ -1,24 +1,4 @@
-const ciudades = [
-    {
-        "id": 1,
-        "nombre": "Ucrania",
-    },
-    {
-        "id": 2,
-        "nombre": "Popayan",
-    }
-]
 
-const categorias = [
-    {
-        "id": 1,
-        "nombre": "Guerra",
-    },
-    {
-        "id": 2,
-        "nombre": "Diversion",
-    }
-]
 
 $(document).ready(function () {
     //Cargar Opciones de Ciudad
@@ -36,29 +16,29 @@ $(document).ready(function () {
     })
 });
 
-function cargarCiudades() {
-    const request = await fetch('http://localhost:8082/activate/event/', {
+async function cargarCiudades() {
+    const request = await fetch('http://localhost:8081/activate/city/cities/all', {
         method: 'GET',
-        // headers: getHeaders()
+        //headers: getHeaders()
     });
     const ciudades = await request.json();
 
     for (let ciudad of ciudades) {
         var option = document.createElement("option");
         option.setAttribute('id',ciudad.id);
-        var text = document.createTextNode(ciudad.nombre);
+        var text = document.createTextNode(ciudad.ciu_name);
         option.appendChild(text);
         document.getElementById("input_ubicacion").appendChild(option);
     }
     
 }
 
-function cargarCategorias(){
-    // const request = await fetch('http://localhost:8082/activate/event/', {
-    //     method: 'GET',
-    //     // headers: getHeaders()
-    // });
-    // const categorias = await request.json();
+async function cargarCategorias(){
+    const request = await fetch('http://localhost:8081/activate/category/categories/all', {
+        method: 'GET',
+        // headers: getHeaders()
+    });
+    const categorias = await request.json();
 
     for (let categoria of categorias) {
         var option = document.createElement("option");
@@ -88,7 +68,8 @@ async function registrarEvento() {
     datos.fecha_final = parts[1];
     //datos.idCategory = document.getElementById('input_ubicacion').value;
     var select_destination = document.getElementById("input_ubicacion"); /*Obtener el SELECT de Destino*/
-    datos.idCity = select_destination.options[select_destination.selectedIndex].id; /*Obtener id de la opción destino*/
+    datos.idCity = select_destination.selectedIndex + 1; /*Obtener id de la opción destino*/
+    //console.log("numero de ciudad :"+datos.idCity);
     var select_category = document.getElementById("input_categoria"); /*Obtener el SELECT de Destino*/
     datos.idCategory = select_category.options[select_category.selectedIndex].id; /*Obtener id de la opción destino*/
     const image_input = document.getElementById('input_img');
@@ -107,10 +88,10 @@ async function registrarEvento() {
             addImage(result.id,image_input.files[0]);
         }else{
             if(result.id == null){
-                alert("Evento no fue Creado")
+                alert("Evento no fue Creado");
             }else{
-                alert("Evento Creado sin imagen")
-                window.location.href = 'user.html';
+                alert("Evento Creado sin imagen");
+                window.location.href = 'profile.html';
             }
         }
     });
@@ -142,9 +123,7 @@ function addImage(event_id,image_input){
       .catch(error => console.log('error', error));
 
 
-
-
     // console.log(formdata);
     alert("Evento creado con exito!");
-    window.location.href = 'user.html';
+    window.location.href = 'profile.html';
 }
