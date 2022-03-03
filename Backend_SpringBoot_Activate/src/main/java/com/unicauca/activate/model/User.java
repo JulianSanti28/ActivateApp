@@ -62,6 +62,8 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy="from")
     private List<Follow> following; // seguidos
+    
+    private String image;
     //@OneToMany(mappedBy = "userComment")
     //List<Comment> comments;
 
@@ -166,6 +168,14 @@ public class User {
 
     public void setFollowing(List<Follow> following) {
         this.following = following;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
     
     public int getFollowingCount(){
