@@ -10,7 +10,6 @@ import com.unicauca.activate.model.CommentDTO;
 import com.unicauca.activate.model.Event;
 import com.unicauca.activate.model.Follow;
 import com.unicauca.activate.model.User;
-import com.unicauca.activate.model.UserDTO;
 import com.unicauca.activate.service.FollowService;
 import com.unicauca.activate.service.IUserService;
 import com.unicauca.activate.utilities.JWTUtilities;
@@ -46,20 +45,17 @@ public class FollowController {
     //crear follow se debe asignar de 1 following 2 ->  y 2 followers 1 
     //le llega token del usuario logeado y como parametro usuario perfil
     @PostMapping("create")
-    //public ResponseEntity<?> create(@RequestHeader(value="Authorization") String token, @RequestBody UserDTO p_user) {
-    public ResponseEntity<?> create(@RequestHeader(value="Authorization") String token, @RequestBody User p_user) {  
-        Long userId_from = Long.parseLong(jwUtil.getKey(token)); //el que hace click en follow 
-        //Long userId_to = p_user.getId();
-        Long userId_to = p_user.getId();
-        Optional<User> user_from = UserService.findById(userId_from);
-        Optional<User> user_to =  UserService.findById(userId_to);
-        //Comment comment = mapper.toComment(commentDto);
+    public ResponseEntity<?> create(@RequestHeader(value="from_user") String fromUser, @RequestHeader(value="to_user") String toUser) {
+   
+
+        Optional<User> user_from = UserService.findById(Long.parseLong(fromUser));
+        Optional<User> user_to =  UserService.findById(Long.parseLong(toUser));
+
         Follow newFollow = new Follow(user_from.get(),user_to.get());
         //Vinculando las relaciones
         user_from.get().addFollowFollowing(newFollow);
         user_to.get().addFollowFollower(newFollow);
-//        User userTo = mapper.toUser(p_user);
-//        User userFrom = mapper.toUser()
+
         Follow save = followService.save(newFollow);
         return ResponseEntity.ok().body(save);
     }

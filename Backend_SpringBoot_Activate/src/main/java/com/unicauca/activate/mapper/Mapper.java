@@ -9,9 +9,6 @@ import com.unicauca.activate.model.Comment;
 import com.unicauca.activate.model.CommentDTO;
 import com.unicauca.activate.model.Event;
 import com.unicauca.activate.model.EventDTO;
-import com.unicauca.activate.model.User;
-import com.unicauca.activate.model.UserDTO;
-import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
@@ -46,17 +43,5 @@ public class Mapper {
         return event;
     }
     
-    public User toUser(UserDTO us ){
-        User user = new User();
-        user.setAssistences(us.getAssistences());
-        user.setEmail(us.getEmail());
-        user.setFollowers(us.getFollowers());
-        user.setFollowing(us.getFollowing());
-        user.setId(us.getId());
-        user.setLastName(us.getLastName());
-        user.setName(us.getName());
-        user.setPassword(us.getPassword());
-        
-        return user;
-    }
+   
 }

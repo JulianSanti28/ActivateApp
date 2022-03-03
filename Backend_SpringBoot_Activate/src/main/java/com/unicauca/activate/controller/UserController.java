@@ -22,6 +22,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Clase controladora de usuario
@@ -42,7 +49,27 @@ public class UserController {
         User save = UserService.save(user);
         return ResponseEntity.ok().body(save);
     }
-
+    
+    //Crear Evento
+    @PostMapping("create/image")
+    public ResponseEntity<?> createImageEvent(@RequestHeader(value = "user_id") Long userId,@RequestPart(value = "image", required = false) MultipartFile foto){ 
+        System.out.print("-----------");
+        if (!foto.isEmpty()) {
+            String ruta = "./files/imagesUser";
+            try {
+                byte[] bytesImage = foto.getBytes();
+                Path rutaAbsoluta = Paths.get(ruta + "//" + foto.getOriginalFilename());
+                Files.write(rutaAbsoluta, bytesImage);
+                //event.setImagen(foto.getOriginalFilename());
+            } catch (IOException ex) {
+                System.out.println("Error al cargar el archivo");
+            }
+        }
+        Optional<User> user = UserService.findById(userId);
+        user.get().setImage(foto.getOriginalFilename());
+        User save = UserService.save(user.get());
+        return ResponseEntity.ok().body(save);
+    }
     //Leer Usuario
     @GetMapping("user/{id}")
     public ResponseEntity<?> read(@PathVariable Long id) {

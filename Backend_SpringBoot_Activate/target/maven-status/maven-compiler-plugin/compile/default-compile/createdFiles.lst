@@ -2,7 +2,6 @@ com\unicauca\activate\service\UserService.class
 com\unicauca\activate\service\IEventUserService.class
 com\unicauca\activate\service\ICommentService.class
 com\unicauca\activate\Application.class
-com\unicauca\activate\model\UserDTO.class
 com\unicauca\activate\repository\EventUserRepository.class
 com\unicauca\activate\service\EventService.class
 com\unicauca\activate\repository\CategoryRepository.class

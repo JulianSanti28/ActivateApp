@@ -44,7 +44,8 @@ public class User {
 
     @Column(length = 255, nullable = false)
     private String password;
-
+    
+    private String image;
     @OneToMany(mappedBy = "user")
     private List<Event> events;
     
@@ -54,9 +55,11 @@ public class User {
     @OneToMany(mappedBy = "user")
     Set<EventUser> assistences;
     
+    @JsonIgnore
     @OneToMany(mappedBy="to")
     private List<Follow> followers; //seguidores
-
+    
+    @JsonIgnore
     @OneToMany(mappedBy="from")
     private List<Follow> following; // seguidos
     //@OneToMany(mappedBy = "userComment")
@@ -112,7 +115,13 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+    public String getImage() {
+        return image;
+    }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
     public void addAsistence(EventUser asistence){
         if (this.assistences == null) {
             this.assistences = new HashSet<>();
@@ -142,7 +151,7 @@ public class User {
     public void setAssistences(Set<EventUser> assistences) {
         this.assistences = assistences;
     }
-
+    
     public List<Follow> getFollowers() {
         return followers;
     }
@@ -159,13 +168,18 @@ public class User {
         this.following = following;
     }
     
-    public long getFollowingCount(){
+    public int getFollowingCount(){
+        if(this.following == null){
+            return 0;
+        }
         return this.following.size();
     }
-    public long getFollowerCount(){
+    public int getFollowerCount(){
+        if(this.followers == null){
+            return 0;
+        }
         return this.followers.size();
     }
-    
     public void delFollowing(long idFollow){
         for(int i = 0 ; i< this.following.size();i++){
             if(this.following.get(i).getId()==idFollow){
