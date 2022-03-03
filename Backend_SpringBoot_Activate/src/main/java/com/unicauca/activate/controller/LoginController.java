@@ -28,8 +28,11 @@ public class LoginController {
     public String  login(@RequestBody User user){
         User usuarioLogueado = UserService.verificarCredenciales(user);
         if (usuarioLogueado != null) {
+            
             String tokenJwt = jwtUtil.create(String.valueOf(usuarioLogueado.getId()), usuarioLogueado.getEmail());
-            return tokenJwt;
+            String usuario_inicio_sesion = "{\"Usuario\":\""+usuarioLogueado.getName()+"\",\"Id\":\""+usuarioLogueado.getId()+"\", \"Token\":\""+tokenJwt+"\"}";
+
+            return usuario_inicio_sesion;
         }
         return "FAIL";    
     }

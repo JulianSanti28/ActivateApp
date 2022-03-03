@@ -37,11 +37,11 @@ $(document).ready(function () {
 });
 
 function cargarCiudades() {
-    // const request = await fetch('http://localhost:8082/activate/event/', {
-    //     method: 'GET',
-    //     // headers: getHeaders()
-    // });
-    // const ciudades = await request.json();
+    const request = await fetch('http://localhost:8082/activate/event/', {
+        method: 'GET',
+        // headers: getHeaders()
+    });
+    const ciudades = await request.json();
 
     for (let ciudad of ciudades) {
         var option = document.createElement("option");
@@ -69,64 +69,82 @@ function cargarCategorias(){
     }
 }
 
-// function getHeaders() {
-//   return {
-//    'Accept': 'application/json',
-//    'Content-Type': 'application/json',
-//    'Authorization': localStorage.token
-//  };
-// }
+function getHeaders() {
+  return {
+   'Accept': 'application/json',
+   'Content-Type': 'application/json',
+   'Authorization': "1"
+ };
+}
 
 async function registrarEvento() {
     let datos = {};
     datos.titulo = document.getElementById('input_titulo').value;
     datos.descripcion = document.getElementById('input_descripcion').value;
-    datos.ubicacion = document.getElementById('input_ubicacion').value;
-    datos.fecha_inicio = document.getElementById('input_inicio').value;
-    datos.fecha_final = document.getElementById('input_fin').value;
-    datos.idCategory = categorias[0];
-    datos.
-    datos.date = document.getElementById('reservationtime').value;
+    datos.ubicacion = "";
+    let fecha = document.getElementById('reservationtime').value;
+    let parts = fecha.split("-");
+    datos.fecha_inicio = parts[0];
+    datos.fecha_final = parts[1];
+    //datos.idCategory = document.getElementById('input_ubicacion').value;
+    var select_destination = document.getElementById("input_ubicacion"); /*Obtener el SELECT de Destino*/
+    datos.idCity = select_destination.options[select_destination.selectedIndex].id; /*Obtener id de la opción destino*/
+    var select_category = document.getElementById("input_categoria"); /*Obtener el SELECT de Destino*/
+    datos.idCategory = select_category.options[select_category.selectedIndex].id; /*Obtener id de la opción destino*/
+    const image_input = document.getElementById('input_img');
     
     
-    const image_input = document.getElementById('input_img').value;
+
+    console.log(datos);
+    let event_id;
+    const request = await fetch('http://localhost:8081/activate/event/create', {
+        method: 'POST',
+        headers: getHeaders(),
+        body: JSON.stringify(datos)
+    }).then(response => response.json())
+    .then(result => {
+        if(result.id != null && image_input.files[0] != null){
+            addImage(result.id,image_input.files[0]);
+        }else{
+            if(result.id == null){
+                alert("Evento no fue Creado")
+            }else{
+                alert("Evento Creado sin imagen")
+                window.location.href = 'user.html';
+            }
+        }
+    });
 
     
+    
+}
 
-    console.log(image_input);
-
-    // const request = await fetch('http://localhost:8082/activate/event/create', {
-    //     method: 'POST',
-    //     headers: getHeaders(),
-    //     body: JSON.stringify(datos)
-    // });
-
-
+function addImage(event_id,image_input){
+    
     var myHeaders = new Headers();
-    myHeaders.append("Authorization", "1");
+    myHeaders.append("event_id", event_id);
     
     var formdata = new FormData();
-    formdata.append("image", "/C:/Users/Sebastian_Arenas/Downloads/cachorros.jpg");
-    formdata.append("event", JSON.stringify(datos));
+    formdata.append("image",image_input);
 
     // console.log(formdata.get("image"))
     
-    // var requestOptions = {
-    //   method: 'POST',
-    //   headers: myHeaders,
-    //   body: formdata,
-    //   redirect: 'follow'
-    // };
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow'
+    };
     
-    // fetch("localhost:8081/activate/event/create", requestOptions)
-    //   .then(response => response.text())
-    //   .then(result => console.log(result))
-    //   .catch(error => console.log('error', error));
+    fetch("http://localhost:8081/activate/event/create/image", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
 
 
 
 
     // console.log(formdata);
     alert("Evento creado con exito!");
-    // window.location.href = 'user.html';
+    window.location.href = 'user.html';
 }
