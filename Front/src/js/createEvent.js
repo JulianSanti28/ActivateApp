@@ -23,9 +23,11 @@ async function cargarCiudades() {
     });
     const ciudades = await request.json();
 
+    console.log(ciudades);
+
     for (let ciudad of ciudades) {
         var option = document.createElement("option");
-        option.setAttribute('id',ciudad.id);
+        option.setAttribute('id',ciudad.ciu_id);
         var text = document.createTextNode(ciudad.ciu_name);
         option.appendChild(text);
         document.getElementById("input_ubicacion").appendChild(option);
@@ -68,8 +70,8 @@ async function registrarEvento() {
     datos.fecha_final = parts[1];
     //datos.idCategory = document.getElementById('input_ubicacion').value;
     var select_destination = document.getElementById("input_ubicacion"); /*Obtener el SELECT de Destino*/
-    datos.idCity = select_destination.selectedIndex + 1; /*Obtener id de la opción destino*/
-    //console.log("numero de ciudad :"+datos.idCity);
+    datos.idCity = select_destination.options[select_destination.selectedIndex].id; /*Obtener id de la opción destino*/
+    console.log("numero de ciudad: =>"+datos.idCity);
     var select_category = document.getElementById("input_categoria"); /*Obtener el SELECT de Destino*/
     datos.idCategory = select_category.options[select_category.selectedIndex].id; /*Obtener id de la opción destino*/
     const image_input = document.getElementById('input_img');
