@@ -31,16 +31,16 @@ $(document).ready(function () {
 
 async function cargarEventosRegistrados() {
 
-    // const request = await fetch('http://localhost:8082/activate/users/all', {
-    //     method: 'GET',
-    //     // headers: getHeaders()
-    // });
-    // const eventosRegistrados = await request.json();
+    const request = await fetch('http://localhost:8081/activate/assist/eventsUser/all/'+ localStorage.id, {
+        method: 'GET',
+        // headers: getHeaders()
+    });
+    const eventosRegistrados = await request.json();
 
     let listadoHtml = '';
     for (let evento of eventosRegistrados) {
-        let usuarioHtml = '<tr><td>' + evento.id + '</td><td>' + evento.name + ' ' + evento.lastName + '</td><td>'
-            + evento.email + '</td><td>' + evento.email + '</td><td>' + evento.email 
+        let usuarioHtml = '<tr><td>' + evento.id + '</td><td>' + evento.titulo  + '</td><td>'
+            + evento.city.ciu_name + '</td><td>' + evento.fecha_inicio + '</td> <td>' + evento.fecha_final
             + '</td>' + '</tr>';
         listadoHtml += usuarioHtml;
     }
