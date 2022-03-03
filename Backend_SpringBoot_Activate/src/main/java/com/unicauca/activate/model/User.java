@@ -53,7 +53,12 @@ public class User {
     
     @OneToMany(mappedBy = "user")
     Set<EventUser> assistences;
+    
+    @OneToMany(mappedBy="to")
+    private List<Follow> followers; //seguidores
 
+    @OneToMany(mappedBy="from")
+    private List<Follow> following; // seguidos
     //@OneToMany(mappedBy = "userComment")
     //List<Comment> comments;
 
@@ -115,9 +120,21 @@ public class User {
         }
 
     }
+    public void addFollowFollowing(Follow follow){ // sigo a otra persona
+        
+        if(this.following==null){
+            this.following = new ArrayList<Follow>();
+        }
+        this.following.add(follow);
+    }
+    public void addFollowFollower(Follow follow){ // me siguen 
+        if(this.followers == null ){
+            this.followers = new ArrayList<Follow>();
+        }
+      
+        this.followers.add(follow);
 
-    
-    
+    }
     public Set<EventUser> getAssistences() {
         return assistences;
     }
@@ -126,6 +143,23 @@ public class User {
         this.assistences = assistences;
     }
 
+    public List<Follow> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(List<Follow> followers) {
+        this.followers = followers;
+    }
+
+    public List<Follow> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(List<Follow> following) {
+        this.following = following;
+    }
+    
+    
     @Override
     public String toString() {
         return "User [assistences=" + assistences + ", comments=" + comments + ", email=" + email + ", events=" + events
