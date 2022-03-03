@@ -60,7 +60,7 @@ public class EventController {
 
     @Autowired
     private EventService EventService;
-    
+
     @Autowired
     private IUserService UserService;
 
@@ -69,19 +69,19 @@ public class EventController {
 
     @Autowired
     private ICategoryService CategoryService;
-    
+
     @Autowired
     private ICityService CityService;
 
     //Crear Evento
     @PostMapping("create")
-    public ResponseEntity<?> create(@RequestHeader(value = "Authorization") String token,@RequestBody @Valid EventDTO eventDTO){ 
+    public ResponseEntity<?> create(@RequestHeader(value = "Authorization") String token, @RequestBody @Valid EventDTO eventDTO) {
 
         System.out.println(token);
         Event event = mapper.toEvent(eventDTO);
 
         Long usuarioID = Long.parseLong(token);
-        Optional<User> user =  UserService.findById(usuarioID);
+        Optional<User> user = UserService.findById(usuarioID);
         Optional<Category> category = CategoryService.findById(eventDTO.getIdCategory());
         Optional<City> city = CityService.findById(eventDTO.getIdCity());
 
@@ -93,12 +93,9 @@ public class EventController {
         return ResponseEntity.ok().body(save);
     }
 
-
-
     //Crear Evento
     @PostMapping("create/image")
-    public ResponseEntity<?> createImageEvent(@RequestHeader(value = "event_id") Long eventId,@RequestPart(value = "image", required = false) MultipartFile foto){ 
-        System.out.print("-----------");
+    public ResponseEntity<?> createImageEvent(@RequestHeader(value = "event_id") Long eventId, @RequestPart(value = "image", required = false) MultipartFile foto) {
         if (!foto.isEmpty()) {
             String ruta = "./files/imagesEvents";
             try {
@@ -110,8 +107,14 @@ public class EventController {
                 System.out.println("Error al cargar el archivo");
             }
         }
-        Optional<Event> event =  EventService.findById(eventId);
-        event.get().setImage(foto.getOriginalFilename());
+        Optional<Event> event = EventService.findById(eventId);
+        try {
+            if (foto.getBytes().length > 0) {
+                event.get().setImage(foto.getBytes());
+            }
+        } catch (IOException ex) {
+            System.out.println("Error al guardar bytes");
+        }
         Event save = EventService.save(event.get());
         return ResponseEntity.ok().body(save);
     }
@@ -136,7 +139,7 @@ public class EventController {
         if (!event.isPresent()) {
             return ResponseEntity.notFound().build();
         }
-        
+
         event.get().setTitulo(eventDetails.getTitulo());
         event.get().setDescripcion(eventDetails.getDescripcion());
         event.get().setUbicacion(eventDetails.getUbicacion());

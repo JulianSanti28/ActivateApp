@@ -51,7 +51,7 @@ public class Event {
     @Column(length = 50)
     private String fecha_final = "";
 
-    private String image;
+    private byte[] image;
 
     //Relación 1:N con la entidad category.
     @ManyToOne
@@ -127,13 +127,13 @@ public class Event {
         this.id = id;
     }
 
-    public String getImage() {
+    public byte[] getImage() {
         return image;
     }
 
 
 
-    public void setImage(String image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 
