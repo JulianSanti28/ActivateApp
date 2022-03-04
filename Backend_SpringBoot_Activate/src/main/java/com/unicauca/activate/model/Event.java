@@ -134,7 +134,6 @@ public class Event {
     }
 
 
-
     public void setImage(byte[] image) {
         this.image = image;
     }

@@ -85,6 +85,8 @@ async function cargarEvento() {
         // headers: getHeaders()
     });
     const evento = await request.json();
+    evento.user.image = "data:image/jpg;base64," + evento.user.image;
+    evento.image = "data:image/jpg;base64," + evento.image;
 
     document.querySelector('#user_name').innerHTML = evento.titulo;
     document.querySelector('#event_description').innerHTML = evento.descripcion;
@@ -92,8 +94,8 @@ async function cargarEvento() {
     document.querySelector('#calendar_event').innerHTML = fecha_evento;
     document.querySelector('#ubication_event').innerHTML = evento.city.ciu_name;
     document.querySelector('#category_event').innerHTML = evento.category.nombre;
-    document.querySelector('#userImg').setAttribute("src", evento.user.img);
-    document.querySelector('#eventImg').setAttribute("src", evento.img);
+    document.querySelector('#userImg').setAttribute("src", evento.user.image);
+    document.querySelector('#eventImg').setAttribute("src", evento.image);
     document.querySelector('#userLoginImg').setAttribute("src", localStorage.img);
 
     let listadoHtml = '';
@@ -104,8 +106,9 @@ async function cargarEvento() {
 }
 
 function cargarComentario(comment) {
+    comment.user.image = "data:image/jpg;base64," + comment.user.image;
     let eventoHtml = '<div class="card-comment">'
-        + '<img class="img-circle img-sm" src="' + comment.user.img + '" alt="X">'
+        + '<img class="img-circle img-sm" src="' + comment.user.image + '" alt="X">'
         + '<div class="comment-text">'
         + '<span class="username">' + comment.user.name + '<span class="text-muted float-right">' + comment.fechaComentario + '</span>'
         + '</span>'

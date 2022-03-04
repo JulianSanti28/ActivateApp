@@ -38,16 +38,16 @@ async function iniciarSesion() {
         body: JSON.stringify(datos)
     });
 
-    const respuesta = await request.text(); //Obtenemos la respuesta del Servidor en String
-    const peticion = JSON.parse(respuesta); //Parseamos dicha respuesta a objeto JSON
+    const respuesta = await request.json(); //Obtenemos la respuesta del Servidor en String
+    console.log(respuesta);
 
     //Se inicia sesion y se almacenan los Token respectivos
     if (respuesta != 'FAIL') {
-        localStorage.token = peticion.Token;
-        localStorage.user = peticion.Usuario;
-        localStorage.email = datos.email;
-        localStorage.id = peticion.Id;
-        //localStorage.img = peticion.img;
+        localStorage.token = respuesta.token;
+        localStorage.user = respuesta.user.name;
+        localStorage.id = respuesta.user.id;
+        localStorage.img = "data:image/jpg;base64," + respuesta.user.image;
+        localStorage.removeItem("verEvento");
         window.location.href = 'profile.html'
     } else {
         alert("Las credenciales son incorrectas. Por favor intente nuevamente.");

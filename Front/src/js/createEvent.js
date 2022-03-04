@@ -53,7 +53,7 @@ function getHeaders() {
   return {
    'Accept': 'application/json',
    'Content-Type': 'application/json',
-   'Authorization': "1"
+   'Authorization': localStorage.token
  };
 }
 
@@ -76,8 +76,7 @@ async function registrarEvento() {
     
     
 
-    console.log(datos);
-    let event_id;
+    //console.log(datos);
     const request = await fetch('http://localhost:8081/activate/event/create', {
         method: 'POST',
         headers: getHeaders(),
