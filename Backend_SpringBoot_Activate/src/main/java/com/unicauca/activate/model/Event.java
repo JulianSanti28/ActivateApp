@@ -60,7 +60,7 @@ public class Event {
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    //Relacion N:1
+    //Relacion N:1 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
