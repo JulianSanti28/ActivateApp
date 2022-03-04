@@ -121,6 +121,7 @@ async function cargarEventos() {
     for (let evento of eventos) {
         
         evento.image = "data:image/jpg;base64," + evento.image;
+        evento.user.image = "data:image/jpg;base64," + evento.user.image;
         listadoHtml += eventBody(evento);
 
         //console.log(evento.image);
@@ -139,7 +140,7 @@ function eventBody(evento) {
         + '<div class="row">'
         + '<div class="user-block">'
 
-        + '<img class="img-circle img-bordered-sm" src="'+evento.user.image+'"'
+        + '<img class="img-circle img-bordered-sm" src="'+ evento.user.image +'"'
         + 'alt="X">'
         + '<span class="username">'
         + '<a onclick="seeUser(event)" id='+evento.user.id+' href="user-profile.html">'+evento.user.name+ ' '+evento.user.lastName+'</a>'

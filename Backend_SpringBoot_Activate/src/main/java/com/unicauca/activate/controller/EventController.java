@@ -77,10 +77,10 @@ public class EventController {
     @PostMapping("create")
     public ResponseEntity<?> create(@RequestHeader(value = "Authorization") String token, @RequestBody @Valid EventDTO eventDTO) {
 
-        System.out.println(token);
+        //System.out.println(jwUtil.getKey(token));
         Event event = mapper.toEvent(eventDTO);
 
-        Long usuarioID = Long.parseLong(token);
+        Long usuarioID = Long.parseLong(jwUtil.getKey(token));
         Optional<User> user = UserService.findById(usuarioID);
         Optional<Category> category = CategoryService.findById(eventDTO.getIdCategory());
         Optional<City> city = CityService.findById(eventDTO.getIdCity());
@@ -100,7 +100,7 @@ public class EventController {
             String ruta = "./files/imagesEvents";
             try {
                 byte[] bytesImage = foto.getBytes();
-                Path rutaAbsoluta = Paths.get(ruta + "//" + foto.getOriginalFilename());
+                Path rutaAbsoluta = Paths.get(ruta + "//" + eventId);
                 Files.write(rutaAbsoluta, bytesImage);
                 //event.setImagen(foto.getOriginalFilename());
             } catch (IOException ex) {

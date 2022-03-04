@@ -17,6 +17,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -45,6 +46,9 @@ public class User {
     @Column(length = 255, nullable = false)
     private String password;
     
+    @Lob
+    private byte[] image;
+
     //private String image;
     @OneToMany(mappedBy = "user")
     private List<Event> events;
@@ -150,6 +154,14 @@ public class User {
 
     public void setAssistences(Set<EventUser> assistences) {
         this.assistences = assistences;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
     
     public List<Follow> getFollowers() {
