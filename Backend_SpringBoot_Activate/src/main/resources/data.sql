@@ -8,6 +8,18 @@
  * Created: 6/02/2022
  */
 INSERT INTO category (nombre, descripcion) VALUES ("MASCOTAS", "Espacio para temas de máscotas");
+INSERT INTO category (nombre, descripcion) VALUES ("DEPORTES", "Deportes y relacionados");
+INSERT INTO category (nombre, descripcion) VALUES ("ESPECTACULO", "Espacio para temas de máscotas");
+INSERT INTO category (nombre, descripcion) VALUES ("CONVENCION", "Animes, comics y demas");
+INSERT INTO category (nombre, descripcion) VALUES ("SOCIAL", "Cumpleaños, aniversarios, graduaciones");
+INSERT INTO category (nombre, descripcion) VALUES ("MUSICAL", "Conciertos y festivales");
+INSERT INTO category (nombre, descripcion) VALUES ("POLITICO", "Eventos politicos");
+INSERT INTO category (nombre, descripcion) VALUES ("AIRE LIBRE", "Hacer actividades al aire libre");
+INSERT INTO category (nombre, descripcion) VALUES ("HACKATON", "actividades para hackers");
+INSERT INTO category (nombre, descripcion) VALUES ("SUBASTA", "Compra venta de items.");
+INSERT INTO category (nombre, descripcion) VALUES ("BEBETON", "Eventos para tomar bebidas exoticas");
+
+
 INSERT INTO city (ciu_name) VALUES("Popayan");
 INSERT INTO city (ciu_name) VALUES("Cali");
 INSERT INTO city (ciu_name) VALUES("Medellin");
