@@ -98,12 +98,13 @@ SGBD MySQL: Se hace uso de una base de datos relacional que permite a partir de 
 - Javascript: Lenguaje de programación usado en la parte del cliente y permite manipular, solicitar y recibir información con el fin de tomar decisiones a nivel del cliente.
 
 ## DISEÑO DETALLADO DE MÓDULOS
-![DISEÑO DETALLADO DE MÓDULOS](https://github.com/JulianSanti28/Backend_Activate/blob/Miguel_Mosquera/Documentacion/Imagenes/Dise%C3%B1o%20detallado%20modulos%201.png)
-![DISEÑO DETALLADO DE MÓDULOS](https://github.com/JulianSanti28/Backend_Activate/blob/Miguel_Mosquera/Documentacion/Imagenes/Dise%C3%B1o%20detallado%20modulos%202.png)
-![DISEÑO DETALLADO DE MÓDULOS](https://github.com/JulianSanti28/Backend_Activate/blob/Miguel_Mosquera/Documentacion/Imagenes/Dise%C3%B1o%20detallado%20modulos%203.png)
-![DISEÑO DETALLADO DE MÓDULOS](https://github.com/JulianSanti28/Backend_Activate/blob/Miguel_Mosquera/Documentacion/Imagenes/Dise%C3%B1o%20detallado%20modulos%204.png)
-![DISEÑO DETALLADO DE MÓDULOS](https://github.com/JulianSanti28/Backend_Activate/blob/Miguel_Mosquera/Documentacion/Imagenes/Dise%C3%B1o%20detallado%20modulos%205.png)
-![DISEÑO DETALLADO DE MÓDULOS](https://github.com/JulianSanti28/Backend_Activate/blob/Miguel_Mosquera/Documentacion/Imagenes/Dise%C3%B1o%20detallado%20modulos%206.png)
+![DISEÑO DETALLADO DE MÓDULOS](https://github.com/JulianSanti28/Backend_Frontend_Activate/blob/SEBASTIAN_ARENAS/Documentacion/Imagenes/Dise%C3%B1o%20detallado%20modulos%201.png)
+![DISEÑO DETALLADO DE MÓDULOS](https://github.com/JulianSanti28/Backend_Frontend_Activate/blob/SEBASTIAN_ARENAS/Documentacion/Imagenes/Dise%C3%B1o%20detallado%20modulos%202.png)
+![DISEÑO DETALLADO DE MÓDULOS](https://github.com/JulianSanti28/Backend_Frontend_Activate/blob/SEBASTIAN_ARENAS/Documentacion/Imagenes/Dise%C3%B1o%20detallado%20modulos%203.png)
+![DISEÑO DETALLADO DE MÓDULOS](https://github.com/JulianSanti28/Backend_Frontend_Activate/blob/SEBASTIAN_ARENAS/Documentacion/Imagenes/Dise%C3%B1o%20detallado%20modulos%204.png)
+![DISEÑO DETALLADO DE MÓDULOS](https://github.com/JulianSanti28/Backend_Frontend_Activate/blob/SEBASTIAN_ARENAS/Documentacion/Imagenes/Dise%C3%B1o%20detallado%20modulos%205.png)
+![DISEÑO DETALLADO DE MÓDULOS](https://github.com/JulianSanti28/Backend_Frontend_Activate/blob/SEBASTIAN_ARENAS/Documentacion/Imagenes/Dise%C3%B1o%20detallado%20modulos%206.png)
+![DISEÑO DETALLADO DE MÓDULOS](https://github.com/JulianSanti28/Backend_Frontend_Activate/blob/SEBASTIAN_ARENAS/Documentacion/Imagenes/Dise%C3%B1o%20detallado%20modulos%207.png)
 
 ## DEPLOYMENT
 ### Proceso para correr la infraestructura del programa.
