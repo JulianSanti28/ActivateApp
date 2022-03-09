@@ -8,7 +8,18 @@ $(document).ready(function () {
         const validPassword = document.getElementById('validPassword');
 
         if (password.value == validPassword.value) {
-            registrarUsuario(password);
+
+            //Si las contrasenias coinciden validamos la expresion regular
+            const expresiones = {
+                password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d$@$!%*?& ]{1,8}$/
+            }
+            
+            if(expresiones.password.test(password.value)){
+                registrarUsuario(password);
+            }else{
+                alert("La contraseña debe contener\n- (1 - 8) caracteres\n- 1 letra Mayus\n- 1 letra Minus\n- 1 Numero")
+            }
+            
         } else {
             alert("Las contraseñas no coinciden")
         }
