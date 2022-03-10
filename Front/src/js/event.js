@@ -54,6 +54,9 @@
 
 
 $(document).ready(function () {
+    //Verificamos si se puede editar el evento
+    editarEvento();
+
     cargarEvento();
 
     //Pendiente al cerrar Evento limpiar el localStorage
@@ -76,6 +79,32 @@ function getHeaders() {
         'Content-Type': 'application/json',
         'Authorization': localStorage.token
     };
+}
+
+async function editarEvento(){
+    let datos = {};
+    datos.evento = localStorage.verEvento;
+    
+    // //Api para verificar si un usuario puede editar un evento. 
+    // const request = await fetch('http://localhost:8081/activate/event/editable', {
+    //     method: 'POST',
+    //     headers: getHeaders(),
+    //     body: JSON.stringify(datos)
+    // }).then(response => response.json())
+    // .then(result => {
+        
+    //     const editBTN = document.getElementById("editBtn");
+    //     if (result){
+    //         editBTN.removeAttribute("hidden");
+    //     }
+    // });
+
+    //ESTO DEBE BORRARSE 
+    const editBTN = document.getElementById("editBtn");
+    if (true){
+        editBTN.removeAttribute("hidden");
+    }
+    
 }
 
 async function cargarEvento() {

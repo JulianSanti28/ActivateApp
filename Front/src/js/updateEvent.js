@@ -10,7 +10,7 @@ $(document).ready(function () {
     form.addEventListener("submit", e => {
         //Validacion del formulario antes de realizar la peticion
         e.preventDefault();
-        registrarEvento()       
+        updateEvent()       
     })
 });
 
@@ -55,7 +55,7 @@ function getHeaders() {
  };
 }
 
-async function registrarEvento() {
+async function updateEvent() {
     let datos = {};
     datos.titulo = document.getElementById('input_titulo').value;
     datos.descripcion = document.getElementById('input_descripcion').value;
@@ -75,7 +75,7 @@ async function registrarEvento() {
     
 
     //console.log(datos);
-    const request = await fetch('http://localhost:8081/activate/event/create', {
+    const request = await fetch('http://localhost:8081/activate/event/update/' + Number(localStorage.verEvento), {
         method: 'POST',
         headers: getHeaders(),
         body: JSON.stringify(datos)
@@ -85,9 +85,9 @@ async function registrarEvento() {
             addImage(result.id,image_input.files[0]);
         }else{
             if(result.id == null){
-                alert("Evento no fue Creado");
+                alert("Evento no fue Actualizadp");
             }else{
-                alert("Evento Creado sin imagen");
+                alert("Evento Actualizado sin imagen");
                 window.location.href = 'profile.html';
             }
         }
