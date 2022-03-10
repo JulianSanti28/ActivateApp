@@ -5,6 +5,9 @@
  */
 package com.unicauca.activate.mapper;
 
+import com.unicauca.activate.model.Claim;
+import com.unicauca.activate.model.ClaimDTO;
+import com.unicauca.activate.model.ClaimType;
 import com.unicauca.activate.model.Comment;
 import com.unicauca.activate.model.CommentDTO;
 import com.unicauca.activate.model.Event;
@@ -12,20 +15,20 @@ import com.unicauca.activate.model.EventDTO;
 
 import org.springframework.stereotype.Component;
 
-
 /**
  *
  * @author 57322
  */
 @Component
 public class Mapper {
-    
+
     /**
      * Convetir de CommentDTO a Comment
+     *
      * @param commentDto
-     * @return 
+     * @return
      */
-    public Comment toComment(CommentDTO commentDto){
+    public Comment toComment(CommentDTO commentDto) {
         Comment comment = new Comment();
         comment.setDescripcion(commentDto.getDescripcion());
         comment.setFechaComentario(commentDto.getFechaComentario());
@@ -33,7 +36,7 @@ public class Mapper {
         return comment;
     }
 
-    public Event toEvent(EventDTO eventDto){
+    public Event toEvent(EventDTO eventDto) {
         Event event = new Event();
         event.setTitulo(eventDto.getTitulo());
         event.setDescripcion(eventDto.getDescripcion());
@@ -41,5 +44,27 @@ public class Mapper {
         event.setFecha_inicio(eventDto.getFecha_inicio());
         event.setFecha_final(eventDto.getFecha_final());
         return event;
+    }
+
+    public Claim toClaim(ClaimDTO claimDto) {
+        Claim claim = new Claim(claimDto.getTitle(), claimDto.getDescription());
+        String TypeClaim = claimDto.getType().toUpperCase();
+        switch (TypeClaim) {
+            case "BASICA":
+                claim.setType(ClaimType.BASICA);
+                break;
+            case "MEDIA":
+                claim.setType(ClaimType.MEDIA);
+                break;
+            case "ALTA":
+                claim.setType(ClaimType.ALTA);
+                break;
+            case "IMMEDIATA":
+                claim.setType(ClaimType.INMEDIATA);
+                break;
+            default:
+                claim.setType(ClaimType.UNCLASSIFIED);
+        }
+        return claim;
     }
 }
