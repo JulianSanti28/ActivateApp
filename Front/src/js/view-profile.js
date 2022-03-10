@@ -1,4 +1,4 @@
-const eventos = [
+const eventosEJM = [
     {
         "id": 1,
         "titulo": "Guerra Mundial",
@@ -80,43 +80,61 @@ const eventos = [
 
 
 $(document).ready(function () {
-    //Situar nombre del usuario Logeado
-    document.getElementById("profileName").innerHTML = localStorage.user;
-    document.getElementById("userImg").setAttribute("src", localStorage.img);
-    //Cargar todos los eventos
-    cargarEventos();
+    //Cargar Info del Usuario
+    cargarUsuario();
 
-    //Pendiente al Cierre de Sesion
+    //Cargar todos los eventos creador por usuario
+    cargarEventosUsuario();
+
+    //Pendiente al Follow
     const closeSession = document.getElementById("closeSession");
     closeSession.addEventListener("click", e => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        localStorage.removeItem("id");
-        localStorage.removeItem("img");
+
     });
 
 });
 
-// function getHeaders() {
-//   return {
-//    'Accept': 'application/json',
-//    'Content-Type': 'application/json',
-//    'Authorization': localStorage.token
-//  };
-// }
+function getHeaders() {
+  return {
+   'Accept': 'application/json',
+   'Content-Type': 'application/json',
+   'Authorization': localStorage.token
+ };
+}
 
-async function cargarEventos() {
+async function cargarUsuario() {
 
     // //Realizamos la peticion al servidor
-    // const request = await fetch('http://localhost:8082/activate/event/events/all', {
-    //     method: 'GET',
-    //     // headers: getHeaders()
-    // });
-    // const eventos = await request.json();
+    const request = await fetch('http://localhost:8081/activate/user/'+ Number(localStorage.user_profile_id), {
+        method: 'GET'
+    });
+
+    const respuesta = await request.json(); //Obtenemos la respuesta del Servidor en String
+    console.log(respuesta);
+
+    //Situar nombre del usuario Logeado
+    document.getElementById("profileName").innerHTML = respuesta.name;
+    document.getElementById("userImg").setAttribute("src", "data:image/jpg;base64," + respuesta.image);
+
+}
+
+async function cargarEventosUsuario() {
+
+    //Realizamos la peticion al servidor
+    const request = await fetch('http://localhost:8081/activate/event/UserCreate/all/'+ Number(localStorage.id), {
+        method: 'GET',
+        // headers: getHeaders()
+    });
+    const eventos = await request.json();
 
     let listadoHtml = '';
     for (let evento of eventos) {
+        
+        evento.image = "data:image/jpg;base64," + evento.image;
+        evento.user.image = "data:image/jpg;base64," + evento.user.image;
         listadoHtml += eventBody(evento);
+
+        //console.log(evento.image);
     }
     document.querySelector('#eventList').innerHTML = listadoHtml;
 
