@@ -60,18 +60,24 @@ public class FollowController {
         return ResponseEntity.ok().body(save);
     }
     
-    @DeleteMapping("remove/{id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id") Long followId) {
-        if (!followService.findById(followId).isPresent()) {
+   // @DeleteMapping("remove/{id}")
+   // public ResponseEntity<?> delete(@PathVariable(value = "id") Long followId) {
+    @DeleteMapping("remove")
+    public ResponseEntity<?> delete(@RequestHeader(value="from_user") long fromUser, @RequestHeader(value="to_user") long toUser) {
+        
+        Optional<User> user_from = UserService.findById(fromUser);
+        Optional<User> user_to =  UserService.findById(toUser);
+        Follow oldFollow = followService.findByFromAndTo(user_from.get(), user_to.get()).get();
+        
+        if (!followService.findByFromAndTo(user_from.get(), user_to.get()).isPresent()) {
             return ResponseEntity.notFound().build();
         }
         
-        Follow oldFollow = followService.findById(followId).get();
         
-        oldFollow.getFrom().delFollowing(followId);
-        oldFollow.getTo().delFollower(followId);
+        oldFollow.getFrom().delFollowing(oldFollow.getId());
+        oldFollow.getTo().delFollower(oldFollow.getId());
         
-        followService.deleteById(followId);
+        followService.deleteById(oldFollow.getId());
         return ResponseEntity.ok().build();
     }
     
