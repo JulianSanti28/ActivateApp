@@ -82,14 +82,15 @@ const eventosEJM = [
 $(document).ready(function () {
     //Cargar Info del Usuario
     cargarUsuario();
-
+    //Verificar un/follow
+    verificarfollow();
     //Cargar todos los eventos creador por usuario
-    cargarEventosUsuario();
+    //cargarEventosUsuario();
 
     //Pendiente al Follow
-    const closeSession = document.getElementById("closeSession");
-    closeSession.addEventListener("click", e => {
-
+    const btnfollow = document.getElementById("followbtn");
+    btnfollow.addEventListener("click", e => {
+        follow();
     });
 
 });
@@ -201,4 +202,49 @@ function verEvento(event) {
     // console.log(hijo);
     localStorage.removeItem('verEvento');
     localStorage.verEvento = hijo.innerHTML;
+}
+
+async function verificarfollow(){
+    let datos = {};
+    datos.id = localStorage.user_profile_id;
+    
+    // //Api para verificar si un usuario puede editar un evento. 
+    // const request = await fetch('http://localhost:8081/activate/event/editable', {
+    //     method: 'POST',
+    //     headers: getHeaders(),
+    //     body: JSON.stringify(datos)
+    // }).then(response => response.json())
+    // .then(result => {
+        
+    //     const editBTN = document.getElementById("editBtn");
+    //     if (result){
+    //         editBTN.removeAttribute("hidden");
+    //     }
+    // });
+
+    //ESTO DEBE BORRARSE 
+    const btnFollow = document.getElementById("followtxt");
+    var result = false;
+    if (result){
+        btnFollow.innerHTML="UnFollow";
+    }else{
+        btnFollow.innerHTML="Follow";
+    }
+    
+}
+
+async function follow(){
+    var myHeaders = new Headers();
+    myHeaders.append("from_user", localStorage.id);
+    myHeaders.append("to_user", localStorage.user_profile_id);
+    fetch("http://localhost:8081/activate/follow/create",
+        {
+            method: 'POST',
+            headers: myHeaders
+        })
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+    
+    window.location.href = 'user-profile.html'
 }
