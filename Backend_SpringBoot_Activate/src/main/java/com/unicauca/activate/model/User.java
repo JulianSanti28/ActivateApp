@@ -66,6 +66,9 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy="from")
     private List<Follow> following; // seguidos
+    
+   // private List<Long> idFollowers;
+    //private List<Long> idFollowing;
     //@OneToMany(mappedBy = "userComment")
     //List<Comment> comments;
 
@@ -142,12 +145,30 @@ public class User {
     }
     public void addFollowFollower(Follow follow){ // me siguen 
         if(this.followers == null ){
-            this.followers = new ArrayList<Follow>();
+            this.followers = new ArrayList<Follow>();  
         }
       
         this.followers.add(follow);
-
+        
     }
+    /*
+    public List<Long> getIdsFollowers(){
+        List<Long> idFollowers =  new ArrayList<Long>();
+        
+        for(int j = 0 ; j< this.followers.size();j++){
+            idFollowers.add(this.followers.get(j).getFrom().getId());
+        }
+        return idFollowers;
+    }
+    public List<Long> getIdsFollowing(){
+        List<Long> idFollowing =  new ArrayList<Long>();
+        
+        for(int j = 0 ; j< this.following.size();j++){
+            idFollowing.add(this.following.get(j).getTo().getId());
+        }
+        return idFollowing;
+    } */
+    
     public Set<EventUser> getAssistences() {
         return assistences;
     }
@@ -193,19 +214,36 @@ public class User {
         return this.followers.size();
     }
     public void delFollowing(long idFollow){
+        Follow oldFollow =null;
         for(int i = 0 ; i< this.following.size();i++){
             if(this.following.get(i).getId()==idFollow){
+                oldFollow = this.following.get(i);
                 this.following.remove(i);
+               // this.idFollowing.remove(oldFollow.getTo().getId());
             }
         }
+        
     }
     public void delFollower(long idFollow){
+        Follow oldFollow =null;
         for(int i = 0 ; i< this.followers.size();i++){
             if(this.followers.get(i).getId()==idFollow){
+                oldFollow = this.followers.get(i);
                 this.followers.remove(i);
+                //this.idFollowers.remove(oldFollow.getFrom().getId());
             }
         }
     }
+    /*
+    public List<Long> getIdFollowers() { // lista ids usuario followers
+        return idFollowers;
+    }
+
+    public List<Long> getIdFollowing() { // lista ids usuario following
+        return idFollowing;
+    }
+    */
+    
     @Override
     public String toString() {
         return "User [assistences=" + assistences + ", comments=" + comments + ", email=" + email + ", events=" + events

@@ -5,9 +5,13 @@
 package com.unicauca.activate.service;
 
 import com.unicauca.activate.model.Follow;
+import com.unicauca.activate.model.User;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  *
@@ -23,4 +27,8 @@ public interface IFollowService {
     public Follow save(Follow follow);
 
     public void deleteById(Long id);
+    
+    public Optional<Follow> findByFromAndTo(User from , User to);
+    
+    
 }

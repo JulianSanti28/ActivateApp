@@ -29,8 +29,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import antlr.debug.Event;
+import com.unicauca.activate.model.Follow;
+import com.unicauca.activate.utilities.JWTUtilities;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
+import java.util.ArrayList;
 
 /**
  * Clase controladora de usuario
@@ -42,6 +45,8 @@ public class UserController {
     @Autowired
     private IUserService UserService;
     
+    @Autowired
+    private JWTUtilities jwUtil;
     //Crear Usuario
     @PostMapping("create")
     public ResponseEntity<?> create(@RequestBody User user) {
@@ -98,6 +103,23 @@ public class UserController {
                 .stream(UserService.findAll().spliterator(), false)
                 .collect(Collectors.toList());
         return users;
+    }
+    
+    @GetMapping("user/follow/{id}")
+    public boolean buscarSeguidor(@RequestHeader(value = "Authorization") String token,@PathVariable(value = "id") Long userId){
+    //recibir token e id de usuario  
+    //Long usuarioID = UserService.findById(Long.parseLong(fromUser)).get().getId(); //token usuario logueado
+    Long usuarioID = Long.parseLong(jwUtil.getKey(token));
+    Optional<User> user = UserService.findById(userId); // perfil user visitado
+    List<Follow> lista = user.get().getFollowers();
+    for(int j = 0 ; j< lista.size();j++){
+            if(lista.get(j).getFrom().getId() == usuarioID){
+                return true;
+                //return "si";
+            }
+    }
+        return false;
+        //return "no";
     }
 
     @PostMapping("create/image")
