@@ -8,9 +8,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+import com.unicauca.activate.model.Authentication;
+import com.unicauca.activate.model.Event;
 import com.unicauca.activate.model.User;
 import com.unicauca.activate.service.EventService;
 import com.unicauca.activate.service.IUserService;
+import com.unicauca.activate.utilities.JWTUtilities;
 
 import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +32,10 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import antlr.debug.Event;
+
 import com.unicauca.activate.model.Follow;
 import com.unicauca.activate.utilities.JWTUtilities;
+
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import java.util.ArrayList;
@@ -44,9 +49,11 @@ public class UserController {
 
     @Autowired
     private IUserService UserService;
-    
+
     @Autowired
     private JWTUtilities jwUtil;
+    
+
     //Crear Usuario
     @PostMapping("create")
     public ResponseEntity<?> create(@RequestBody User user) {
@@ -146,4 +153,24 @@ public class UserController {
         User save = UserService.save(user.get());
         return ResponseEntity.ok().body(save);
     }
+
+    //Obtener Autentificacion de Evento Creado
+    //Debe recibir el token del usuario y el id del evento
+    //return True si el evento fue creado por el usuario
+    @GetMapping("authentication/createEvent")
+    public Authentication authenticateEventCreation(@RequestHeader(value="Authorization") String token,@RequestHeader(value = "event_id") Long eventId){
+        Long userId = Long.parseLong(jwUtil.getKey(token)); 
+        Optional<User> user = UserService.findById(userId);
+        List<Event> events = user.get().getEvents();
+        Authentication authenticate = new Authentication();
+        authenticate.setStatus(false);
+
+        for (Event temp : events) {
+            if(temp.getId() == eventId){
+                authenticate.setStatus(true);
+                return authenticate;
+            }
+        }
+        return authenticate;
+    } 
 }

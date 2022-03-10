@@ -50,6 +50,7 @@ public class User {
     private byte[] image;
 
     //private String image;
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Event> events;
     
@@ -234,16 +235,15 @@ public class User {
             }
         }
     }
-    /*
-    public List<Long> getIdFollowers() { // lista ids usuario followers
-        return idFollowers;
+
+    public List<Event> getEvents() {
+        return events;
     }
 
-    public List<Long> getIdFollowing() { // lista ids usuario following
-        return idFollowing;
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
-    */
-    
+
     @Override
     public String toString() {
         return "User [assistences=" + assistences + ", comments=" + comments + ", email=" + email + ", events=" + events

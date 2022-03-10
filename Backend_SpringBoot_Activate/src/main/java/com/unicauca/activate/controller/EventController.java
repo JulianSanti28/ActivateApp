@@ -131,10 +131,13 @@ public class EventController {
         return ResponseEntity.ok(oEvent);
     }
 
-    //Actualizar Evento
+    //Actualizar Evento, recibe Id del evento y los datos a actualizar
     @PutMapping("update/{id}")
-    public ResponseEntity<?> update(@RequestBody Event eventDetails, @PathVariable(value = "id") Long eventId) {
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long eventId,@RequestBody EventDTO eventDetails) {
+        System.out.println(eventDetails.toString());
         Optional<Event> event = EventService.findById(eventId);
+        Optional<Category> category = CategoryService.findById(eventDetails.getIdCategory());
+        Optional<City> city = CityService.findById(eventDetails.getIdCity());
 
         if (!event.isPresent()) {
             return ResponseEntity.notFound().build();
@@ -145,6 +148,8 @@ public class EventController {
         event.get().setUbicacion(eventDetails.getUbicacion());
         event.get().setFecha_inicio(eventDetails.getFecha_inicio());
         event.get().setFecha_final(eventDetails.getFecha_final());
+        event.get().setCategory(category.get());
+        event.get().setCity(city.get());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(EventService.save(event.get()));
     }
