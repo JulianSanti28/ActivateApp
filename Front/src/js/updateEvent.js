@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    cargarEvento();
     //Cargar Opciones de Ciudad
     cargarCiudades();
 
@@ -13,6 +14,21 @@ $(document).ready(function () {
         updateEvent()       
     })
 });
+
+async function cargarEvento() {
+
+    const request = await fetch('http://localhost:8081/activate/event/' + Number(localStorage.verEvento), {
+        method: 'GET',
+        // headers: getHeaders()
+    });
+
+    const evento = await request.json();
+    document.getElementById("input_titulo").value = evento.titulo;
+    document.getElementById("input_descripcion").value = evento.descripcion;
+    document.getElementById("input_ubicacion").value = evento.city;
+    console.log(evento);
+
+}
 
 async function cargarCiudades() {
     const request = await fetch('http://localhost:8081/activate/city/cities/all', {
@@ -76,7 +92,7 @@ async function updateEvent() {
 
     //console.log(datos);
     const request = await fetch('http://localhost:8081/activate/event/update/' + Number(localStorage.verEvento), {
-        method: 'POST',
+        method: 'PUT',
         headers: getHeaders(),
         body: JSON.stringify(datos)
     }).then(response => response.json())
@@ -85,7 +101,7 @@ async function updateEvent() {
             addImage(result.id,image_input.files[0]);
         }else{
             if(result.id == null){
-                alert("Evento no fue Actualizadp");
+                alert("Evento no fue Actualizado");
             }else{
                 alert("Evento Actualizado sin imagen");
                 window.location.href = 'profile.html';
