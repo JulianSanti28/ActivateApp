@@ -84,9 +84,10 @@ $(document).ready(function () {
     localStorage.removeItem('user_profile_id');
     
     //Situar nombre del usuario Logeado
-    document.getElementById("profileName").innerHTML = localStorage.user;
-    document.getElementById("userImg").setAttribute("src", localStorage.img);
+    // document.getElementById("profileName").innerHTML = localStorage.user;
+    // document.getElementById("userImg").setAttribute("src", localStorage.img);
     //Cargar todos los eventos
+    cargarUsuario();
     cargarEventos();
 
     //Pendiente al Cierre de Sesion
@@ -99,6 +100,24 @@ $(document).ready(function () {
     });
 
 });
+
+async function cargarUsuario() {
+
+    // //Realizamos la peticion al servidor
+    const request = await fetch('http://localhost:8081/activate/user/' + Number(localStorage.id), {
+        method: 'GET'
+    });
+
+    const respuesta = await request.json(); //Obtenemos la respuesta del Servidor en String
+    console.log(respuesta);
+
+    //Situar nombre del usuario Logeado
+    document.getElementById("profileName").innerHTML = respuesta.name;
+    document.getElementById("followers").innerHTML = respuesta.followerCount;
+    document.getElementById("following").innerHTML = respuesta.followingCount;
+    document.getElementById("userImg").setAttribute("src", "data:image/jpg;base64," + respuesta.image);
+
+}
 
 // function getHeaders() {
 //   return {
@@ -131,7 +150,7 @@ async function cargarEventos() {
 }
 
 function eventBody(evento) {
-    console.log(evento);
+    // console.log(evento);
     let eventoHtml = '<div class="col-12 col-sm-6 col-md-6 d-flex align-items-stretch flex-column">'
         + '<div class="card bg-light d-flex flex-fill">'
         + '<div class="card-body pt-1">'

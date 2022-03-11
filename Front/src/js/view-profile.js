@@ -123,6 +123,8 @@ async function cargarUsuario() {
 
     //Situar nombre del usuario Logeado
     document.getElementById("profileName").innerHTML = respuesta.name;
+    document.getElementById("followers").innerHTML = respuesta.followerCount;
+    document.getElementById("following").innerHTML = respuesta.followingCount;
     document.getElementById("userImg").setAttribute("src", "data:image/jpg;base64," + respuesta.image);
 
 }
@@ -256,12 +258,12 @@ async function unfollow() {
     datos.to_user = localStorage.user_profile_id;
 
     var requestOptions = {
-        method: 'DELETE',
+        method: 'REMOVE',
         headers: getHeaders(),
         redirect: 'follow',
     };
 
-    fetch("http://localhost:8081/activate/follow/remove", requestOptions)
+    fetch("http://localhost:8081/activate/follow/remove"+ Number(localStorage.user_profile_id), requestOptions)
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));

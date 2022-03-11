@@ -81,32 +81,27 @@ function getHeaders() {
     };
 }
 
-async function editarEvento(){
+async function editarEvento() {
     let datos = {};
     datos.evento = localStorage.verEvento;
-    
-    
 
-    //Api para verificar si un usuario puede editar un evento. 
-    const request = await fetch('http://localhost:8081/activate/authentication/createEvent', {
-        method: 'POST',
-        headers: getHeaders(),
-        body: JSON.stringify(datos)
+    const request = await fetch('http://localhost:8081/activate/authentication/creationEvent/' + Number(localStorage.verEvento), {
+        method: 'GET',
+        headers: getHeaders()
     }).then(response => response.json())
-    .then(result => {
-        
-        const editBTN = document.getElementById("editBtn");
-        if (result){
-            editBTN.removeAttribute("hidden");
-        }
-    });
+        .then(result => {
+            const editBTN = document.getElementById("editBtn");
+            if (result) {
+                editBTN.removeAttribute("hidden");
+            }
+        });
 
     //ESTO DEBE BORRARSE 
     const editBTN = document.getElementById("editBtn");
-    if (true){
+    if (false) {
         editBTN.removeAttribute("hidden");
     }
-    
+
 }
 
 async function cargarEvento() {
