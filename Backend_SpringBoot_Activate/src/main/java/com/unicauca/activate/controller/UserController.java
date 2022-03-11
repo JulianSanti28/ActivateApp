@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import com.unicauca.activate.model.Authentication;
+
 import com.unicauca.activate.model.Event;
 import com.unicauca.activate.model.User;
 import com.unicauca.activate.service.EventService;
@@ -157,20 +157,18 @@ public class UserController {
     //Obtener Autentificacion de Evento Creado
     //Debe recibir el token del usuario y el id del evento
     //return True si el evento fue creado por el usuario
-    @GetMapping("authentication/createEvent")
-    public Authentication authenticateEventCreation(@RequestHeader(value="Authorization") String token,@RequestHeader(value = "event_id") Long eventId){
+    @GetMapping("authentication/creationEvent/{id}")
+    public boolean authenticateEventCreation(@RequestHeader(value="Authorization") String token,@PathVariable(value = "id") Long eventId){
         Long userId = Long.parseLong(jwUtil.getKey(token)); 
         Optional<User> user = UserService.findById(userId);
         List<Event> events = user.get().getEvents();
-        Authentication authenticate = new Authentication();
-        authenticate.setStatus(false);
+
 
         for (Event temp : events) {
             if(temp.getId() == eventId){
-                authenticate.setStatus(true);
-                return authenticate;
+                return true;
             }
         }
-        return authenticate;
+        return false;
     } 
 }
