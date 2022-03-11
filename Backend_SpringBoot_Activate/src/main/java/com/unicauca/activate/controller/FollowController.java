@@ -14,6 +14,7 @@ import com.unicauca.activate.service.FollowService;
 import com.unicauca.activate.service.IUserService;
 import com.unicauca.activate.utilities.JWTUtilities;
 import java.util.Optional;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -60,13 +61,17 @@ public class FollowController {
         return ResponseEntity.ok().body(save);
     }
     
-   // @DeleteMapping("remove/{id}")
+    @DeleteMapping("remove/{id}")
    // public ResponseEntity<?> delete(@PathVariable(value = "id") Long followId) {
-    @DeleteMapping("remove")
-    public ResponseEntity<?> delete(@RequestHeader(value="from_user") long fromUser, @RequestHeader(value="to_user") long toUser) {
+    //@DeleteMapping("remove")
+    public ResponseEntity<?> delete(@RequestHeader(value = "Authorization") String token, @PathVariable(value = "id")Long to_user) {
+        System.out.println("EL USUARIO __ "+ to_user);
+        Long fromUser = Long.parseLong(jwUtil.getKey(token));
+        //Long toUser = Long.parseLong(to_user);
+        
         
         Optional<User> user_from = UserService.findById(fromUser);
-        Optional<User> user_to =  UserService.findById(toUser);
+        Optional<User> user_to =  UserService.findById(to_user);
         Follow oldFollow = followService.findByFromAndTo(user_from.get(), user_to.get()).get();
         
         if (!followService.findByFromAndTo(user_from.get(), user_to.get()).isPresent()) {
