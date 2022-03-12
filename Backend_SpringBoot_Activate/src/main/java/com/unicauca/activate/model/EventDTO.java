@@ -9,6 +9,10 @@ public class EventDTO {
     private Long idCategory;
     private Long idUser;
     private Long idCity;
+
+    public EventDTO(){
+        
+    }
     
     public EventDTO(String titulo, String descripcion, String ubicacion, String fecha_inicio,
             String fecha_final, Long idCategory, Long idUser, Long idCity) {
