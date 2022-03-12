@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/activate/follow")
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.DELETE})
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE})
 public class FollowController {
     
     private Mapper mapper = new Mapper();

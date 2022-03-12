@@ -259,8 +259,8 @@ async function unfollow() {
     datos.to_user = localStorage.user_profile_id;
 
     var requestOptions = {
-        mode: 'no-cors',
-        method: 'REMOVE',
+        mode: 'cors',
+        method: 'DELETE',
         headers: getHeaders(),
         redirect: 'follow'
         
