@@ -25,7 +25,7 @@ async function cargarEvento() {
     const evento = await request.json();
     document.getElementById("input_titulo").value = evento.titulo;
     document.getElementById("input_descripcion").value = evento.descripcion;
-    document.getElementById("input_ubicacion").value = evento.city;
+    //document.getElementById("input_ubicacion").value = evento.city;
     console.log(evento);
 
 }
