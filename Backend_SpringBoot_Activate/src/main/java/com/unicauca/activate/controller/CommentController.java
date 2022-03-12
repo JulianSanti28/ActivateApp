@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/activate/comment")
 public class CommentController {
 
-    private Mapper mapper = new Mapper();
+    private Mapper mapper = Mapper.getMapper();
     @Autowired
     private EventService EventService;
 

@@ -61,7 +61,7 @@ public class EventController {
 
     
 
-    private Mapper mapper = new Mapper();
+    private Mapper mapper = Mapper.getMapper();
 
     @Autowired
     private EventService EventService;

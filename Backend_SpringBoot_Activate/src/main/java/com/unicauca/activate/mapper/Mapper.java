@@ -28,6 +28,21 @@ public class Mapper {
      * @param commentDto
      * @return
      */
+    private static Mapper  instance;
+    
+    private Mapper() {
+    
+    }
+    
+    
+    public static Mapper getMapper(){
+        
+        if(instance==null){
+            instance = new Mapper();
+        }
+        return instance;
+    }
+
     public Comment toComment(CommentDTO commentDto) {
         Comment comment = new Comment();
         comment.setDescripcion(commentDto.getDescripcion());

@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE})
 public class FollowController {
     
-    private Mapper mapper = new Mapper();
+    private Mapper mapper = Mapper.getMapper();
     @Autowired
     private FollowService followService;
     
