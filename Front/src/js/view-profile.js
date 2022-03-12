@@ -107,7 +107,8 @@ function getHeaders() {
     return {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': localStorage.token
+        'Authorization': localStorage.token,
+        'Access-Control-Allow-Origin': '*'
     };
 }
 
@@ -258,12 +259,14 @@ async function unfollow() {
     datos.to_user = localStorage.user_profile_id;
 
     var requestOptions = {
+        mode: 'no-cors',
         method: 'REMOVE',
         headers: getHeaders(),
-        redirect: 'follow',
+        redirect: 'follow'
+        
     };
 
-    fetch("http://localhost:8081/activate/follow/remove"+ Number(localStorage.user_profile_id), requestOptions)
+    fetch("http://localhost:8081/activate/follow/remove/"+ Number(localStorage.user_profile_id), requestOptions)
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
