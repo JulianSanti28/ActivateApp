@@ -179,4 +179,12 @@ public class EventController {
         return events;
     }
 
+    //Obtener todos los eventos creados por un usuario
+    //Recibe el token del usuario logueado 
+    @GetMapping("eventsUser/all/{id}")
+    public List<Event> readAllByUser(@PathVariable(value = "id") Long userId) {
+        Optional<User> user = UserService.findById(userId);
+        List<Event> events = user.get().getEvents();
+        return events;
+    }
 }
