@@ -86,7 +86,7 @@ $(document).ready(function () {
     //Verificar un/follow
     verificarfollow()
     //Cargar todos los eventos creador por usuario
-    //cargarEventosUsuario();
+    cargarEventosUsuario();
     //Pendiente al Follow
     const btnfollow = document.getElementById("followbtn");
     btnfollow.addEventListener("click", e => {
@@ -120,7 +120,7 @@ async function cargarUsuario() {
     });
 
     const respuesta = await request.json(); //Obtenemos la respuesta del Servidor en String
-    console.log(respuesta);
+    //console.log(respuesta);
 
     //Situar nombre del usuario Logeado
     document.getElementById("profileName").innerHTML = respuesta.name;
@@ -133,16 +133,17 @@ async function cargarUsuario() {
 async function cargarEventosUsuario() {
 
     //Realizamos la peticion al servidor
-    const request = await fetch('http://localhost:8081/activate/event/UserCreate/all/' + Number(localStorage.id), {
+    const request = await fetch('http://localhost:8081/activate/event/eventsUser/all/' + Number(localStorage.user_profile_id), {
         method: 'GET',
         // headers: getHeaders()
     });
     const eventos = await request.json();
+    console.log(eventos);
 
     let listadoHtml = '';
     for (let evento of eventos) {
 
-        evento.image = "data:image/jpg;base64," + evento.image;
+        evento.image = "data:image/jpg;base64,"+evento.image;
         evento.user.image = "data:image/jpg;base64," + evento.user.image;
         listadoHtml += eventBody(evento);
 
@@ -161,7 +162,7 @@ function eventBody(evento) {
         + '<div class="row">'
         + '<div class="user-block">'
 
-        + '<img class="img-circle img-bordered-sm" src="' + evento.user.img + '"'
+        + '<img class="img-circle img-bordered-sm" src="' + evento.user.image + '"'
         + 'alt="User Image">'
         + '<span class="username">'
         + '<a href="user-profile.html">' + evento.user.name + ' ' + evento.user.lastName + '</a>'
@@ -183,7 +184,7 @@ function eventBody(evento) {
         + '</div>'
         + '<div class="col-5 text-center">'
 
-        + '<img src="' + evento.img + '" alt="user-avatar" class="img-circle img-fluid">'
+        + '<img src="' + evento.image + '" alt="user-avatar" class="img-circle img-fluid">'
 
         + '</div>'
         + '</div>'
@@ -271,5 +272,5 @@ async function unfollow() {
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
 
-    //window.location.href = 'user-profile.html'
+    window.location.href = 'user-profile.html'
 }
