@@ -60,7 +60,7 @@ public class ClaimController {
         /**
          * Convertimos al objeto deseado
          */
-        Mapper mapper = new Mapper();
+        Mapper mapper = Mapper.getMapper();
         Claim claim = mapper.toClaim(claimDto);
 
         /**
