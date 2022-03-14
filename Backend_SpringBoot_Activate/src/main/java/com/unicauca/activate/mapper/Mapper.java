@@ -74,7 +74,7 @@ public class Mapper {
             case "ALTA":
                 claim.setType(ClaimType.ALTA);
                 break;
-            case "IMMEDIATA":
+            case "INMEDIATA":
                 claim.setType(ClaimType.INMEDIATA);
                 break;
             default:

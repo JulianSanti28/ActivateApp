@@ -18,6 +18,7 @@ import com.unicauca.activate.service.IEmailService;
 import com.unicauca.activate.service.IUserService;
 import com.unicauca.activate.utilities.JWTUtilities;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.PropertyMapper.SourceOperator;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -68,8 +69,8 @@ public class ClaimController {
          * usuarios y a nuestros colaboradores
          */
         if (manager.getLevelOne().attend(claim)) {
-            //EmailService.sendEmailSupport(claim.getEmail(), "Claim Request Attention!", "Hello! You must answer this request. More details of the user's request are added below:"
-                    //+ "\n" + "Claim Tittle: " + claim.getTitle() + "\n" + "Claim Description: " + claim.getDescription() + "\n" + "Claim Register Date:" + claim.getDate() + "\n" + "Atention Type:" + claim.getType().toString() + "\n" + "Thank you so much!");
+            EmailService.sendEmailSupport(claim.getEmail(), "Claim Request Attention!", "Hello! You must answer this request. More details of the user's request are added below:"
+                    + "\n" + "Claim Tittle: " + claim.getTitle() + "\n" + "Claim Description: " + claim.getDescription() + "\n" + "Claim Register Date:" + claim.getDate() + "\n" + "Atention Type:" + claim.getType().toString() + "\n" + "Thank you so much!");
 
             //EmailService.sendEmailClient(user.getEmail(), EmailTemplateUtil.CLAIM_SUCCESSFULLY_CREATED_SUBJECT, "Hello " + user.getName() + ", " + "your claim request will be answered very soon, our team is working for you. Details of your request:"
                     //+ "\n" + "Claim Tittle: " + claim.getTitle() + "\n" + "Claim Description: " + claim.getDescription() + "\n" + "Claim Register Date:" + claim.getDate() + "\n" + "Atention Type:" + claim.getType().toString() + "\n" + "Thank you so much!");

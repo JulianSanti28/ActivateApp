@@ -157,13 +157,15 @@
                   <!-- /.card-header -->
                   <div class="card-body">
                     <div class="form-group">
-                      <label>Seleccione un tipo</label>
+                      <input class="form-control" placeholder="Titulo:" id="request_tittle">
+                    </div>
+                    <div class="form-group">
+                      <label>Seleccione una prioridad</label>
                       <select class="form-control" id="select_request_type">
-                      <option>option 1</option>
-                      <option>option 2</option>
-                      <option>option 3</option>
-                      <option>option 4</option>
-                      <option>option 5</option>
+                      <option>BASICA</option>
+                      <option>MEDIA</option>
+                      <option>ALTA</option>
+                      <option>INMEDIATA</option>
                       </select>
                       </div>
                     <div class="form-group">
@@ -201,9 +203,8 @@
                     <div class="modal-header">
                       <h4 class="modal-title">Peticion enviada con Exito!</h4>
                     </div>
-
+                    
                     <div class="modal-body">
-                      <p>Su peticion sera atendida por:</p>
                       <p id="request_responsable"></p>
                     </div>
 
