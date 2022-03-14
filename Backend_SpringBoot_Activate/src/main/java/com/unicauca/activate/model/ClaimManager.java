@@ -20,7 +20,7 @@ public class ClaimManager {
         levelOne = new ClaimLevelOne("Julián Santiago", "Martinez Trullo", "juliansmartinez@unicauca.edu.co");
         levelTwo = new ClaimLevelTwo("Paula Andrea", "Peña Constain", "ppena@unicauca.edu.co");
         levelThree = new ClaimLevelThree("Miguel Andres", "Mosquera Monje", "miguelmonje@unicauca.edu.co");
-        levelFour = new ClaimLevelFour("Sebastian", "Arenas Rodriguez", "juliansmartinez@unicauca.edu.co");
+        levelFour = new ClaimLevelFour("Sebastian", "Arenas Rodriguez", "jarenas@unicauca.edu.co");
         // Crea los enlaces
         levelOne.setNextHandler(levelTwo);
         levelTwo.setNextHandler(levelThree);
