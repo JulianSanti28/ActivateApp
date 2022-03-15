@@ -52,7 +52,7 @@ public class ClaimController {
     @PostMapping("create")
     public ResponseEntity<?> create(@RequestHeader(value = "Authorization") String token, @RequestBody ClaimDTO claimDto) {
         /*Id del Usuario*/
-        Long userId = Long.parseLong(token);
+        Long userId = Long.parseLong(jwUtil.getKey(token));
         /*Obtener el Usuario*/
         User user = UserService.findById(userId).get();
         /**
