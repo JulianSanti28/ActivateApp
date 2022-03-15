@@ -5,14 +5,11 @@
  */
 package com.unicauca.activate.service;
 
-import java.util.List;
-
 /**
  *
  * @author 57322
  */
-public interface IEmailService {
-
-    public void sendEmailSupport(String to, String subject, String body);
+public interface IEmailServiceClient {
     public void sendEmailClient(String to, String subject, String body);
+    public void init(String to, String subject, String body);
 }
