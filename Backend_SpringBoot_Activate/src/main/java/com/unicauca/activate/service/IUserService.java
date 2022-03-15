@@ -17,4 +17,6 @@ public interface IUserService {
 
     public User verificarCredenciales(User user);
     
+    public boolean validarPassword(String password);
+    
 }
