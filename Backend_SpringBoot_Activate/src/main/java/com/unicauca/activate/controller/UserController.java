@@ -59,6 +59,10 @@ public class UserController {
     public ResponseEntity<?> create(@RequestBody User user) {
         Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
         String hash = argon2.hash(1, 1024, 1, user.getPassword());
+        if( !UserService.validarPassword(user.getPassword())){
+            System.out.println("La contraseña no pasa");
+            return ResponseEntity.status(404).build();
+        }
         user.setPassword(hash);
         User save = UserService.save(user);
         return ResponseEntity.ok().body(save);

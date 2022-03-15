@@ -21,6 +21,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -83,6 +85,26 @@ public class UserService implements IUserService {
         }
         return null;
     }
+    
+    @Override
+    public boolean validarPassword(String password){
+    
+        // Regex to check valid password.
+        String regex = "^(?=.*[1-8])"
+                       + "(?=.*[a-z])(?=.*[A-Z])"
+                       + "(?=.*[@#$%^&+=])"
+                       + "(?=\\S+$).{8,20}$";
+  
+        Pattern p = Pattern.compile(regex);
 
+        if (password == null) {
+            return false;
+        }
+  
+        Matcher m = p.matcher(password);
+  
+        return m.matches();
+        
+    }
     
 }
