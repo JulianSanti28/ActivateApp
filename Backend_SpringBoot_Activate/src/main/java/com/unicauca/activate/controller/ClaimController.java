@@ -6,25 +6,24 @@
 package com.unicauca.activate.controller;
 
 import com.unicauca.activate.mapper.Mapper;
-import com.unicauca.activate.utilities.EmailTemplateUtil;
 import com.unicauca.activate.utilities.Utilities;
 import com.unicauca.activate.model.Claim;
 import com.unicauca.activate.model.ClaimDTO;
 import com.unicauca.activate.model.ClaimManager;
-import com.unicauca.activate.model.ClaimType;
 import com.unicauca.activate.model.User;
 import com.unicauca.activate.service.IClaimService;
-import com.unicauca.activate.service.IEmailService;
+import com.unicauca.activate.service.IEmailServiceClient;
 import com.unicauca.activate.service.IUserService;
 import com.unicauca.activate.utilities.JWTUtilities;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.PropertyMapper.SourceOperator;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.unicauca.activate.service.IEmailServiceSupport;
+import com.unicauca.activate.utilities.EmailTemplateUtil;
 
 /**
  *
@@ -38,7 +37,10 @@ public class ClaimController {
     private IClaimService ClaimService;
 
     @Autowired
-    private IEmailService EmailService;
+    private IEmailServiceSupport EmailServiceSupport; //Inyección de dependencias
+
+    @Autowired
+    private IEmailServiceClient EmailServiceClient; //Inyección de dependencias
 
     @Autowired
     private IUserService UserService;
@@ -50,7 +52,7 @@ public class ClaimController {
     @PostMapping("create")
     public ResponseEntity<?> create(@RequestHeader(value = "Authorization") String token, @RequestBody ClaimDTO claimDto) {
         /*Id del Usuario*/
-        Long userId = Long.parseLong(jwUtil.getKey(token));
+        Long userId = Long.parseLong(token);
         /*Obtener el Usuario*/
         User user = UserService.findById(userId).get();
         /**
@@ -66,14 +68,22 @@ public class ClaimController {
 
         /**
          * Se puede atender la solicitud? Entonces notificamos vía email a los
-         * usuarios y a nuestros colaboradores
+         * usuarios y a nuestros colaboradores(En un hilo distinto para que
+         * nuestra API REST responda y no espere el envío de esto)
          */
         if (manager.getLevelOne().attend(claim)) {
-            EmailService.sendEmailSupport(claim.getEmail(), "Claim Request Attention!", "Hello! You must answer this request. More details of the user's request are added below:"
+            //Iniciar los valores del sevricio de email de soporte
+            EmailServiceSupport.init(claim.getEmail(), "Claim Request Attention!", "Hello! You must answer this request. More details of the user's request are added below:"
                     + "\n" + "Claim Tittle: " + claim.getTitle() + "\n" + "Claim Description: " + claim.getDescription() + "\n" + "Claim Register Date:" + claim.getDate() + "\n" + "Atention Type:" + claim.getType().toString() + "\n" + "Thank you so much!");
+            Thread emailSupport = new Thread((Runnable) EmailServiceSupport);
+            emailSupport.start();
 
-            //EmailService.sendEmailClient(user.getEmail(), EmailTemplateUtil.CLAIM_SUCCESSFULLY_CREATED_SUBJECT, "Hello " + user.getName() + ", " + "your claim request will be answered very soon, our team is working for you. Details of your request:"
-                    //+ "\n" + "Claim Tittle: " + claim.getTitle() + "\n" + "Claim Description: " + claim.getDescription() + "\n" + "Claim Register Date:" + claim.getDate() + "\n" + "Atention Type:" + claim.getType().toString() + "\n" + "Thank you so much!");
+            //Iniciar los valores del sevricio de email de Cliente
+            EmailServiceClient.init(user.getEmail(), EmailTemplateUtil.CLAIM_SUCCESSFULLY_CREATED_SUBJECT, "Hello " + user.getName() + ", " + "your claim request will be answered very soon, our team is working for you. Details of your request:"
+                    + "\n" + "Claim Tittle: " + claim.getTitle() + "\n" + "Claim Description: " + claim.getDescription() + "\n" + "Claim Register Date:" + claim.getDate() + "\n" + "Atention Type:" + claim.getType().toString() + "\n" + "Thank you so much!");
+            Thread emailClient = new Thread((Runnable) EmailServiceClient);
+            emailClient.start();
+
         }
         Claim save = ClaimService.save(claim);
         return ResponseEntity.ok().body(save);
