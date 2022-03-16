@@ -47,8 +47,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import com.unicauca.activate.mapper.Mapper;
 
-import ch.qos.logback.classic.Level;
-import ch.qos.logback.classic.Logger;
 
 /**
  *

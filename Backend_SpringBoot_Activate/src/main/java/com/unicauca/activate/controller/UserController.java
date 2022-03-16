@@ -9,7 +9,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-
 import com.unicauca.activate.model.Event;
 import com.unicauca.activate.model.User;
 import com.unicauca.activate.service.EventService;
@@ -32,7 +31,6 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-
 import com.unicauca.activate.model.Follow;
 import com.unicauca.activate.utilities.JWTUtilities;
 
@@ -52,18 +50,10 @@ public class UserController {
 
     @Autowired
     private JWTUtilities jwUtil;
-    
 
     //Crear Usuario
     @PostMapping("create")
     public ResponseEntity<?> create(@RequestBody User user) {
-        Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
-        String hash = argon2.hash(1, 1024, 1, user.getPassword());
-        if( !UserService.validarPassword(user.getPassword())){
-            System.out.println("La contraseña no pasa");
-            return ResponseEntity.status(404).build();
-        }
-        user.setPassword(hash);
         User save = UserService.save(user);
         return ResponseEntity.ok().body(save);
     }
@@ -115,20 +105,20 @@ public class UserController {
                 .collect(Collectors.toList());
         return users;
     }
-    
+
     @GetMapping("user/follow/{id}")
-    public boolean buscarSeguidor(@RequestHeader(value = "Authorization") String token,@PathVariable(value = "id") Long userId){
-    //recibir token e id de usuario  
-    //Long usuarioID = UserService.findById(Long.parseLong(fromUser)).get().getId(); //token usuario logueado
-    Long usuarioID = Long.parseLong(jwUtil.getKey(token));
-    Optional<User> user = UserService.findById(userId); // perfil user visitado
-    List<Follow> lista = user.get().getFollowers();
-    for(int j = 0 ; j< lista.size();j++){
-            if(lista.get(j).getFrom().getId() == usuarioID){
+    public boolean buscarSeguidor(@RequestHeader(value = "Authorization") String token, @PathVariable(value = "id") Long userId) {
+        //recibir token e id de usuario  
+        //Long usuarioID = UserService.findById(Long.parseLong(fromUser)).get().getId(); //token usuario logueado
+        Long usuarioID = Long.parseLong(jwUtil.getKey(token));
+        Optional<User> user = UserService.findById(userId); // perfil user visitado
+        List<Follow> lista = user.get().getFollowers();
+        for (int j = 0; j < lista.size(); j++) {
+            if (lista.get(j).getFrom().getId() == usuarioID) {
                 return true;
                 //return "si";
             }
-    }
+        }
         return false;
         //return "no";
     }
@@ -149,7 +139,7 @@ public class UserController {
         Optional<User> user = UserService.findById(userId);
         try {
             if (foto.getBytes().length > 0) {
-                user.get().setImage( foto.getBytes() );
+                user.get().setImage(foto.getBytes());
             }
         } catch (IOException ex) {
             System.out.println("Error al guardar bytes");
@@ -162,17 +152,16 @@ public class UserController {
     //Debe recibir el token del usuario y el id del evento
     //return True si el evento fue creado por el usuario
     @GetMapping("authentication/creationEvent/{id}")
-    public boolean authenticateEventCreation(@RequestHeader(value="Authorization") String token,@PathVariable(value = "id") Long eventId){
-        Long userId = Long.parseLong(jwUtil.getKey(token)); 
+    public boolean authenticateEventCreation(@RequestHeader(value = "Authorization") String token, @PathVariable(value = "id") Long eventId) {
+        Long userId = Long.parseLong(jwUtil.getKey(token));
         Optional<User> user = UserService.findById(userId);
         List<Event> events = user.get().getEvents();
 
-
         for (Event temp : events) {
-            if(temp.getId() == eventId){
+            if (temp.getId() == eventId) {
                 return true;
             }
         }
         return false;
-    } 
+    }
 }
