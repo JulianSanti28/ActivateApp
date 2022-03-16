@@ -11,7 +11,7 @@ $(document).ready(function () {
 
             //Si las contrasenias coinciden validamos la expresion regular
             const expresiones = {
-                password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d$@$!%*?& ]{1,8}$/
+                password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d$@$!%*?& ]{1,9}$/
             }
             
             if(expresiones.password.test(password.value)){
