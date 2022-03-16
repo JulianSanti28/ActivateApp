@@ -57,7 +57,14 @@ public class UserService implements IUserService {
     @Override
     @Transactional
     public User save(User user) {
-        return userRepository.save(user);
+        if (validarPassword(user.getPassword())) {
+            Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
+            String hash = argon2.hash(1, 1024, 1, user.getPassword());
+            user.setPassword(hash);
+            return userRepository.save(user);
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -85,26 +92,23 @@ public class UserService implements IUserService {
         }
         return null;
     }
-    
+
     @Override
-    public boolean validarPassword(String password){
-    
+    public boolean validarPassword(String password) {
         // Regex to check valid password.
         String regex = "^(?=.*[1-8])"
-                       + "(?=.*[a-z])(?=.*[A-Z])"
-                       + "(?=.*[@#$%^&+=])"
-                       + "(?=\\S+$).{8,20}$";
-  
-        Pattern p = Pattern.compile(regex);
+                + "(?=.*[a-z])(?=.*[A-Z])"
+                + "(?=\\S+$).{8,20}$";
 
+        Pattern p = Pattern.compile(regex);
         if (password == null) {
             return false;
         }
-  
+
         Matcher m = p.matcher(password);
-  
+
         return m.matches();
-        
+
     }
-    
+
 }
