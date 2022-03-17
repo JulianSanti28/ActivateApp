@@ -33,13 +33,13 @@ public class CommentController {
 
     private Mapper mapper = Mapper.getMapper();
     @Autowired
-    private EventService EventService;
+    private EventService eventService;
 
     @Autowired
-    private CommentService CommentService;
+    private CommentService commentService;
 
     @Autowired
-    private IUserService UserService;
+    private IUserService userService;
 
     @Autowired
     private JWTUtilities jwUtil;
@@ -49,13 +49,13 @@ public class CommentController {
     public ResponseEntity<?> create(@RequestHeader(value="Authorization") String token, @RequestBody CommentDTO commentDto) {
         Long userId = Long.parseLong(jwUtil.getKey(token)); 
         Long eventId = commentDto.getEventId();
-        Optional<User> user = UserService.findById(userId);
-        Optional<Event> event = EventService.findById(eventId);
+        Optional<User> user = userService.findById(userId);
+        Optional<Event> event = eventService.findById(eventId);
         Comment comment = mapper.toComment(commentDto);
         //Vinculando las relaciones
         comment.setUser(user.get());
         event.get().agregarComentarios(comment);
-        Comment save = CommentService.save(comment);
+        Comment save = commentService.save(comment);
         return ResponseEntity.ok().body(save);
     }
 

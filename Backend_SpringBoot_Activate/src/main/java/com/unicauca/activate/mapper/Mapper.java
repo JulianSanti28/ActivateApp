@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
  * @author 57322
  */
 @Component
-public class Mapper {
+public final class Mapper {
 
     /**
      * Convetir de CommentDTO a Comment

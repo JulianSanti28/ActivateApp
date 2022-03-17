@@ -5,23 +5,18 @@
 package com.unicauca.activate.controller;
 
 import com.unicauca.activate.mapper.Mapper;
-import com.unicauca.activate.model.Comment;
-import com.unicauca.activate.model.CommentDTO;
-import com.unicauca.activate.model.Event;
 import com.unicauca.activate.model.Follow;
 import com.unicauca.activate.model.User;
 import com.unicauca.activate.service.FollowService;
 import com.unicauca.activate.service.IUserService;
 import com.unicauca.activate.utilities.JWTUtilities;
 import java.util.Optional;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,7 +36,7 @@ public class FollowController {
     private FollowService followService;
     
     @Autowired
-    private IUserService UserService;
+    private IUserService userService;
     
     @Autowired
     private JWTUtilities jwUtil;
@@ -52,13 +47,13 @@ public class FollowController {
     public ResponseEntity<?> create(@RequestHeader(value="from_user") String fromUser, @RequestHeader(value="to_user") String toUser) {
    
 
-        Optional<User> user_from = UserService.findById(Long.parseLong(fromUser));
-        Optional<User> user_to =  UserService.findById(Long.parseLong(toUser));
+        Optional<User> userFrom = userService.findById(Long.parseLong(fromUser));
+        Optional<User> userTo =  userService.findById(Long.parseLong(toUser));
 
-        Follow newFollow = new Follow(user_from.get(),user_to.get());
+        Follow newFollow = new Follow(userFrom.get(),userTo.get());
         //Vinculando las relaciones
-        user_from.get().addFollowFollowing(newFollow);
-        user_to.get().addFollowFollower(newFollow);
+        userFrom.get().addFollowFollowing(newFollow);
+        userTo.get().addFollowFollower(newFollow);
 
         Follow save = followService.save(newFollow);
         return ResponseEntity.ok().body(save);
@@ -67,17 +62,16 @@ public class FollowController {
     @DeleteMapping("remove/{id}")
    // public ResponseEntity<?> delete(@PathVariable(value = "id") Long followId) {
     //@DeleteMapping("remove")
-    public ResponseEntity<?> delete(@RequestHeader(value = "Authorization") String token, @PathVariable(value = "id")Long to_user) {
-        System.out.println("EL USUARIO __ "+ to_user);
+    public ResponseEntity<?> delete(@RequestHeader(value = "Authorization") String token, @PathVariable(value = "id")Long toUser) {
         Long fromUser = Long.parseLong(jwUtil.getKey(token));
         //Long toUser = Long.parseLong(to_user);
         
         
-        Optional<User> user_from = UserService.findById(fromUser);
-        Optional<User> user_to =  UserService.findById(to_user);
-        Follow oldFollow = followService.findByFromAndTo(user_from.get(), user_to.get()).get();
+        Optional<User> userFrom = userService.findById(fromUser);
+        Optional<User> userTo =  userService.findById(toUser);
+        Follow oldFollow = followService.findByFromAndTo(userFrom.get(), userTo.get()).get();
         
-        if (!followService.findByFromAndTo(user_from.get(), user_to.get()).isPresent()) {
+        if (!followService.findByFromAndTo(userFrom.get(), userTo.get()).isPresent()) {
             return ResponseEntity.notFound().build();
         }
         

@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class CityController {
 
     @Autowired
-    private ICityService CityService;
+    private ICityService cityService;
 
     //Obtener todos los usuarios
     @GetMapping("cities/all")
     public List<City> readAll() {
         List<City> users = StreamSupport
-                .stream(CityService.findAll().spliterator(), false)
+                .stream(cityService.findAll().spliterator(), false)
                 .collect(Collectors.toList());
         return users;
     }

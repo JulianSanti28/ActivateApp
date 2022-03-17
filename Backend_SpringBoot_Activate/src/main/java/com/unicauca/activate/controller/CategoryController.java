@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class CategoryController {
     
     @Autowired
-    private ICategoryService CategoryService;
+    private ICategoryService categoryService;
 
     //Obtener todos los usuarios
     @GetMapping("categories/all")
     public List<Category> readAll() {
         List<Category> users = StreamSupport
-                .stream(CategoryService.findAll().spliterator(), false)
+                .stream(categoryService.findAll().spliterator(), false)
                 .collect(Collectors.toList());
         return users;
     }
