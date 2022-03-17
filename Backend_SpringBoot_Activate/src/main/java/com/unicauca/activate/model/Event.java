@@ -47,10 +47,10 @@ public class Event {
     private String ubicacion = "";
 
     @Column(length = 50)
-    private String fecha_inicio = "";
+    private String fechaInicio = "";
 
     @Column(length = 50)
-    private String fecha_final = "";
+    private String fechaFinal = "";
 
     @Lob
     private byte[] image;
@@ -164,21 +164,31 @@ public class Event {
         this.ubicacion = ubicacion;
     }
 
-    public String getFecha_inicio() {
-        return fecha_inicio;
+    
+
+    public String getFechaInicio() {
+        return fechaInicio;
     }
 
-    public void setFecha_inicio(String fecha_inicio) {
-        this.fecha_inicio = fecha_inicio;
+
+
+    public void setFechaInicio(String fechaInicio) {
+        this.fechaInicio = fechaInicio;
     }
 
-    public String getFecha_final() {
-        return fecha_final;
+
+
+    public String getFechaFinal() {
+        return fechaFinal;
     }
 
-    public void setFecha_final(String fecha_final) {
-        this.fecha_final = fecha_final;
+
+
+    public void setFechaFinal(String fechaFinal) {
+        this.fechaFinal = fechaFinal;
     }
+
+
 
     public City getCity() {
         return city;

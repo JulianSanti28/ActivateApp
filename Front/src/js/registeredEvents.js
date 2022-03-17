@@ -40,7 +40,7 @@ async function cargarEventosRegistrados() {
     let listadoHtml = '';
     for (let evento of eventosRegistrados) {
         let usuarioHtml = '<tr><td>' + evento.id + '</td><td>' + evento.titulo  + '</td><td>'
-            + evento.city.ciu_name + '</td><td>' + evento.fecha_inicio + '</td> <td>' + evento.fecha_final
+            + evento.city.ciuName + '</td><td>' + evento.fechaInicio + '</td> <td>' + evento.fechaFinal
             + '</td>' + '</tr>';
         listadoHtml += usuarioHtml;
     }

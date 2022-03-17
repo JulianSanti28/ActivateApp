@@ -4,8 +4,8 @@ const eventosEJM = [
         "titulo": "Guerra Mundial",
         "descripcion": "Hagamos la Paz no la guerra",
         "ubicacion": "Ucrania",
-        "fecha_inicio": "28/05/1998",
-        "fecha_final": "28/05/1998",
+        "fechaInicio": "28/05/1998",
+        "fechaFinal": "28/05/1998",
         "img": "dist/img/photo2.png",
         "category": {
             "id": 1,
@@ -42,8 +42,8 @@ const eventosEJM = [
         "titulo": "Rumbita",
         "descripcion": "Hola",
         "ubicacion": "Popayan",
-        "fecha_inicio": "28/05/1998",
-        "fecha_final": "28/05/1998",
+        "fechaInicio": "28/05/1998",
+        "fechaFinal": "28/05/1998",
         "img": "dist/img/photo2.png",
         "category": {
             "id": 1,
@@ -175,10 +175,10 @@ function eventBody(evento) {
         + '<h3 class=""><b>' + evento.titulo + '</b></h3>'
         + '</div>'
         + '<div class="row ">'
-        + '<i class="fas fa-calendar"> ' + evento.fecha_inicio + ' / ' + evento.fecha_final + '</i><br>'
+        + '<i class="fas fa-calendar"> ' + evento.fechaInicio + ' / ' + evento.fechaFinal + '</i><br>'
         + '</div>'
         + '<div class="row ">'
-        + '<i class="fas fa-map-marker-alt"> ' + evento.ubicacion + '</i>'
+        + '<i class="fas fa-map-marker-alt"> ' + evento.city.ciuName + '</i>'
         + '</div>'
 
         + '</div>'
