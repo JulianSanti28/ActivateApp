@@ -7,7 +7,6 @@ package com.unicauca.activate.service;
 import com.unicauca.activate.model.Follow;
 import com.unicauca.activate.model.User;
 import com.unicauca.activate.repository.FollowRepository;
-import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

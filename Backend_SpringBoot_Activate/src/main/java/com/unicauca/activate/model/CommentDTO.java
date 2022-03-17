@@ -5,9 +5,7 @@
  */
 package com.unicauca.activate.model;
 
-import com.unicauca.activate.utilities.ScoreEnum;
-import static com.unicauca.activate.utilities.ScoreEnum.UNO;
-import java.util.Date;
+
 
 /**
  *

@@ -4,19 +4,24 @@
  * and open the template in the editor.
  */
 package com.unicauca.activate.model;
-import java.time.LocalDate;
+
 /**
  *
  * @author Julián S Martinez T
  */
 public class ClaimDTO {
 
-    //Atributos
+    /**
+     * Attributes
+     */
     private String title;
     private String description;
     private String type;
 
-    /*Atributos*/
+    /**
+     * Getters and Setters
+     * @return
+     */
     public String getTitle() {
         return title;
     }

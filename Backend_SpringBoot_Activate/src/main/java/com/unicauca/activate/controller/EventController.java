@@ -28,7 +28,7 @@ import java.util.stream.StreamSupport;
 
 import javax.validation.Valid;
 
-import org.hibernate.annotations.SourceType;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -71,10 +71,10 @@ public class EventController {
     private JWTUtilities jwUtil;
 
     @Autowired
-    private ICategoryService CategoryService;
+    private ICategoryService categoryService;
 
     @Autowired
-    private ICityService CityService;
+    private ICityService cityService;
 
     //Crear Evento
     @PostMapping("create")
@@ -85,8 +85,8 @@ public class EventController {
 
         Long usuarioID = Long.parseLong(jwUtil.getKey(token));
         Optional<User> user = UserService.findById(usuarioID);
-        Optional<Category> category = CategoryService.findById(eventDTO.getIdCategory());
-        Optional<City> city = CityService.findById(eventDTO.getIdCity());
+        Optional<Category> category = categoryService.findById(eventDTO.getIdCategory());
+        Optional<City> city = cityService.findById(eventDTO.getIdCity());
 
         city.get().agregarEventos(event);
         category.get().agregarEventos(event);
@@ -96,7 +96,7 @@ public class EventController {
         return ResponseEntity.ok().body(save);
     }
 
-    //Crear Evento
+    //Create Event
     @PostMapping("create/image")
     public ResponseEntity<?> createImageEvent(@RequestHeader(value = "event_id") Long eventId, @RequestPart(value = "image", required = false) MultipartFile foto) {
         if (!foto.isEmpty()) {
@@ -122,7 +122,7 @@ public class EventController {
         return ResponseEntity.ok().body(save);
     }
 
-    //Obtene por id
+    //Get by id
     @GetMapping("{id}")
     public ResponseEntity<?> read(@PathVariable Long id) {
         Optional<Event> oEvent = EventService.findById(id);
@@ -134,13 +134,13 @@ public class EventController {
         return ResponseEntity.ok(oEvent);
     }
 
-    //Actualizar Evento, recibe Id del evento y los datos a actualizar
+    //Update event
     @PutMapping("update/{id}")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long eventId,@RequestBody EventDTO eventDetails) {
         System.out.println(eventDetails.toString());
         Optional<Event> event = EventService.findById(eventId);
-        Optional<Category> category = CategoryService.findById(eventDetails.getIdCategory());
-        Optional<City> city = CityService.findById(eventDetails.getIdCity());
+        Optional<Category> category = categoryService.findById(eventDetails.getIdCategory());
+        Optional<City> city = cityService.findById(eventDetails.getIdCity());
 
         if (!event.isPresent()) {
             return ResponseEntity.notFound().build();
@@ -149,15 +149,15 @@ public class EventController {
         event.get().setTitulo(eventDetails.getTitulo());
         event.get().setDescripcion(eventDetails.getDescripcion());
         event.get().setUbicacion(eventDetails.getUbicacion());
-        event.get().setFecha_inicio(eventDetails.getFecha_inicio());
-        event.get().setFecha_final(eventDetails.getFecha_final());
+        event.get().setFechaInicio(eventDetails.getFechaInicio());
+        event.get().setFechaFinal(eventDetails.getFechaFinal());
         event.get().setCategory(category.get());
         event.get().setCity(city.get());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(EventService.save(event.get()));
     }
 
-    //Borrar Usuario
+    //Delete User
     @DeleteMapping("remove/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long eventId) {
         if (!EventService.findById(eventId).isPresent()) {
@@ -168,7 +168,7 @@ public class EventController {
         return ResponseEntity.ok().build();
     }
 
-    //Obtener todos los usuarios
+    //Get all users
     @GetMapping("events/all")
     public List<Event> readAll() {
         List<Event> events = StreamSupport
@@ -177,8 +177,7 @@ public class EventController {
         return events;
     }
 
-    //Obtener todos los eventos creados por un usuario
-    //Recibe el token del usuario logueado 
+    //Get all events by one user
     @GetMapping("eventsUser/all/{id}")
     public List<Event> readAllByUser(@PathVariable(value = "id") Long userId) {
         Optional<User> user = UserService.findById(userId);

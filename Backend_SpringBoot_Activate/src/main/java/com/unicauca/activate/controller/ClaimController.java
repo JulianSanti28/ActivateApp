@@ -34,16 +34,16 @@ import com.unicauca.activate.utilities.EmailTemplateUtil;
 public class ClaimController {
 
     @Autowired
-    private IClaimService ClaimService;
+    private IClaimService claimService;
 
     @Autowired
-    private IEmailServiceSupport EmailServiceSupport; //Inyección de dependencias
+    private IEmailServiceSupport emailServiceSupport; //Dependences Injection
 
     @Autowired
-    private IEmailServiceClient EmailServiceClient; //Inyección de dependencias
+    private IEmailServiceClient emailServiceClient; //Dependences Injection
 
     @Autowired
-    private IUserService UserService;
+    private IUserService userService;
 
     @Autowired
     private JWTUtilities jwUtil;
@@ -51,41 +51,41 @@ public class ClaimController {
     //Crear Usuario
     @PostMapping("create")
     public ResponseEntity<?> create(@RequestHeader(value = "Authorization") String token, @RequestBody ClaimDTO claimDto) {
-        /*Id del Usuario*/
+        /*Id User*/
         Long userId = Long.parseLong(jwUtil.getKey(token));
-        /*Obtener el Usuario*/
-        User user = UserService.findById(userId).get();
+        /*Get User*/
+        User user = userService.findById(userId).get();
         /**
-         * Se ontiene el manager y se inician valores
+         * Get Manager and initializer values
          */
         ClaimManager manager = Utilities.getClaimManager();
         manager.createAthentionFlow();
         /**
-         * Convertimos al objeto deseado
+         * Get object
          */
         Mapper mapper = Mapper.getMapper();
         Claim claim = mapper.toClaim(claimDto);
 
         /**
-         * Se puede atender la solicitud? Entonces notificamos vía email a los
-         * usuarios y a nuestros colaboradores(En un hilo distinto para que
-         * nuestra API REST responda y no espere el envío de esto)
+         * Can the request be accommodated? We then notify via email the
+         * users and our collaborators (In a different thread so that
+         * our REST API responds and don't wait for this to be sent)
          */
         if (manager.getLevelOne().attend(claim)) {
-            //Iniciar los valores del sevricio de email de soporte
-            EmailServiceSupport.init(claim.getEmail(), "Claim Request Attention!", "Hello! You must answer this request. More details of the user's request are added below:"
+            //Service Email Notification Support
+            emailServiceSupport.init(claim.getEmail(), "Claim Request Attention!", "Hello! You must answer this request. More details of the user's request are added below:"
                     + "\n" + "Claim Tittle: " + claim.getTitle() + "\n" + "Claim Description: " + claim.getDescription() + "\n" + "Claim Register Date:" + claim.getDate() + "\n" + "Atention Type:" + claim.getType().toString() + "\n" + "Thank you so much!");
-            Thread emailSupport = new Thread((Runnable) EmailServiceSupport);
+            Thread emailSupport = new Thread((Runnable) emailServiceSupport);
             emailSupport.start();
 
-            //Iniciar los valores del sevricio de email de Cliente
-            EmailServiceClient.init(user.getEmail(), EmailTemplateUtil.CLAIM_SUCCESSFULLY_CREATED_SUBJECT, "Hello " + user.getName() + ", " + "your claim request will be answered very soon, our team is working for you. Details of your request:"
+            //Service Email Notification Client
+            emailServiceClient.init(user.getEmail(), EmailTemplateUtil.CLAIM_SUCCESSFULLY_CREATED_SUBJECT, "Hello " + user.getName() + ", " + "your claim request will be answered very soon, our team is working for you. Details of your request:"
                     + "\n" + "Claim Tittle: " + claim.getTitle() + "\n" + "Claim Description: " + claim.getDescription() + "\n" + "Claim Register Date:" + claim.getDate() + "\n" + "Atention Type:" + claim.getType().toString() + "\n" + "Thank you so much!");
-            Thread emailClient = new Thread((Runnable) EmailServiceClient);
+            Thread emailClient = new Thread((Runnable) emailServiceClient);
             emailClient.start();
 
         }
-        Claim save = ClaimService.save(claim);
+        Claim save = claimService.save(claim);
         return ResponseEntity.ok().body(save);
     }
 

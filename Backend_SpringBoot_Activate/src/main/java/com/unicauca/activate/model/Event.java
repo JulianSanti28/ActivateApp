@@ -5,14 +5,10 @@
  */
 package com.unicauca.activate.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -47,10 +43,10 @@ public class Event {
     private String ubicacion = "";
 
     @Column(length = 50)
-    private String fecha_inicio = "";
+    private String fechaInicio = "";
 
     @Column(length = 50)
-    private String fecha_final = "";
+    private String fechaFinal = "";
 
     @Lob
     private byte[] image;
@@ -85,8 +81,14 @@ public class Event {
         }
     }
     
-    
+    public void addAsistence(EventUser asistence){
+        if (this.assistences == null) {
+            this.assistences = new HashSet<>();
+            this.assistences.add(asistence);
+        }
 
+    }
+    
     public Category getCategory() {
         return category;
     }
@@ -164,35 +166,28 @@ public class Event {
         this.ubicacion = ubicacion;
     }
 
-    public String getFecha_inicio() {
-        return fecha_inicio;
-    }
+    public String getFechaInicio() {
+		return fechaInicio;
+	}
 
-    public void setFecha_inicio(String fecha_inicio) {
-        this.fecha_inicio = fecha_inicio;
-    }
 
-    public String getFecha_final() {
-        return fecha_final;
-    }
+	public void setFechaInicio(String fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
 
-    public void setFecha_final(String fecha_final) {
-        this.fecha_final = fecha_final;
-    }
+	public String getFechaFinal() {
+		return fechaFinal;
+	}
 
-    public City getCity() {
+	public void setFechaFinal(String fechaFinal) {
+		this.fechaFinal = fechaFinal;
+	}
+
+	public City getCity() {
         return city;
     }
 
     public void setCity(City city) {
         this.city = city;
-    }
-
-    public void addAsistence(EventUser asistence){
-        if (this.assistences == null) {
-            this.assistences = new HashSet<>();
-            this.assistences.add(asistence);
-        }
-
     }
 }
