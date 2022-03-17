@@ -6,9 +6,6 @@
 package com.unicauca.activate.utilities;
 
 import com.unicauca.activate.model.ClaimManager;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 
 /**
  *

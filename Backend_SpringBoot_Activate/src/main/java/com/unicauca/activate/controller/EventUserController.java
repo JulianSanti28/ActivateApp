@@ -35,13 +35,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class EventUserController {
     
     @Autowired
-    private IEventUserService EventUserService;
+    private IEventUserService eventUserService;
 
     @Autowired
-    private IUserService UserService;
+    private IUserService userService;
 
     @Autowired
-    private EventService EventService;
+    private EventService eventService;
 
     @Autowired
     private JWTUtilities jwUtil;
@@ -51,8 +51,8 @@ public class EventUserController {
         //Long usuarioID = Long.parseLong(jwUtil.getKey(token)); 
         //Long eventoID = Long.parseLong(event_id); 
         //Asistence asistence = new Asistence(usuarioID, eventoID);
-        Optional<User> user = UserService.findById(asistence.getIdentificacionUsuario());
-        Optional<Event> event = EventService.findById(asistence.getIdentificacionEvento());
+        Optional<User> user = userService.findById(asistence.getIdentificacionUsuario());
+        Optional<Event> event = eventService.findById(asistence.getIdentificacionEvento());
         //Relación N:M
         EventUser eventUser = new EventUser();
         
@@ -70,13 +70,13 @@ public class EventUserController {
         event.get().addAsistence(eventUser);
         user.get().addAsistence(eventUser);
 
-        EventUser save = EventUserService.save(eventUser);
+        EventUser save = eventUserService.save(eventUser);
         return ResponseEntity.ok().body(save);
     }
 
     @GetMapping("eventsUser/all/{id}")
     public List<Event> readAllEvents(@PathVariable Long id) {
-        Optional<User> user = UserService.findById(id);
+        Optional<User> user = userService.findById(id);
         Set<EventUser> eventsUser = user.get().getAssistences();
         List<Event> events = new ArrayList<>();
         for (EventUser temp : eventsUser) {
@@ -87,7 +87,7 @@ public class EventUserController {
 
     @GetMapping("usersEvent/all/{id}")
     public List<User> readAllUsers(@PathVariable Long id){
-        Optional<Event> event = EventService.findById(id);
+        Optional<Event> event = eventService.findById(id);
         Set<EventUser> eventsUser = event.get().getAssistences();
         List<User> users = new ArrayList<>();
         for (EventUser temp : eventsUser) {

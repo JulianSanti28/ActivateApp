@@ -9,13 +9,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import com.unicauca.activate.model.Event;
 import com.unicauca.activate.model.User;
-import com.unicauca.activate.service.EventService;
 import com.unicauca.activate.service.IUserService;
 import com.unicauca.activate.utilities.JWTUtilities;
 
-import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,11 +32,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.unicauca.activate.model.Follow;
-import com.unicauca.activate.utilities.JWTUtilities;
-
-import de.mkammerer.argon2.Argon2;
-import de.mkammerer.argon2.Argon2Factory;
-import java.util.ArrayList;
 
 /**
  * Clase controladora de usuario
@@ -46,7 +41,7 @@ import java.util.ArrayList;
 public class UserController {
 
     @Autowired
-    private IUserService UserService;
+    private IUserService userService;
 
     @Autowired
     private JWTUtilities jwUtil;
@@ -54,14 +49,14 @@ public class UserController {
     //Crear Usuario
     @PostMapping("create")
     public ResponseEntity<?> create(@RequestBody User user) {
-        User save = UserService.save(user);
+        User save = userService.save(user);
         return ResponseEntity.ok().body(save);
     }
 
     //Leer Usuario
     @GetMapping("user/{id}")
     public ResponseEntity<?> read(@PathVariable Long id) {
-        Optional<User> oUser = UserService.findById(id);
+        Optional<User> oUser = userService.findById(id);
         if (!oUser.isPresent()) {
             return ResponseEntity.notFound().build();
         }
@@ -72,7 +67,7 @@ public class UserController {
     //Actualizar Usuario
     @PutMapping("update/{id}")
     public ResponseEntity<?> update(@RequestBody User userDetails, @PathVariable(value = "id") Long userId) {
-        Optional<User> user = UserService.findById(userId);
+        Optional<User> user = userService.findById(userId);
 
         if (!user.isPresent()) {
             return ResponseEntity.notFound().build();
@@ -83,17 +78,17 @@ public class UserController {
         user.get().setEmail(userDetails.getEmail());
         user.get().setPassword(userDetails.getPassword());
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(UserService.save(user.get()));
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user.get()));
     }
 
     //Borrar Usuario
     @DeleteMapping("remove/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long userId) {
-        if (!UserService.findById(userId).isPresent()) {
+        if (!userService.findById(userId).isPresent()) {
             return ResponseEntity.notFound().build();
         }
 
-        UserService.deleteById(userId);
+        userService.deleteById(userId);
         return ResponseEntity.ok().build();
     }
 
@@ -101,7 +96,7 @@ public class UserController {
     @GetMapping("users/all")
     public List<User> readAll() {
         List<User> users = StreamSupport
-                .stream(UserService.findAll().spliterator(), false)
+                .stream(userService.findAll().spliterator(), false)
                 .collect(Collectors.toList());
         return users;
     }
@@ -111,7 +106,7 @@ public class UserController {
         //recibir token e id de usuario  
         //Long usuarioID = UserService.findById(Long.parseLong(fromUser)).get().getId(); //token usuario logueado
         Long usuarioID = Long.parseLong(jwUtil.getKey(token));
-        Optional<User> user = UserService.findById(userId); // perfil user visitado
+        Optional<User> user = userService.findById(userId); // perfil user visitado
         List<Follow> lista = user.get().getFollowers();
         for (int j = 0; j < lista.size(); j++) {
             if (lista.get(j).getFrom().getId() == usuarioID) {
@@ -133,18 +128,18 @@ public class UserController {
                 Files.write(rutaAbsoluta, bytesImage);
                 //event.setImagen(foto.getOriginalFilename());
             } catch (IOException ex) {
-                System.out.println("Error al cargar el archivo");
+            	Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        Optional<User> user = UserService.findById(userId);
+        Optional<User> user = userService.findById(userId);
         try {
             if (foto.getBytes().length > 0) {
                 user.get().setImage(foto.getBytes());
             }
         } catch (IOException ex) {
-            System.out.println("Error al guardar bytes");
+        	Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        User save = UserService.save(user.get());
+        User save = userService.save(user.get());
         return ResponseEntity.ok().body(save);
     }
 
@@ -154,7 +149,7 @@ public class UserController {
     @GetMapping("authentication/creationEvent/{id}")
     public boolean authenticateEventCreation(@RequestHeader(value = "Authorization") String token, @PathVariable(value = "id") Long eventId) {
         Long userId = Long.parseLong(jwUtil.getKey(token));
-        Optional<User> user = UserService.findById(userId);
+        Optional<User> user = userService.findById(userId);
         List<Event> events = user.get().getEvents();
 
         for (Event temp : events) {

@@ -34,16 +34,16 @@ import com.unicauca.activate.utilities.EmailTemplateUtil;
 public class ClaimController {
 
     @Autowired
-    private IClaimService ClaimService;
+    private IClaimService claimService;
 
     @Autowired
-    private IEmailServiceSupport EmailServiceSupport; //Inyección de dependencias
+    private IEmailServiceSupport emailServiceSupport; //Inyección de dependencias
 
     @Autowired
-    private IEmailServiceClient EmailServiceClient; //Inyección de dependencias
+    private IEmailServiceClient emailServiceClient; //Inyección de dependencias
 
     @Autowired
-    private IUserService UserService;
+    private IUserService userService;
 
     @Autowired
     private JWTUtilities jwUtil;
@@ -54,7 +54,7 @@ public class ClaimController {
         /*Id del Usuario*/
         Long userId = Long.parseLong(jwUtil.getKey(token));
         /*Obtener el Usuario*/
-        User user = UserService.findById(userId).get();
+        User user = userService.findById(userId).get();
         /**
          * Se ontiene el manager y se inician valores
          */
@@ -73,19 +73,19 @@ public class ClaimController {
          */
         if (manager.getLevelOne().attend(claim)) {
             //Iniciar los valores del sevricio de email de soporte
-            EmailServiceSupport.init(claim.getEmail(), "Claim Request Attention!", "Hello! You must answer this request. More details of the user's request are added below:"
+            emailServiceSupport.init(claim.getEmail(), "Claim Request Attention!", "Hello! You must answer this request. More details of the user's request are added below:"
                     + "\n" + "Claim Tittle: " + claim.getTitle() + "\n" + "Claim Description: " + claim.getDescription() + "\n" + "Claim Register Date:" + claim.getDate() + "\n" + "Atention Type:" + claim.getType().toString() + "\n" + "Thank you so much!");
-            Thread emailSupport = new Thread((Runnable) EmailServiceSupport);
+            Thread emailSupport = new Thread((Runnable) emailServiceSupport);
             emailSupport.start();
 
             //Iniciar los valores del sevricio de email de Cliente
-            EmailServiceClient.init(user.getEmail(), EmailTemplateUtil.CLAIM_SUCCESSFULLY_CREATED_SUBJECT, "Hello " + user.getName() + ", " + "your claim request will be answered very soon, our team is working for you. Details of your request:"
+            emailServiceClient.init(user.getEmail(), EmailTemplateUtil.CLAIM_SUCCESSFULLY_CREATED_SUBJECT, "Hello " + user.getName() + ", " + "your claim request will be answered very soon, our team is working for you. Details of your request:"
                     + "\n" + "Claim Tittle: " + claim.getTitle() + "\n" + "Claim Description: " + claim.getDescription() + "\n" + "Claim Register Date:" + claim.getDate() + "\n" + "Atention Type:" + claim.getType().toString() + "\n" + "Thank you so much!");
-            Thread emailClient = new Thread((Runnable) EmailServiceClient);
+            Thread emailClient = new Thread((Runnable) emailServiceClient);
             emailClient.start();
 
         }
-        Claim save = ClaimService.save(claim);
+        Claim save = claimService.save(claim);
         return ResponseEntity.ok().body(save);
     }
 
