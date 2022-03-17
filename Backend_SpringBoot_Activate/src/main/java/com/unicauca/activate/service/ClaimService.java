@@ -5,7 +5,7 @@
  */
 package com.unicauca.activate.service;
 
-
+import com.unicauca.activate.model.Category;
 import com.unicauca.activate.model.Claim;
 import com.unicauca.activate.repository.ClaimRepository;
 import java.util.Optional;

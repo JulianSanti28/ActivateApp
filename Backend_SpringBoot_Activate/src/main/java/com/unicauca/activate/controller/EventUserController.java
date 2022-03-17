@@ -2,6 +2,8 @@ package com.unicauca.activate.controller;
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import com.unicauca.activate.model.Asistence;
 import com.unicauca.activate.model.Event;
@@ -33,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class EventUserController {
     
     @Autowired
-    private IEventUserService eventUserService;
+    private IEventUserService EventUserService;
 
     @Autowired
     private IUserService UserService;
@@ -43,23 +45,32 @@ public class EventUserController {
 
     @Autowired
     private JWTUtilities jwUtil;
-    //Create Event
+    //Crear Asistencia
     @PostMapping("create")
     public ResponseEntity<?> create(@RequestBody Asistence asistence) {
+        //Long usuarioID = Long.parseLong(jwUtil.getKey(token)); 
+        //Long eventoID = Long.parseLong(event_id); 
+        //Asistence asistence = new Asistence(usuarioID, eventoID);
         Optional<User> user = UserService.findById(asistence.getIdentificacionUsuario());
         Optional<Event> event = EventService.findById(asistence.getIdentificacionEvento());
-        //Relationship NM
+        //Relación N:M
         EventUser eventUser = new EventUser();
-        //Save
+        
+        //Guardar la relación N:M 
+        
         UserEventKey userEventKey = new UserEventKey();
+
         userEventKey.setEventId(asistence.getIdentificacionEvento());
         userEventKey.setUserId(asistence.getIdentificacionUsuario());
+
         eventUser.setId(userEventKey);
         eventUser.setEvent(event.get());
         eventUser.setUser(user.get());
+
         event.get().addAsistence(eventUser);
         user.get().addAsistence(eventUser);
-        EventUser save = eventUserService.save(eventUser);
+
+        EventUser save = EventUserService.save(eventUser);
         return ResponseEntity.ok().body(save);
     }
 

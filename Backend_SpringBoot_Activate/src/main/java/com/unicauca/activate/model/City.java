@@ -13,41 +13,33 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "city")
-public class City{
+public class City {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CIU_id")
-    private Long ciuId;
+    private Long CIU_id;
 
     @Column(length = 50)
-    private String ciuName;
+    private String CIU_name;
 
     @OneToMany(mappedBy = "city")
     private List<Event> events;
 
-    public Long getCiuId() {
-        return ciuId;
+    public Long getCIU_id() {
+        return CIU_id;
     }
 
-    public void setCiuId(Long ciuId) {
-        this.ciuId = ciuId;
+    public void setCIU_id(Long cIU_id) {
+        CIU_id = cIU_id;
     }
 
-    public List<Event> getEvents() {
-        return events;
+    public String getCIU_name() {
+        return CIU_name;
     }
 
-    public void setEvents(List<Event> events) {
-        this.events = events;
-    }
-
-    public String getCiuName() {
-        return ciuName;
-    }
-
-    public void setCiuName(String ciuName) {
-        this.ciuName = ciuName;
+    public void setCIU_name(String cIU_name) {
+        CIU_name = cIU_name;
     }
 
     public void agregarEventos(Event event){

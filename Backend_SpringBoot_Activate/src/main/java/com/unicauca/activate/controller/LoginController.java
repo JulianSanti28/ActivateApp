@@ -5,6 +5,9 @@
  */
 package com.unicauca.activate.controller;
 
+
+import javax.persistence.Entity;
+
 import com.unicauca.activate.mapper.JsonResponseLogin;
 import com.unicauca.activate.model.User;
 import com.unicauca.activate.service.UserService;
@@ -18,17 +21,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.micrometer.core.ipc.http.HttpSender.Response;
 
 @RestController
 @RequestMapping("/activate")
 public class LoginController {
     @Autowired
-    private UserService userService;
+    private UserService UserService;
     @Autowired
     private JWTUtilities jwtUtil;
+    //Crear Usuario
     @PostMapping("login")
     public ResponseEntity<?>  login(@RequestBody User user){
-        User usuarioLogueado = userService.verificarCredenciales(user);
+        User usuarioLogueado = UserService.verificarCredenciales(user);
         if (usuarioLogueado != null) {
             
             String tokenJwt = jwtUtil.create(String.valueOf(usuarioLogueado.getId()), usuarioLogueado.getEmail());
