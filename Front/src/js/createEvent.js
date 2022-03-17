@@ -67,7 +67,6 @@ async function registrarEvento() {
     //datos.idCategory = document.getElementById('input_ubicacion').value;
     var select_destination = document.getElementById("input_ubicacion"); /*Obtener el SELECT de Destino*/
     datos.idCity = select_destination.options[select_destination.selectedIndex].id; /*Obtener id de la opción destino*/
-    console.log("numero de ciudad: =>"+datos.idCity);
     var select_category = document.getElementById("input_categoria"); /*Obtener el SELECT de Destino*/
     datos.idCategory = select_category.options[select_category.selectedIndex].id; /*Obtener id de la opción destino*/
     const image_input = document.getElementById('input_img');

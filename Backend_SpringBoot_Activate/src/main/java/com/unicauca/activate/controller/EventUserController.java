@@ -48,6 +48,7 @@ public class EventUserController {
     //Crear Asistencia
     @PostMapping("create")
     public ResponseEntity<?> create(@RequestBody Asistence asistence) {
+
         //Long usuarioID = Long.parseLong(jwUtil.getKey(token)); 
         //Long eventoID = Long.parseLong(event_id); 
         //Asistence asistence = new Asistence(usuarioID, eventoID);

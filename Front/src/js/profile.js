@@ -109,7 +109,6 @@ async function cargarUsuario() {
     });
 
     const respuesta = await request.json(); //Obtenemos la respuesta del Servidor en String
-    console.log(respuesta);
 
     //Situar nombre del usuario Logeado
     document.getElementById("profileName").innerHTML = respuesta.name;

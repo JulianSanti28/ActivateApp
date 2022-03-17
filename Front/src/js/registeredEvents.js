@@ -1,20 +1,3 @@
-const eventosRegistrados = 
-[
-  {
-    id: 1,
-    name: "Miguel",
-    lastName: "Mosquera",
-    email: "gmail@gmail"
-  },
-  {
-    id: 2,
-    name: "Ana",
-    lastName: "Banana",
-    email: "gmail@gmail"
-  }  
-];
-
-
 // Call the dataTables jQuery plugin
 $(document).ready(function () {
     cargarEventosRegistrados();

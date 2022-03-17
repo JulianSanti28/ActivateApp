@@ -4,6 +4,11 @@ package com.unicauca.activate.model;
 public class Asistence {
     private Long identificacionUsuario;
     private Long identificacionEvento;
+
+    
+    public Asistence() {
+    }
+    
     public Asistence(Long identificacionUsuario, Long identificacionEvento) {
         this.identificacionUsuario = identificacionUsuario;
         this.identificacionEvento = identificacionEvento;
