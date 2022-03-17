@@ -23,8 +23,8 @@ async function cargarCiudades() {
 
     for (let ciudad of ciudades) {
         var option = document.createElement("option");
-        option.setAttribute('id',ciudad.ciu_id);
-        var text = document.createTextNode(ciudad.ciu_name);
+        option.setAttribute('id',ciudad.ciuId);
+        var text = document.createTextNode(ciudad.ciuName);
         option.appendChild(text);
         document.getElementById("input_ubicacion").appendChild(option);
     }
@@ -62,8 +62,8 @@ async function registrarEvento() {
     datos.ubicacion = "";
     let fecha = document.getElementById('reservationtime').value;
     let parts = fecha.split("-");
-    datos.fecha_inicio = parts[0];
-    datos.fecha_final = parts[1];
+    datos.fechaInicio = parts[0];
+    datos.fechaFinal = parts[1];
     //datos.idCategory = document.getElementById('input_ubicacion').value;
     var select_destination = document.getElementById("input_ubicacion"); /*Obtener el SELECT de Destino*/
     datos.idCity = select_destination.options[select_destination.selectedIndex].id; /*Obtener id de la opción destino*/

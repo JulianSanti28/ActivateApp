@@ -149,8 +149,8 @@ public class EventController {
         event.get().setTitulo(eventDetails.getTitulo());
         event.get().setDescripcion(eventDetails.getDescripcion());
         event.get().setUbicacion(eventDetails.getUbicacion());
-        event.get().setFecha_inicio(eventDetails.getFecha_inicio());
-        event.get().setFecha_final(eventDetails.getFecha_final());
+        event.get().setFechaInicio(eventDetails.getFechaInicio());
+        event.get().setFechaFinal(eventDetails.getFechaFinal());
         event.get().setCategory(category.get());
         event.get().setCity(city.get());
 

@@ -4,8 +4,8 @@ public class EventDTO {
     private String titulo;
     private String descripcion;
     private String ubicacion;
-    private String fecha_inicio;
-    private String fecha_final;
+    private String fechaInicio;
+    private String fechaFinal;
     private Long idCategory;
     private Long idUser;
     private Long idCity;
@@ -14,17 +14,45 @@ public class EventDTO {
         
     }
     
-    public EventDTO(String titulo, String descripcion, String ubicacion, String fecha_inicio,
-            String fecha_final, Long idCategory, Long idUser, Long idCity) {
+    
+
+    public EventDTO(String titulo, String descripcion, String ubicacion, String fechaInicio, String fechaFinal,
+            Long idCategory, Long idUser, Long idCity) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.ubicacion = ubicacion;
-        this.fecha_inicio = fecha_inicio;
-        this.fecha_final = fecha_final;
+        this.fechaInicio = fechaInicio;
+        this.fechaFinal = fechaFinal;
         this.idCategory = idCategory;
         this.idUser = idUser;
         this.idCity = idCity;
     }
+
+
+
+    public String getFechaInicio() {
+        return fechaInicio;
+    }
+
+
+
+    public void setFechaInicio(String fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+
+
+    public String getFechaFinal() {
+        return fechaFinal;
+    }
+
+
+
+    public void setFechaFinal(String fechaFinal) {
+        this.fechaFinal = fechaFinal;
+    }
+
+
 
     public String getTitulo() {
         return titulo;
@@ -50,21 +78,6 @@ public class EventDTO {
         this.ubicacion = ubicacion;
     }
 
-    public String getFecha_inicio() {
-        return fecha_inicio;
-    }
-
-    public void setFecha_inicio(String fecha_inicio) {
-        this.fecha_inicio = fecha_inicio;
-    }
-
-    public String getFecha_final() {
-        return fecha_final;
-    }
-
-    public void setFecha_final(String fecha_final) {
-        this.fecha_final = fecha_final;
-    }
 
     public Long getIdCategory() {
         return idCategory;

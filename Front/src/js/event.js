@@ -3,8 +3,8 @@
 //     "titulo": "Guerra Mundial",
 //     "descripcion": "Hagamos la Paz no la guerra",
 //     "ubicacion": "Ucrania",
-//     "fecha_inicio": "28/05/1998",
-//     "fecha_final": "28/05/1998",
+//     "fechaInicio": "28/05/1998",
+//     "fechaFinal": "28/05/1998",
 //     "img": "dist/img/photo2.png",
 //     "category": {
 //         "id": 1,
@@ -116,9 +116,9 @@ async function cargarEvento() {
 
     document.querySelector('#user_name').innerHTML = evento.titulo;
     document.querySelector('#event_description').innerHTML = evento.descripcion;
-    fecha_evento = "Inicio:" + evento.fecha_inicio + "    Fin:" + evento.fecha_final
+    fecha_evento = "Inicio:" + evento.fechaInicio + "    Fin:" + evento.fechaFinal
     document.querySelector('#calendar_event').innerHTML = fecha_evento;
-    document.querySelector('#ubication_event').innerHTML = evento.city.ciu_name;
+    document.querySelector('#ubication_event').innerHTML = evento.city.ciuName;
     document.querySelector('#category_event').innerHTML = evento.category.nombre;
     document.querySelector('#userImg').setAttribute("src", evento.user.image);
     document.querySelector('#eventImg').setAttribute("src", evento.image);

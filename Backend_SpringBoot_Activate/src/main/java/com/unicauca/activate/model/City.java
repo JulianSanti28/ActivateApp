@@ -18,28 +18,28 @@ public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CIU_id")
-    private Long CIU_id;
+    private Long ciuId;
 
     @Column(length = 50)
-    private String CIU_name;
+    private String ciuName;
 
     @OneToMany(mappedBy = "city")
     private List<Event> events;
 
-    public Long getCIU_id() {
-        return CIU_id;
+    public Long getCiuId() {
+        return ciuId;
     }
 
-    public void setCIU_id(Long cIU_id) {
-        CIU_id = cIU_id;
+    public void setCiuId(Long ciuId) {
+        this.ciuId = ciuId;
     }
 
-    public String getCIU_name() {
-        return CIU_name;
+    public String getCiuName() {
+        return ciuName;
     }
 
-    public void setCIU_name(String cIU_name) {
-        CIU_name = cIU_name;
+    public void setCiuName(String ciuName) {
+        this.ciuName = ciuName;
     }
 
     public void agregarEventos(Event event){

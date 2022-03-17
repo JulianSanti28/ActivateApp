@@ -56,15 +56,15 @@ public class Mapper {
         event.setTitulo(eventDto.getTitulo());
         event.setDescripcion(eventDto.getDescripcion());
         event.setUbicacion(eventDto.getUbicacion());
-        event.setFecha_inicio(eventDto.getFecha_inicio());
-        event.setFecha_final(eventDto.getFecha_final());
+        event.setFechaInicio(eventDto.getFechaInicio());
+        event.setFechaFinal(eventDto.getFechaFinal());
         return event;
     }
 
     public Claim toClaim(ClaimDTO claimDto) {
         Claim claim = new Claim(claimDto.getTitle(), claimDto.getDescription());
-        String TypeClaim = claimDto.getType().toUpperCase();
-        switch (TypeClaim) {
+        String typeClaim = claimDto.getType().toUpperCase();
+        switch (typeClaim) {
             case "BASICA":
                 claim.setType(ClaimType.BASICA);
                 break;
