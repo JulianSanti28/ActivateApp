@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.unicauca.activate.model;
 
 import java.time.LocalDate;
@@ -17,9 +21,7 @@ import javax.persistence.Table;
 @Table(name = "pqrs")
 public class Claim {
 
-    /**
-     * Atributos
-     */
+    //Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -50,7 +52,7 @@ public class Claim {
         this.date = LocalDate.now();
     }
     /**
-     * Constructor
+     * Constructor vacío
      */
     public Claim() {
     }
@@ -108,4 +110,6 @@ public class Claim {
         this.date = date;
     }
     
+    
+
 }

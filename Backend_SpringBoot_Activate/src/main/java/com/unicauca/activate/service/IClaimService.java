@@ -5,6 +5,7 @@
  */
 package com.unicauca.activate.service;
 
+import com.unicauca.activate.model.Category;
 import com.unicauca.activate.model.Claim;
 import java.util.Optional;
 import org.springframework.data.domain.Page;

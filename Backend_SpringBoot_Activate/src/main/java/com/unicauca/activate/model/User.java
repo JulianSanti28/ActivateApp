@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.unicauca.activate.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -23,7 +27,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "user")
-public class User{
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -211,11 +215,12 @@ public class User{
         return this.followers.size();
     }
     public void delFollowing(long idFollow){
-        Follow oldFollow = null;
+        Follow oldFollow =null;
         for(int i = 0 ; i< this.following.size();i++){
             if(this.following.get(i).getId()==idFollow){
                 oldFollow = this.following.get(i);
                 this.following.remove(i);
+               // this.idFollowing.remove(oldFollow.getTo().getId());
             }
         }
         

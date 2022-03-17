@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
  * @author 57322
  */
 @Component
-public class Mapper{
+public class Mapper {
 
     /**
      * Convetir de CommentDTO a Comment
@@ -34,10 +34,7 @@ public class Mapper{
     
     }
     
-    /**
-     * Singleton class
-     * @return
-     */
+    
     public static Mapper getMapper(){
         
         if(instance==null){
@@ -59,15 +56,15 @@ public class Mapper{
         event.setTitulo(eventDto.getTitulo());
         event.setDescripcion(eventDto.getDescripcion());
         event.setUbicacion(eventDto.getUbicacion());
-        event.setFechaInicio(eventDto.getFechaInicio());
-        event.setFechaFinal(eventDto.getFechaFinal());
+        event.setFecha_inicio(eventDto.getFecha_inicio());
+        event.setFecha_final(eventDto.getFecha_final());
         return event;
     }
 
     public Claim toClaim(ClaimDTO claimDto) {
         Claim claim = new Claim(claimDto.getTitle(), claimDto.getDescription());
-        String typeClaim = claimDto.getType().toUpperCase();
-        switch (typeClaim) {
+        String TypeClaim = claimDto.getType().toUpperCase();
+        switch (TypeClaim) {
             case "BASICA":
                 claim.setType(ClaimType.BASICA);
                 break;

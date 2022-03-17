@@ -11,7 +11,11 @@ import java.util.stream.StreamSupport;
 
 import com.unicauca.activate.model.Event;
 import com.unicauca.activate.model.User;
+import com.unicauca.activate.service.EventService;
 import com.unicauca.activate.service.IUserService;
+import com.unicauca.activate.utilities.JWTUtilities;
+
+import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,7 +46,7 @@ import java.util.ArrayList;
 public class UserController {
 
     @Autowired
-    private IUserService userService;
+    private IUserService UserService;
 
     @Autowired
     private JWTUtilities jwUtil;
@@ -50,14 +54,14 @@ public class UserController {
     //Crear Usuario
     @PostMapping("create")
     public ResponseEntity<?> create(@RequestBody User user) {
-        User save = userService.save(user);
+        User save = UserService.save(user);
         return ResponseEntity.ok().body(save);
     }
 
     //Leer Usuario
     @GetMapping("user/{id}")
     public ResponseEntity<?> read(@PathVariable Long id) {
-        Optional<User> oUser = userService.findById(id);
+        Optional<User> oUser = UserService.findById(id);
         if (!oUser.isPresent()) {
             return ResponseEntity.notFound().build();
         }
@@ -68,7 +72,7 @@ public class UserController {
     //Actualizar Usuario
     @PutMapping("update/{id}")
     public ResponseEntity<?> update(@RequestBody User userDetails, @PathVariable(value = "id") Long userId) {
-        Optional<User> user = userService.findById(userId);
+        Optional<User> user = UserService.findById(userId);
 
         if (!user.isPresent()) {
             return ResponseEntity.notFound().build();
@@ -79,40 +83,44 @@ public class UserController {
         user.get().setEmail(userDetails.getEmail());
         user.get().setPassword(userDetails.getPassword());
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user.get()));
+        return ResponseEntity.status(HttpStatus.CREATED).body(UserService.save(user.get()));
     }
 
     //Borrar Usuario
     @DeleteMapping("remove/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long userId) {
-        if (!userService.findById(userId).isPresent()) {
+        if (!UserService.findById(userId).isPresent()) {
             return ResponseEntity.notFound().build();
         }
 
-        userService.deleteById(userId);
+        UserService.deleteById(userId);
         return ResponseEntity.ok().build();
     }
 
+    //Obtener todos los usuarios
     @GetMapping("users/all")
     public List<User> readAll() {
         List<User> users = StreamSupport
-                .stream(userService.findAll().spliterator(), false)
+                .stream(UserService.findAll().spliterator(), false)
                 .collect(Collectors.toList());
         return users;
     }
 
     @GetMapping("user/follow/{id}")
     public boolean buscarSeguidor(@RequestHeader(value = "Authorization") String token, @PathVariable(value = "id") Long userId) {
+        //recibir token e id de usuario  
         //Long usuarioID = UserService.findById(Long.parseLong(fromUser)).get().getId(); //token usuario logueado
         Long usuarioID = Long.parseLong(jwUtil.getKey(token));
-        Optional<User> user = userService.findById(userId); // perfil user visitado
+        Optional<User> user = UserService.findById(userId); // perfil user visitado
         List<Follow> lista = user.get().getFollowers();
         for (int j = 0; j < lista.size(); j++) {
             if (lista.get(j).getFrom().getId() == usuarioID) {
                 return true;
+                //return "si";
             }
         }
         return false;
+        //return "no";
     }
 
     @PostMapping("create/image")
@@ -128,22 +136,25 @@ public class UserController {
                 System.out.println("Error al cargar el archivo");
             }
         }
-        Optional<User> user = userService.findById(userId);
+        Optional<User> user = UserService.findById(userId);
         try {
             if (foto.getBytes().length > 0) {
                 user.get().setImage(foto.getBytes());
             }
         } catch (IOException ex) {
+            System.out.println("Error al guardar bytes");
         }
-        User save = userService.save(user.get());
+        User save = UserService.save(user.get());
         return ResponseEntity.ok().body(save);
     }
 
-
+    //Obtener Autentificacion de Evento Creado
+    //Debe recibir el token del usuario y el id del evento
+    //return True si el evento fue creado por el usuario
     @GetMapping("authentication/creationEvent/{id}")
     public boolean authenticateEventCreation(@RequestHeader(value = "Authorization") String token, @PathVariable(value = "id") Long eventId) {
         Long userId = Long.parseLong(jwUtil.getKey(token));
-        Optional<User> user = userService.findById(userId);
+        Optional<User> user = UserService.findById(userId);
         List<Event> events = user.get().getEvents();
 
         for (Event temp : events) {
